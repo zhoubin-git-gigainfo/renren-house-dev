@@ -2,6 +2,7 @@ package io.renren.modules.sys.controller;
 
 
 import io.renren.common.annotation.SysLog;
+import io.renren.common.utils.Constant;
 import io.renren.modules.sys.shiro.ShiroUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.common.utils.PageUtils;
@@ -42,7 +43,10 @@ public class SysUserController extends AbstractController {
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:user:list")
 	public R list(@RequestParam Map<String, Object> params){
-		//查询列表数据
+		//只有超级管理员，才能查看所有管理员列表
+		if(getUserId() != Constant.SUPER_ADMIN){
+			params.put("createUserId", getUserId());
+		}
 		Query query = new Query(params);
 		List<SysUserEntity> userList = sysUserService.queryList(query);
 		int total = sysUserService.queryTotal(query);
@@ -105,7 +109,7 @@ public class SysUserController extends AbstractController {
 	@RequiresPermissions("sys:user:save")
 	public R save(@RequestBody SysUserEntity user){
 		ValidatorUtils.validateEntity(user, AddGroup.class);
-
+		user.setCreateUserId(getUserId());
 		sysUserService.save(user);
 
 		return R.ok();
@@ -119,7 +123,7 @@ public class SysUserController extends AbstractController {
 	@RequiresPermissions("sys:user:update")
 	public R update(@RequestBody SysUserEntity user){
 		ValidatorUtils.validateEntity(user, UpdateGroup.class);
-
+		user.setCreateUserId(getUserId());
 		sysUserService.update(user);
 
 		return R.ok();
