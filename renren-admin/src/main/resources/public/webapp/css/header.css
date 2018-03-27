@@ -1,0 +1,40 @@
+
+.header{
+    height: 50px;
+    width: 100%;
+    background-color: #00B86B;
+    line-height: 50px;
+    padding: 0 8%;
+}
+
+.header a{
+    height: 100%;
+    width: 100%;
+    display: block;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.header a:hover{
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.header span{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0px 10px 0px 0px;
+    border-right: solid 1px white;
+}
+
+.header .list-inline{
+    float: right;
+}
+.header .list-inline li{
+    padding-left: 0px;
+    padding-right: 0px;
+}

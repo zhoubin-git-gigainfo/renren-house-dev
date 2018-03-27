@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.house.dao.TmMbodycardDao">
+
+    <select id="queryEntity" resultType="io.renren.modules.house.entity.TmMbodycardEntity">
+        <if test="currPage != null and currPage != ''">
+        SELECT * FROM (
+            SELECT A.*, ROWNUM RN
+            FROM (
+        </if>
+                SELECT *
+                FROM tm_mbodycard
+                WHERE ismart = 1 AND mo_type = 155001 AND f_date IS NULL
+                AND ismart = 1 AND iscrtag = 2
+        <if test="currPage != null and currPage != ''">
+            ) A  WHERE ROWNUM  <![CDATA[<=]]]> #{last}
+        ) WHERE RN >= #{currPage}
+        </if>
+    </select>
+
+
+</mapper>

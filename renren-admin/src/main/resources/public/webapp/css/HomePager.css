@@ -1,0 +1,315 @@
+
+body {
+    background-color: #EEEEF1;
+}
+
+a {
+    color: white;
+}
+
+.HP-header {
+    position: relative;
+    text-align: center;
+    height: 500px;
+    width: 100%;
+    color: white;
+    background-image: url(../images/banner1.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.HP-top {
+    background-color: #00B86B;
+    height: 60px;
+    color: white;
+    line-height: 60px;
+    font-size: 17px;
+}
+
+.HP-top-left {
+    margin-left: 100px;
+    float: left;
+}
+
+.HP-top-right {
+    margin-right: 100px;
+    float: right;
+}
+
+.HP-top-right > * {
+    margin: auto 10px;
+    padding: 3px 8px;
+}
+
+.HP-top-left > * {
+    margin: auto 5px;
+}
+
+.HP-top-right a:hover {
+    color: white;
+    background-color: grey;
+    text-decoration: none;
+}
+
+.HP-header h1 {
+    padding-top: 40px;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+.input-group {
+    width: 40%;
+    margin-left: 30%;
+    height: 50px;
+    margin-top: 40px;
+}
+
+.form-control {
+    height: 50px;
+}
+
+.input-group-addon {
+    width: 100px;
+    background-color: #00B86B;
+    color: white;
+}
+
+.HP-header .list-inline {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-image: url(../images/black-bg.png);
+    padding: 5px 0;
+    margin-bottom: 0;
+}
+
+.HP-header .list-inline img {
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+}
+
+.HP-header .list-inline a {
+    display: block;
+    width: 70px;
+    margin: 0 auto;
+}
+
+.HP-header .list-inline li {
+    width: 14%;
+}
+
+/*
+租房推荐
+*/
+.housing-recommended {
+    width: 90%;
+    margin: 20px 4% 20px 6%;
+}
+
+.housing-more {
+    float: right;
+    margin-top: 50px;
+    margin-right: 3%;
+}
+
+.housing-recommended h1 {
+    float: left;
+}
+
+.housing-text {
+    clear: both;
+}
+
+.housing-recommended .row {
+    height: 280px;
+}
+
+.housing-recommended .col-md-3 {
+    height: 100%;
+    width: 22%;
+    margin-right: 3%;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: white;
+}
+
+.housing-img {
+    height: 200px;
+    width: 100%;
+}
+
+.housing-img img {
+    height: 100%;
+    width: 100%;
+}
+
+.housing-content {
+    width: 80%;
+    margin: 0 auto;
+    color: black;
+}
+
+.housing-introduce {
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.housing-info {
+    width: 100%;
+    font-size: 12px;
+    color: #999;
+    margin-top: 15px;
+}
+
+.housing-price {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    background-color: black;
+    top: 150px;
+    left: 0;
+}
+
+/*
+小区推荐
+*/
+.community {
+    width: 100%;
+    background-color: white;
+    padding: 30px 0;
+}
+
+.community-recommended {
+    width: 90%;
+    margin: 20px 4% 20px 6%;
+}
+
+.community-more {
+    float: right;
+    margin-top: 50px;
+    margin-right: 3%;
+}
+
+.community-recommended h1 {
+    float: left;
+}
+
+.community-text {
+    clear: both;
+}
+
+.community-recommended .row {
+    height: 280px;
+}
+
+.col-md-4 {
+    height: 100%;
+    background-color: #EEEEF1;
+    width: 30.333%;
+    margin-right: 3%;
+    padding: 0;
+    border: 1px solid #DDDDDD;
+}
+
+.col-md-4 img {
+    height: 200px;
+    width: 100%;
+}
+
+.community-content {
+    width: 90%;
+    margin: 10px auto 10px auto;
+    color: black;
+}
+
+.community-name {
+    font-size: 20px;
+}
+
+.community-size {
+    float: left;
+}
+
+.community-date {
+    float: right;
+    color: grey;
+}
+
+/*
+二手房
+*/
+.esf-recommended {
+    width: 90%;
+    margin: 20px 4% 20px 6%;
+}
+
+.esf-more {
+    float: right;
+    margin-top: 50px;
+    margin-right: 3%;
+}
+
+.esf-recommended h1 {
+    float: left;
+}
+
+.esf-text {
+    clear: both;
+}
+
+.esf-recommended .row {
+    height: 280px;
+}
+
+.esf-recommended .col-md-3 {
+    height: 100%;
+    width: 22%;
+    margin-right: 3%;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: white;
+}
+
+.esf-img {
+    height: 200px;
+    width: 100%;
+}
+
+.esf-img img {
+    height: 100%;
+    width: 100%;
+}
+
+.esf-content {
+    width: 80%;
+    margin: 0 auto;
+    color: black;
+}
+
+.esf-introduce {
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.esf-info {
+    width: 100%;
+    font-size: 12px;
+    color: #999;
+    margin-top: 15px;
+}
+
+.esf-price {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    background-color: black;
+    top: 150px;
+    left: 0;
+}

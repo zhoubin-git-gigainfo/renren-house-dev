@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.house.dao.TsSegmentDao">
+
+    <select id="queryBySgType" resultType="io.renren.modules.house.entity.TsSegmentEntity">
+           select * from TS_SEGMENT t1 where t1.sg_type = #{value}
+    </select>
+
+</mapper>

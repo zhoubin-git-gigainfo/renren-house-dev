@@ -1,16 +1,17 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
         druid:
             first:  #数据源1
-                url: jdbc:mysql://localhost:3306/renren_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-                username: renren
-                password: 123456
+                driverClassName: com.mysql.jdbc.Driver
+                url: jdbc:mysql://192.168.168.107:3306/houst-dev?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                username: root
+                password: root
             second:  #数据源2
-                url: jdbc:mysql://10.10.168.18:3306/renren_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-                username: renren
-                password: 123456
+                driverClassName: oracle.jdbc.driver.OracleDriver
+                url: jdbc:oracle:thin:@172.24.24.96:1521:zztest
+                username: zfadmin
+                password: password
             initial-size: 10
             max-active: 100
             min-idle: 10
