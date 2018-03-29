@@ -1,50 +1,8 @@
 
-.header{
-    height: 50px;
-    width: 100%;
-    background-color: #00B86B;
-    line-height: 50px;
-    padding: 0 8%;
-}
-
-.header a{
-    height: 100%;
-    width: 100%;
-    display: block;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.header a:hover{
-    text-decoration: none;
-    cursor:pointer;
-}
-
-.header span{
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0px 10px 0px 0px;
-    border-right: solid 1px white;
-}
-
-.header .list-inline{
-    float: right;
-}
-.header .list-inline li{
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-
-a{
-    cursor: pointer;
-}
-
-.input-group {
+/*
+搜索框
+*/
+.search-house .input-group {
     width: 40%;
     margin-left: 30%;
     height: 50px;
@@ -52,16 +10,19 @@ a{
     margin-bottom: 20px;
 }
 
-.form-control {
+.search-house .form-control {
     height: 50px;
 }
 
-.input-group-addon {
+.search-house .input-group-addon {
     width: 100px;
     background-color: #00B86B;
     color: white;
 }
 
+/*
+搜索条件
+*/
 .search-criteria{
     width: 90%;
     margin: 0 auto;
@@ -84,20 +45,28 @@ a{
     height: 20px;
 }
 
-.unpitch-on{
+.criteria span{
+    font-weight: bold;
+}
+
+.search-criteria .unpitch-on{
     color: black;
     font-weight: normal;
 }
 
-.pitch-on{
-    color: #00B86B;
+.search-criteria .pitch-on{
+    color: #42CBC1;
     font-weight: bold;
 }
 
 .criteria a:hover{
-    color: #00B86B;
+    color: #42CBC1;
+    font-weight: bold;
 }
 
+/*
+搜索结果
+*/
 .house-list-left dl{
     height: 30px;
     margin-top: 20px;
@@ -105,7 +74,7 @@ a{
     border-bottom: 1px solid #dedede;
 }
 
-.search-house{
+.search-housing{
     float: left;
     font-size: 20px;
     font-weight: bold;

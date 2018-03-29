@@ -31,21 +31,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 
     @Override
     public Map<String, Object> login(HouseLoginForm form) {
+        Map<String, Object> map = new HashMap<>(2);
         UserEntity user = queryByMobile(form.getMobile());
         Assert.isNull(user, "手机号或密码错误");
+        if(user==null){
+            map.put("code",200);
+            map.put("msg","该手机号还没注册");
+            return map;
+        }else {
+            //密码错误
+            if (!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))) {
+                throw new RRException("手机号或密码错误");
+            }
 
-        //密码错误
-        if (!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))) {
-            throw new RRException("手机号或密码错误");
+            //获取登录token
+            TokenEntity tokenEntity = tokenService.createToken(user.getUserId());
+
+            map.put("token", tokenEntity.getToken());
+            map.put("expire", tokenEntity.getExpireTime().getTime() - System.currentTimeMillis());
+            map.put("username",user.getUsername());
+
+            return map;
         }
-
-        //获取登录token
-        TokenEntity tokenEntity = tokenService.createToken(user.getUserId());
-
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("token", tokenEntity.getToken());
-        map.put("expire", tokenEntity.getExpireTime().getTime() - System.currentTimeMillis());
-
-        return map;
     }
 }
