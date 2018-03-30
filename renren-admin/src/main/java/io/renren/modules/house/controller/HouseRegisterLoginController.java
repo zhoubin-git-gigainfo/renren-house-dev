@@ -1,5 +1,6 @@
 package io.renren.modules.house.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.renren.common.utils.R;
 import io.renren.common.utils.SendMsgUtil;
 import io.renren.common.validator.ValidatorUtils;
@@ -22,8 +23,8 @@ import java.util.Map;
 /**
  * APP登录授权
  *
- * @author chenshun
- * @email sunlightcs@gmail.com
+ * @author zhoubin
+ * @email zhoubin@gigainfo.com.cn
  * @date 2017-03-23 15:31
  */
 @RestController
@@ -70,6 +71,17 @@ public class HouseRegisterLoginController {
 
         return R.ok();
     }
+
+    @PostMapping("updatePassword")
+    @ApiOperation("修改密码")
+    public R updatePassword(String mobile,String password) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setMobile(mobile);
+        userEntity.setPassword(DigestUtils.sha256Hex(password));
+       userService.update(userEntity,new EntityWrapper<UserEntity>().eq("mobile", mobile));
+        return R.ok().put("code", 0);
+    }
+
 
     @PostMapping("message")
     @ApiOperation("验证码")
