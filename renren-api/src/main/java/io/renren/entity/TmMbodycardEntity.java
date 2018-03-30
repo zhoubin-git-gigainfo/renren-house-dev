@@ -4,7 +4,6 @@ package io.renren.entity;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
