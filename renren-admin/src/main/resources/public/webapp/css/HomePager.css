@@ -1,156 +1,527 @@
 
-body {
-    background-color: #EEEEF1;
+
+/*
+登录
+ */
+#loginModal .modal-content {
+    width: 380px;
 }
 
-a {
-    color: white;
+#loginModal .modal-dialog {
+    width: 380px;
+    margin: 10% auto;
 }
 
-.HP-header {
-    position: relative;
-    text-align: center;
-    height: 500px;
-    width: 100%;
-    color: white;
-    background-image: url(../images/banner1.jpg);
-    background-position: top center;
-    background-repeat: no-repeat;
+.login-close {
+    width: 320px;
+    height: 10px;
+    margin: 15px auto 5px auto;
 }
 
-.HP-top {
-    background-color: #00B86B;
-    height: 60px;
-    color: white;
-    line-height: 60px;
-    font-size: 17px;
-}
-
-.HP-top-left {
-    margin-left: 100px;
-    float: left;
-}
-
-.HP-top-right {
-    margin-right: 100px;
-    float: right;
-}
-
-.HP-top-right > * {
-    margin: auto 10px;
-    padding: 3px 8px;
-}
-
-.HP-top-left > * {
-    margin: auto 5px;
-}
-
-.HP-top-right a:hover {
-    color: white;
-    background-color: grey;
-    text-decoration: none;
-}
-
-.HP-header h1 {
-    padding-top: 40px;
-    font-weight: bolder;
-    font-size: 50px;
-}
-
-.input-group {
-    width: 40%;
-    margin-left: 30%;
+.login {
+    width: 300px;
+    margin: 0px auto 15px auto;
     height: 50px;
-    margin-top: 40px;
+    line-height: 50px;
 }
 
-.form-control {
+.login h3 {
     height: 50px;
+    margin: 0;
+    line-height: 50px;
 }
 
-.input-group-addon {
-    width: 100px;
-    background-color: #00B86B;
-    color: white;
+#loginModal .form-group {
+    clear: both;
+    width: 300px;
+    margin: 0 auto;
+    height: 44px;
 }
 
-.HP-header .list-inline {
+#loginModal .form-control {
+    height: 44px;
+    border-radius: 0px;
+    outline: medium;
+}
+
+#PhoneL {
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    background-image: url(../images/black-bg.png);
-    padding: 5px 0;
-    margin-bottom: 0;
+    margin: 0;
 }
 
-.HP-header .list-inline img {
-    height: 60px;
-    width: 60px;
-    margin: 0 auto;
+#PasswordL {
+    width: 100%;
+    margin: -1px 0 0 0;
 }
 
-.HP-header .list-inline a {
-    display: block;
-    width: 70px;
-    margin: 0 auto;
+.login-prompt-info {
+    width: 300px;
+    height: 20px;
+    margin: 10px 40px;
+    color: red;
+    line-height: 20px;
+    display: none;
 }
 
-.HP-header .list-inline li {
-    width: 14%;
+#loginModal .col-sm-offset-2 {
+    margin: 0;
+    padding: 0;
+    height: 40px;
+}
+
+#loginModal .col-sm-3 {
+    text-align: right;
+}
+
+#loginModal .col-sm-3 a {
+    padding: 12px 0;
+    line-height: 40px;
+    color: black;
+}
+
+#loginModal .col-sm-3 a:hover {
+    color: black;
+}
+
+#login-btn {
+    width: 300px;
+    margin: 10px 40px 20px 40px;
+    background-color: #42CBC1;
+    border: none;
 }
 
 /*
-租房推荐
+ 找回密码
 */
-.housing-recommended {
-    width: 90%;
-    margin: 20px 4% 20px 6%;
+#retrieveModal .modal-content {
+    width: 380px;
 }
 
-.housing-more {
+#retrieveModal .modal-dialog {
+    width: 380px;
+    margin: 10% auto;
+}
+
+.retrieve-close {
+    width: 320px;
+    height: 10px;
+    margin: 15px auto 5px auto;
+}
+
+.retrieve {
+    width: 300px;
+    margin: 0px auto 15px auto;
+    height: 50px;
+    line-height: 50px;
+}
+
+.retrieve h3 {
+    float: left;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+}
+
+.retrieve span {
     float: right;
-    margin-top: 50px;
-    margin-right: 3%;
 }
 
-.housing-recommended h1 {
+#retrieveModal .form-group {
+    clear: both;
+    width: 300px;
+    margin: 0 auto;
+    height: 44px;
+}
+
+#retrieveModal .form-control {
+    height: 44px;
+    border-radius: 0px;
+    outline: medium;
+}
+
+#PhoneRW {
+    width: 100%;
+    margin: 0;
+}
+
+#DxyzmRW {
+    width: 201px;
+    float: left;
+    margin: -1px 0 0 0;
+}
+
+#DxyzmRW-btn {
+    width: 100px;
+    height: 44px;
+    float: right;
+    background-color: white;
+    border-radius: 0px;
+    color: black;
+    border-color: #ccc;
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+#PasswordRW {
+    width: 100%;
+    margin: -2px 0 0 0;
+}
+
+#PasswordTwoRW {
+    width: 100%;
+    margin: -3px 0 0 0;
+}
+
+.retrieve-prompt-info {
+    width: 300px;
+    height: 20px;
+    margin: 10px 40px 0 40px;
+    color: red;
+    line-height: 20px;
+    display: none;
+}
+
+#retrieve-btn {
+    width: 300px;
+    margin: 20px 40px;
+    background-color: #42CBC1;
+    border: none;
+}
+
+.retrieve-a {
+    color: #42CBC1;
+}
+
+.retrieve-a:hover {
+    color: #42CBC1;
+}
+
+/*
+ 注册
+*/
+#registeredModal .modal-content {
+    width: 380px;
+}
+
+#registeredModal .modal-dialog {
+    width: 380px;
+    margin: 5% auto;
+}
+
+.registered-close {
+    width: 320px;
+    height: 10px;
+    margin: 15px auto 5px auto;
+}
+
+.registered {
+    width: 300px;
+    margin: 0px auto 15px auto;
+    height: 50px;
+    line-height: 50px;
+}
+
+.registered h3 {
+    float: left;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+}
+
+.registered span {
+    float: right;
+}
+
+#registeredModal .form-group {
+    clear: both;
+    width: 300px;
+    margin: 0 auto;
+    height: 44px;
+}
+
+#registeredModal .form-control {
+    height: 44px;
+    border-radius: 0px;
+    outline: medium;
+}
+
+#PhoneR {
+    width: 100%;
+    margin: 0;
+}
+
+#DxyzmR {
+    width: 201px;
+    float: left;
+    margin: -1px 0 0 0;
+}
+
+#DxyzmR-btn {
+    width: 100px;
+    height: 44px;
+    float: right;
+    background-color: white;
+    border-radius: 0px;
+    color: black;
+    border-color: #ccc;
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+#NameR {
+    width: 100%;
+    margin: -2px 0 0 0;
+}
+
+#IdcardR {
+    width: 100%;
+    margin: -3px 0 0 0;
+}
+
+#PasswordR {
+    width: 100%;
+    margin: -4px 0 0 0;
+}
+
+#PasswordTwoR {
+    width: 100%;
+    margin: -5px 0 0 0;
+}
+
+#registeredModal .col-sm-offset-2 {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.registered-prompt-info {
+    width: 300px;
+    height: 20px;
+    margin: 0 40px;
+    color: red;
+    line-height: 20px;
+    display: none;
+}
+
+#registered-btn {
+    width: 300px;
+    margin: 20px 40px;
+    background-color: #42CBC1;
+    border: none;
+}
+
+.register-a {
+    color: #42CBC1;
+}
+
+.register-a:hover {
+    color: #42CBC1;
+}
+
+/*
+    轮播图
+ */
+#carousel-example-generic {
+    height: 350px;
+}
+
+#carousel-example-generic img {
+    height: 350px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-indicators {
+    width: 100%;
+    background-color: #D9D9D9;
+    bottom: 0;
+    left: 0;
+    padding-top: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.carousel-indicators .active {
+    background-color: #818181;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.carousel-indicators li {
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: white;
+}
+
+/*
+搜索框
+ */
+.top-search {
+    width: 100%;
+    background-color: #D9D9D9;
+}
+
+.house-search {
+    width: 74%;
+    margin: 0 auto;
+}
+
+.house-type {
+    margin-left: 10px;
+    margin-bottom: -10px;
+}
+
+.house-type ul {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.house-type li {
+    margin-bottom: 0;
+    margin-top: 0;
+    height: 35px;
+    color: black;
+}
+
+.house-type-check {
+    background-image: url(../images/houseTypeCheck.png);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+
+.input-search {
+    width: 100%;
+    height: 59px;
+}
+
+.form-control {
+    width: 75%;
+    height: 45px;
+    border-radius: 8px;
+    margin: 7px 0.5% 7px 0;
     float: left;
 }
 
-.housing-text {
-    clear: both;
+.search-btn {
+    float: left;
+    width: 15%;
+    height: 45px;
+    background-color: #FF6D0A;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 7px 0;
 }
 
-.housing-recommended .row {
+.house-map {
+    float: left;
+    margin-left: 1.5%;
+}
+
+.house-map img {
+    width: 100%;
+    height: 100%;
+}
+
+.hot-search {
+    clear: both;
+    height: 30px;
+    margin-top: -20px;
+    margin-left: 15px;
+}
+
+.hot-search dt {
+    float: left;
+}
+
+.hot-search dd {
+    float: left;
+}
+
+.hot-search dd a {
+    color: #5E5E5E;
+    font-weight: 100;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.hot-search dd a:hover {
+    color: #5E5E5E;
+}
+
+/*
+    有好房
+ */
+.room {
+    width: 100%;
+}
+
+.good-room {
+    width: 90%;
+    margin: 0 4% 0 6%;
+}
+
+.room-title {
+    width: 125px;
+    margin: 0 auto;
+}
+
+.room-title p {
+    margin-top: 45px;
+    width: 5px;
+    height: 30px;
+    background-color: #41CBBE;
+    float: left;
+}
+
+.room-title h1 {
+    padding-top: 20px;
+    float: right;
+}
+
+.room-text {
+    clear: both;
+    text-align: center;
+    color: #5E5E5E;
+    margin: 20px auto;
+}
+
+.good-room .row {
     height: 280px;
 }
 
-.housing-recommended .col-md-3 {
+.good-room .col-md-3 {
     height: 100%;
     width: 22%;
     margin-right: 3%;
     padding-left: 0;
     padding-right: 0;
-    background-color: white;
+    background-color: #F3F3F3;
+    border: 1px solid #DDDDDD;
 }
 
-.housing-img {
+.room-img {
     height: 200px;
     width: 100%;
 }
 
-.housing-img img {
+.room-img img {
     height: 100%;
     width: 100%;
 }
 
-.housing-content {
+.room-content {
     width: 80%;
     margin: 0 auto;
     color: black;
 }
 
-.housing-introduce {
+.room-introduce {
     margin-top: 15px;
     width: 100%;
     font-size: 16px;
@@ -158,14 +529,14 @@ a {
     text-overflow: ellipsis;
 }
 
-.housing-info {
+.room-info {
     width: 100%;
     font-size: 12px;
     color: #999;
     margin-top: 15px;
 }
 
-.housing-price {
+.room-price {
     color: white;
     font-size: 18px;
     position: absolute;
@@ -175,12 +546,10 @@ a {
 }
 
 /*
-小区推荐
-*/
+绝对强推
+ */
 .community {
     width: 100%;
-    background-color: white;
-    padding: 30px 0;
 }
 
 .community-recommended {
@@ -188,25 +557,36 @@ a {
     margin: 20px 4% 20px 6%;
 }
 
-.community-more {
-    float: right;
-    margin-top: 50px;
-    margin-right: 3%;
+.community-title {
+    width: 160px;
+    margin: 0 auto;
 }
 
-.community-recommended h1 {
+.community-title p {
+    margin-top: 45px;
+    width: 5px;
+    height: 30px;
+    background-color: #41CBBE;
     float: left;
+}
+
+.community-title h1 {
+    padding-top: 20px;
+    float: right;
 }
 
 .community-text {
     clear: both;
+    text-align: center;
+    color: #5E5E5E;
+    margin: 20px auto;
 }
 
 .community-recommended .row {
     height: 280px;
 }
 
-.col-md-4 {
+.community-recommended .col-md-4 {
     height: 100%;
     background-color: #EEEEF1;
     width: 30.333%;
@@ -215,7 +595,7 @@ a {
     border: 1px solid #DDDDDD;
 }
 
-.col-md-4 img {
+.community-recommended .col-md-4 img {
     height: 200px;
     width: 100%;
 }
@@ -240,76 +620,86 @@ a {
 }
 
 /*
-二手房
-*/
-.esf-recommended {
+核验担保
+ */
+.guarantee {
+    width: 100%;
+    background-color: #F3F3F3;
+    padding-bottom: 20px;
+}
+
+.check-guarantee {
     width: 90%;
-    margin: 20px 4% 20px 6%;
+    margin: 0 4% 0 6%;
 }
 
-.esf-more {
-    float: right;
-    margin-top: 50px;
-    margin-right: 3%;
+.guarantee-title {
+    width: 160px;
+    margin: 0 auto;
 }
 
-.esf-recommended h1 {
+.guarantee-title p {
+    margin-top: 45px;
+    width: 5px;
+    height: 30px;
+    background-color: #41CBBE;
     float: left;
 }
 
-.esf-text {
+.guarantee-title h1 {
+    padding-top: 20px;
+    float: right;
+}
+
+.guarantee-text {
     clear: both;
+    text-align: center;
+    margin: 20px auto;
+    color: #5E5E5E;
 }
 
-.esf-recommended .row {
-    height: 280px;
+.check-guarantee .row {
+    height: 150px;
 }
 
-.esf-recommended .col-md-3 {
+.check-guarantee .col-md-6 {
     height: 100%;
-    width: 22%;
+    width: 47%;
     margin-right: 3%;
     padding-left: 0;
     padding-right: 0;
-    background-color: white;
 }
 
-.esf-img {
-    height: 200px;
-    width: 100%;
+.guarantee-img {
+    height: 100%;
+    width: 49%;
+    float: left;
 }
 
-.esf-img img {
+.guarantee-img img {
     height: 100%;
     width: 100%;
 }
 
-.esf-content {
-    width: 80%;
-    margin: 0 auto;
+.guarantee-content {
+    width: 49%;
+    margin-left: 2%;
     color: black;
+    float: right;
 }
 
-.esf-introduce {
-    margin-top: 15px;
+.guarantee-question {
     width: 100%;
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.esf-info {
-    width: 100%;
+.guarantee-answer {
+    width: 50%;
+    max-height: 80%;
     font-size: 12px;
     color: #999;
-    margin-top: 15px;
-}
-
-.esf-price {
-    color: white;
-    font-size: 18px;
     position: absolute;
-    background-color: black;
-    top: 150px;
-    left: 0;
+    bottom: 0;
 }
