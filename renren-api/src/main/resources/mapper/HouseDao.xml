@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.dao.HouseDao">
+
+    <select id="queryMbodycardEntityByIcNo" parameterType="java.util.Map"
+            resultType="io.renren.entity.TmMbodycardEntity">
+            SELECT t.*,t1.NAME as ic_name
+            FROM tm_mbodycard t,TS_CODE t1,(
+              SELECT
+                a1.mcardseq
+              FROM tu_card a0, to_relation a1, tm_mbodycard a2
+              WHERE
+                a0.bid = a1.bid
+                AND a1.f_date IS NULL
+                AND a1.mid = a2.md_id
+                AND a1.mcardseq = a2.mseq
+                AND a0.cdno = #{cdno}
+                AND a2.ic_no = #{icno}
+            ) t3
+            WHERE t.MSEQ =t3.MCARDSEQ  and t1.ID=t.IC_TYPE
+    </select>
+
+    <select id="queryMbodycardEntityByCdno" parameterType="java.util.Map"
+            resultType="io.renren.entity.TmMbodycardEntity">
+            SELECT t1.*
+            FROM tm_mbodycard t1,( SELECT DISTINCT a1.mcardseq
+                  FROM tm_mbodycard a0, to_relation a1, sales_contract a2
+                WHERE
+                 a0.mseq = a1.mcardseq
+                 AND a2.sseq = a1.bid
+                 AND a1.f_date IS NULL
+                 AND a2.contract_no = #{cdno}) t2
+            WHERE t1.MSEQ = t2.mcardseq
+    </select>
+
+    <select id="getHouseByCdnoAndIcno" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DISTINCT
+          a2.lname,
+          a3.hdesc,
+          a3.hid,
+          a3.barea
+        FROM tu_card a0, to_relation a1, tu_bldg a2, tu_house a3, tm_mbodycard a4
+        WHERE
+           a4.md_id = a1.mid
+          AND a0.bid = a1.bid
+          AND a1.sid = a3.hid
+          AND a3.sid = a2.sid
+          AND a0.cdno =#{cdno}
+          AND a4.ic_no =#{icno}
+    </select>
+
+    <select id="queryState" parameterType="java.lang.Long" resultType="java.util.Map">
+        select t2.INFO
+        from to_state t1,ta_housecheck_config t2
+        where
+            t1.SID= #{value}
+            AND t1.modality=0
+            AND t1.f_date is null
+            and t1.STYPE =t2.CHECK_STATE
+            and t2.STATE_TYPE = 'house_limit_state'
+            AND t2.BTYPE = 'ESF'
+    </select>
+
+</mapper>

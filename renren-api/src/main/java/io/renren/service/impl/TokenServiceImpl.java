@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.UUID;
 
 
-@Service("tokenService")
+@Service("apiTokenService")
 public class TokenServiceImpl extends ServiceImpl<TokenDao, TokenEntity> implements TokenService {
 	/**
 	 * 12小时后过期
