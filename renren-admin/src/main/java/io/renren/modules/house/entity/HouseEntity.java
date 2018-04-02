@@ -1,172 +1,57 @@
 package io.renren.modules.house.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 户籍验证接口 实体
+ * 客体信息
  */
 public class HouseEntity implements Serializable {
 
-    private String whcd;
-    private String rylb;
-    private String gzdw;
-    private String hzxm;
-    private String xm;
-    private String sfzh;
-    private String hh;
-    private String mz;
-    private String yhzgx;
-    private String djsj;
-    private String xzzxz;
-    private String hlx;
-    private String xb;
-    private String csrq;
-    private String hjdxz;
-    private String hjzt;
-    private String hzsfzh;
-    private String hyzk;
+    private String hid;
+    private String lname;
+    private String hdesc;
+    private String BAREA;
+    private List<Map> states;
 
-    public String getWhcd() {
-        return whcd;
+    public String getHid() {
+        return hid;
     }
 
-    public void setWhcd(String whcd) {
-        this.whcd = whcd;
+    public void setHid(String hid) {
+        this.hid = hid;
     }
 
-    public String getRylb() {
-        return rylb;
+    public String getLname() {
+        return lname;
     }
 
-    public void setRylb(String rylb) {
-        this.rylb = rylb;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
-    public String getGzdw() {
-        return gzdw;
+    public String getHdesc() {
+        return hdesc;
     }
 
-    public void setGzdw(String gzdw) {
-        this.gzdw = gzdw;
+    public void setHdesc(String hdesc) {
+        this.hdesc = hdesc;
     }
 
-    public String getHzxm() {
-        return hzxm;
+    public String getBAREA() {
+        return BAREA;
     }
 
-    public void setHzxm(String hzxm) {
-        this.hzxm = hzxm;
+    public void setBAREA(String BAREA) {
+        this.BAREA = BAREA;
     }
 
-    public String getXm() {
-        return xm;
+    public List<Map> getStates() {
+        return states;
     }
 
-    public void setXm(String xm) {
-        this.xm = xm;
-    }
-
-    public String getSfzh() {
-        return sfzh;
-    }
-
-    public void setSfzh(String sfzh) {
-        this.sfzh = sfzh;
-    }
-
-    public String getHh() {
-        return hh;
-    }
-
-    public void setHh(String hh) {
-        this.hh = hh;
-    }
-
-    public String getMz() {
-        return mz;
-    }
-
-    public void setMz(String mz) {
-        this.mz = mz;
-    }
-
-    public String getYhzgx() {
-        return yhzgx;
-    }
-
-    public void setYhzgx(String yhzgx) {
-        this.yhzgx = yhzgx;
-    }
-
-    public String getDjsj() {
-        return djsj;
-    }
-
-    public void setDjsj(String djsj) {
-        this.djsj = djsj;
-    }
-
-    public String getXzzxz() {
-        return xzzxz;
-    }
-
-    public void setXzzxz(String xzzxz) {
-        this.xzzxz = xzzxz;
-    }
-
-    public String getHlx() {
-        return hlx;
-    }
-
-    public void setHlx(String hlx) {
-        this.hlx = hlx;
-    }
-
-    public String getXb() {
-        return xb;
-    }
-
-    public void setXb(String xb) {
-        this.xb = xb;
-    }
-
-    public String getCsrq() {
-        return csrq;
-    }
-
-    public void setCsrq(String csrq) {
-        this.csrq = csrq;
-    }
-
-    public String getHjdxz() {
-        return hjdxz;
-    }
-
-    public void setHjdxz(String hjdxz) {
-        this.hjdxz = hjdxz;
-    }
-
-    public String getHjzt() {
-        return hjzt;
-    }
-
-    public void setHjzt(String hjzt) {
-        this.hjzt = hjzt;
-    }
-
-    public String getHzsfzh() {
-        return hzsfzh;
-    }
-
-    public void setHzsfzh(String hzsfzh) {
-        this.hzsfzh = hzsfzh;
-    }
-
-    public String getHyzk() {
-        return hyzk;
-    }
-
-    public void setHyzk(String hyzk) {
-        this.hyzk = hyzk;
+    public void setStates(List<Map> states) {
+        this.states = states;
     }
 }

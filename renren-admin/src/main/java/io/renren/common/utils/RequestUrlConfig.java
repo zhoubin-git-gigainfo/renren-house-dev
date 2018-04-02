@@ -9,7 +9,7 @@ public interface RequestUrlConfig {
     /**
      * 房源核验接口地址
      */
-    public static final String HOUSE_VERIFICATION_URL = "http://192.168.168.107:8081/api/house";
+    public static final String HOUSE_VERIFICATION_URL = "http://192.168.168.107:8081/renren-api/api/house";
 
 
 }
