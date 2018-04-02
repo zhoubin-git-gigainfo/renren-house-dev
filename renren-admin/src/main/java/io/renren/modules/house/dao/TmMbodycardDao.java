@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import io.renren.modules.house.entity.TmMbodycardEntity;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 import java.util.Map;
 
 @Mapper

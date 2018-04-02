@@ -7,8 +7,8 @@ import io.renren.common.utils.Query;
 import io.renren.datasources.DataSourceNames;
 import io.renren.datasources.annotation.DataSource;
 import io.renren.modules.house.dao.TatSechlistingDao;
-import io.renren.modules.house.service.TatSechlistingServer;
 import io.renren.modules.house.entity.TatSechlistingEntity;
+import io.renren.modules.house.service.TatSechlistingServer;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

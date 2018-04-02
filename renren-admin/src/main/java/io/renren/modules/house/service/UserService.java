@@ -23,4 +23,11 @@ public interface UserService extends IService<UserEntity> {
 	 * @return        返回登录信息
 	 */
 	Map<String, Object> login(HouseLoginForm form);
+
+	/**
+	 *
+	 * @param idCard
+	 * @return
+	 */
+    Object queryByIdCard(String idCard);
 }

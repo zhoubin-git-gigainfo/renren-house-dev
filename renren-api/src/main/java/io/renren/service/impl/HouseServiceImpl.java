@@ -3,11 +3,8 @@ package io.renren.service.impl;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.dao.HouseDao;
 import io.renren.entity.TmMbodycardEntity;
-import io.renren.entity.UserEntity;
 import io.renren.service.HouseService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
