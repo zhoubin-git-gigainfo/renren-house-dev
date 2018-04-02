@@ -54,4 +54,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
             return map;
         }
     }
+
+    @Override
+    public UserEntity queryByIdCard(String idCard) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setIdCard(idCard);
+        return baseMapper.selectOne(userEntity);
+    }
 }
