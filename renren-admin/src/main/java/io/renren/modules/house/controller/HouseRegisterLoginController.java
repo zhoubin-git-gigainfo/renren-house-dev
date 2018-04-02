@@ -81,7 +81,7 @@ public class HouseRegisterLoginController {
 
         String json = null;
         try {
-            json = HttpRequest.get(RequestUrlConfig.HOUSEHOLD_REGISTER_URL_HN + "?requestStr=" + objectMapper.writeValueAsString(map));
+            json = HttpRequest.get(RequestUrlConfig.HOUSE_HOLD_REGISTER_URL_HN + "?requestStr=" + objectMapper.writeValueAsString(map));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
