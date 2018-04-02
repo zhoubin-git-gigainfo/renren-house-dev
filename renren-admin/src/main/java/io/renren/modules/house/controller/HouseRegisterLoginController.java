@@ -50,7 +50,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("register")
     @ApiOperation("注册")
-    public R register(HouseRegisterForm form) {
+    public R register(@RequestBody HouseRegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
 
@@ -74,7 +74,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("updatePassword")
     @ApiOperation("修改密码")
-    public R updatePassword(String mobile,String password) {
+    public R updatePassword(@RequestBody String mobile,@RequestBody String password) {
         UserEntity userEntity = new UserEntity();
         userEntity.setMobile(mobile);
         userEntity.setPassword(DigestUtils.sha256Hex(password));
@@ -85,7 +85,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("message")
     @ApiOperation("验证码")
-    public R message(String mobile) {
+    public R message(@RequestBody String mobile) {
         String code = SendMsgUtil.createRandomVcode();
 //        SendMsgUtil.sendMsg(phone, "【签名】尊敬的用户，您的验证码为" + code + "，请在10分钟内输入。请勿告诉其他人!");
         return R.ok().put("code", code);

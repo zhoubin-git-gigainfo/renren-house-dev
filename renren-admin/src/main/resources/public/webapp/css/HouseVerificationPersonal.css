@@ -1,0 +1,110 @@
+
+/*
+ 生成房源核验码
+*/
+.generate{
+    width: 400px;
+    margin: 0 auto;
+}
+
+.generate .form-group {
+    width: 300px;
+    margin: 0 auto;
+    height: 44px;
+}
+
+.generate .form-control {
+    height: 44px;
+    border-radius: 0px;
+    outline: medium;
+}
+
+#fczhId {
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+#Idcard {
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.verification-prompt-info {
+    width: 300px;
+    height: 20px;
+    margin: 10px 50px 0 50px;
+    color: red;
+    line-height: 20px;
+    display: none;
+}
+
+#verification-btn {
+    width: 300px;
+    margin: 20px 50px;
+    background-color: #42CBC1;
+    border: none;
+}
+
+/*
+ 房源信息列表
+*/
+.houses{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.house-list ul li{
+    clear: both;
+    border-bottom: 1px solid #dedede;
+    height: 200px;
+}
+
+.house-pic{
+    width: 23%;
+    height: 130px;
+    float: left;
+    margin: 20px 0;
+}
+
+.house-pic img{
+    width: 100%;
+    height: 100%;
+}
+
+.house-content{
+    float: right;
+    width: 75%;
+    height: 130px;
+    margin: 20px 0;
+}
+
+.house-info{
+    float: left;
+
+}
+
+.house-info a{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.house-info a:hover{
+    color: black;
+}
+
+.house-price{
+    float: right;
+    color: #00B86B;
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/*#example{
+    text-align: center
+}*/
+

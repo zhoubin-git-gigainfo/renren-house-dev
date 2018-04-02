@@ -9,8 +9,8 @@ $(document).ready(function () {
         if (username != null && username != "" && password != null && password != "" && mobile != null && mobile != "") {
             var startTime = localStorage.getItem("startTime");
             var endTime = getNowFormatDate();
-            var apartDay=getDateDiff(startTime,endTime);
-            if(apartDay<=7){
+            var apartDay = getDateDiff(startTime, endTime);
+            if (apartDay <= 7) {
                 var data = {
                     "mobile": mobile,
                     "password": password
@@ -28,18 +28,18 @@ $(document).ready(function () {
                     },
                     success: function (result) {
                         if (result.code == 0) {
-                            $(".top dd").html('<span>'+username+'</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                            $(".top dd").html('<span>' + username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
                         }
                     }
                 });
-            }else {
+            } else {
                 localStorage.removeItem("name");
                 localStorage.removeItem("password");
                 localStorage.removeItem("mobile");
                 localStorage.removeItem("startTime");
             }
         }
-    }else {
+    } else {
         var data = {
             "mobile": mobile,
             "password": password
@@ -57,15 +57,21 @@ $(document).ready(function () {
             },
             success: function (result) {
                 if (result.code == 0) {
-                    $(".top dd").html('<span>'+username+'</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                    $(".top dd").html('<span>' + username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
                 }
             }
         });
     }
 
+    $("#search-context").focus(function () {
+        $('.search-history').css('display', 'block');
+    });
+    $("#search-context").blur(function () {
+        $('.search-history').css('display', 'none');
+    });
 });
 
-function onOutLogin(){
+function onOutLogin() {
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("password");
     sessionStorage.removeItem("mobile");
@@ -75,13 +81,13 @@ function onOutLogin(){
     localStorage.removeItem("startTime");
     location.reload();
 }
+
 //日期间隔
-function getDateDiff(startDate,endDate)
-{
-    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();
-    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();
-    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);
-    return  dates;
+function getDateDiff(startDate, endDate) {
+    var startTime = new Date(Date.parse(startDate.replace(/-/g, "/"))).getTime();
+    var endTime = new Date(Date.parse(endDate.replace(/-/g, "/"))).getTime();
+    var dates = Math.abs((startTime - endTime)) / (1000 * 60 * 60 * 24);
+    return dates;
 }
 
 //注册跳转登录
@@ -102,12 +108,6 @@ function jumpRW() {
     })
 }
 
-//搜索类型的选择
-function onTypeChange(check) {
-    $(".house-type li").attr("class", "house-type-uncheck");
-    $(check).attr("class", "house-type-check");
-}
-
 //登录
 function onLogin() {
     var mobile = $("#PhoneL").val();
@@ -124,7 +124,7 @@ function onLogin() {
             "mobile": mobile,
             "password": password
         };
-        var url=getUrl() + "app/house/login";
+        var url = getUrl() + "app/house/login";
         $.ajax({
             type: "post",
             contentType: "application/json;charset=UTF-8",
@@ -165,7 +165,7 @@ function onLogin() {
                         sessionStorage.setItem("password", password);
                         sessionStorage.setItem("mobile", mobile);
                     }
-                    $(".top dd").html('<span>'+result.username+'</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                    $(".top dd").html('<span>' + result.username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
                     alert("登录成功");
                 }
             }
@@ -194,8 +194,8 @@ function getNowFormatDate() {
 function onRetrievePassword() {
     var mobile = $("#PhoneRW").val();
     var password = $('#PasswordRW').val();
-    var passwordTwo = $('#PasswordTwoR').val();
-    var dxyzm = $('#DxyzmR').val();
+    var passwordTwo = $('#PasswordTwoRW').val();
+    var dxyzm = $('#DxyzmRW').val();
     var dxyzmOld = sessionStorage.getItem("dxyzm");
     if (mobile == null || mobile == "" || !(/^1[3-9][0-9]\d{8}$/.test(mobile))) {
         $('.retrieve-prompt-info span').html("请输入有效的手机号码");
@@ -229,7 +229,7 @@ function onRetrievePassword() {
         $.ajax({
             type: "post",
             contentType: "application/json;charset=UTF-8",
-            url: getUrl() + "app/house/login",
+            url: getUrl() + "app/house/updatePassword",
             async: true,
             timeout: 10000,
             data: JSON.stringify(data),
@@ -249,7 +249,7 @@ function onRetrievePassword() {
                     sessionStorage.setItem("name", result.username);
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("mobile", mobile);
-                    $(".top dd").html('<span>'+result.username+'</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                    $(".top dd").html('<span>' + result.username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
                     alert("修改密码成功");
                 }
             }
@@ -330,7 +330,7 @@ function onRegistered() {
                     sessionStorage.setItem("name", username);
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("mobile", mobile);
-                    $(".top dd").html('<span>'+username+'</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                    $(".top dd").html('<span>' + username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
                     alert("注册成功");
                 }
             }
@@ -372,7 +372,7 @@ function onInvokeSettime(obj, mobile) {
     $.ajax({
         type: "post",
         contentType: "application/json;charset=UTF-8",
-        url: getUrl()+"app/house/message",
+        url: getUrl() + "app/house/message",
         async: true,
         timeout: 10000,
         data: JSON.stringify(data),
@@ -406,15 +406,61 @@ function onInvokeSettime(obj, mobile) {
     });
 }
 
+function closeModal(btn) {
+    var modal = $(btn).parents('.bs-example-modal-sm');
+    modal.modal("hide");
+    var id = modal.attr('id');
+    modal.load(location.href + " #" + id + " .modal-dialog");
+}
+
+
 //搜索结果跳转页面
-function onHouseSearch() {
-    var houseType = $('.house-type .house-type-check').html();
+function onHouseVerification() {
     var searchContext = $('#search-context').val();
-    if (houseType == "二手房") {
-        window.location.href = "BuyHouse.html";
-    } else if (houseType == "新房") {
-        window.location.href = "BuyHouse.html";
-    } else if (houseType == "租房") {
+    if (searchContext != null || searchContext != "") {
+//点击搜索按钮时，去重
+        KillRepeat(searchContext);
+//去重后把数组存储到浏览器localStorage
+        localStorage.houseSearch = houseSearchArr;
+//然后再把搜索内容显示出来
+        MapSearchArr();
+        $('#search-context').val("");
         window.location.href = "RentHouse.html";
+    }
+}
+
+var houseSearchArr;
+//定义一个search的，判断浏览器有无数据存储（搜索历史）
+if (localStorage.houseSearch) {
+//如果有，转换成 数组的形式存放到searchArr的数组里（localStorage以字符串的形式存储，所以要把它转换成数组的形式）
+    houseSearchArr = localStorage.houseSearch.split(",")
+} else {
+//如果没有，则定义searchArr为一个空的数组
+    houseSearchArr = [];
+}
+//把存储的数据显示出来作为搜索历史
+MapSearchArr();
+
+function MapSearchArr() {
+    var tmpHtml = "";
+    for (var i = houseSearchArr.length - 1; i >= 0; i--) {
+        tmpHtml += "<li>" + houseSearchArr[i] + "</li>"
+    }
+    $("#key-history").html(tmpHtml);
+}
+
+//去重
+function KillRepeat(val) {
+    var kill = 0;
+    for (var i = 0; i < houseSearchArr.length; i++) {
+        if (val === houseSearchArr[i]) {
+            kill++;
+        }
+    }
+    if (kill < 1) {
+        if (houseSearchArr.length >= 5) {
+            houseSearchArr.splice(0, 1);
+        }
+        houseSearchArr.push(val);
     }
 }

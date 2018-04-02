@@ -50,7 +50,7 @@
                             <a class="unpitch-on" href="BuyHouse.html">买卖</a>
                         </li>
                         <li>
-                            <a class="unpitch-on" href="#">贷款</a>
+                            <a class="unpitch-on" href="HouseVerificationPersonal.html">贷款</a>
                         </li>
                         <li>
                             <a class="unpitch-on" href="#">真伪核验</a>
@@ -77,7 +77,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="login-close">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
             </div>
 
             <div class="login">
@@ -109,6 +109,21 @@
                 </div>
             </div>
 
+            <!--<div class="login-user-type">
+                <div class="radio user-type-ordinary">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                        普通用户
+                    </label>
+                </div>
+                <div class="radio user-type-agent" style="margin: 0px;">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                        经纪人
+                    </label>
+                </div>
+            </div>-->
+
             <button type="button" class="btn btn-primary btn-lg active" id="login-btn" onclick="onLogin()">登录</button>
 
         </div>
@@ -119,7 +134,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="retrieve-close">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
             </div>
 
             <div class="retrieve">
@@ -157,7 +172,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="registered-close">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
             </div>
 
             <div class="registered">
@@ -252,34 +267,14 @@
     </a>
 </div>
 
-<div class="top-search">
-    <div class="house-search">
-        <div class="house-type">
-            <ul class="list-inline">
-                <li class="house-type-check" onclick="onTypeChange(this)">二手房</li>
-                <li class="house-type-uncheck" onclick="onTypeChange(this)">新房</li>
-                <li class="house-type-uncheck" onclick="onTypeChange(this)">租房</li>
-            </ul>
+<div class="top-verification">
+    <div class="house-verification">
+        <div class="input-verification">
+            <input type="text" class="form-control" placeholder="请輸入房源核验码" data-search="true" id="verification-context">
+            <button type="button" class="verification-btn" onclick="onHouseVerification()">核验</button>
         </div>
-        <div class="input-search">
-            <input type="text" class="form-control" placeholder="请输入区域、商圈或小区名" data-search="true" id="search-context">
-            <button type="button" class="search-btn" onclick="onHouseSearch()">搜索</button>
-            <a href="#" class="house-map">
-                <img src="images/dtzf.png" />
-            </a>
-        </div>
-        <div class="hot-search">
-            <dl>
-                <dt>热门搜索：</dt>
-                <dd>
-                    <a>武广片区</a>
-                    <a>华晨商圈</a>
-                    <a>东城板块</a>
-                    <a>神龙湾</a>
-                    <a>尚品龙樾华府</a>
-                    <a>白鹤板块</a>
-                </dd>
-            </dl>
+        <div class="verification-history">
+            <ul class="list-unstyled" id="key-history"></ul>
         </div>
     </div>
 </div>
