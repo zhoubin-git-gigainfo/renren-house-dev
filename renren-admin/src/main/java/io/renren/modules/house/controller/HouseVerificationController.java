@@ -9,7 +9,9 @@ import io.renren.modules.house.entity.HouseCheckEntity;
 import io.renren.modules.house.entity.HouseEntity;
 import io.renren.modules.house.entity.HouseVerificationCodeEntity;
 import io.renren.modules.house.service.HouseVerificationCodeService;
+import io.renren.modules.house.service.SequenceService;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +32,14 @@ public class HouseVerificationController {
     @Autowired
     private HouseVerificationCodeService houseVerificationCodeService;
 
+    @Autowired
+    private SequenceService sequenceService;
+
     @PostMapping("/list")
     public R list(String icno, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
         try {
+            //TODO 接口已修改，需重新解析数据
             String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "obligee?ic_no" + icno + "&cdno=" + cdno);
             ObjectMapper objectMapper = new ObjectMapper();
             houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
@@ -71,12 +77,13 @@ public class HouseVerificationController {
         return R.ok().put("data", houseCheckEntity);
     }
 
-    private static String code() {
+    private String code() {
         String code = "";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         code = dateFormat.format(new Date());
-        for (int i = 0; i < 3; i++) {
-            code = code + (int) (Math.random() * 9);
+        String seq = sequenceService.queryNextvalSeq("code_validate").toString();
+        while (seq.toString().length() < 4) {
+            seq = "0" + seq;
         }
         code = IMEICheck(code);
         //存在
