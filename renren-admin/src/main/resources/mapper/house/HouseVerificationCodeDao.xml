@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.house.dao.HouseVerificationCodeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.house.entity.HouseVerificationCodeEntity" id="houseVerificationCodeMap">
+        <result property="id" column="ID"/>
+        <result property="code" column="CODE"/>
+        <result property="houseId" column="HOUSE_ID"/>
+        <result property="icno" column="ICNO"/>
+        <result property="cdno" column="CDNO"/>
+        <result property="vDate" column="V_DATE"/>
+        <result property="fDate" column="F_DATE"/>
+        <result property="state" column="STATE"/>
+    </resultMap>
+
+
+</mapper>
