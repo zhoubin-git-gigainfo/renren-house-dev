@@ -12,8 +12,21 @@ public class HouseEntity implements Serializable {
     private String hid;
     private String lname;
     private String hdesc;
-    private String BAREA;
+    private String barea;
     private List<Map> states;
+
+    /**
+     * 关联核验码--界面展示
+     */
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getHid() {
         return hid;
@@ -39,12 +52,12 @@ public class HouseEntity implements Serializable {
         this.hdesc = hdesc;
     }
 
-    public String getBAREA() {
-        return BAREA;
+    public String getBarea() {
+        return barea;
     }
 
-    public void setBAREA(String BAREA) {
-        this.BAREA = BAREA;
+    public void setBarea(String barea) {
+        this.barea = barea;
     }
 
     public List<Map> getStates() {

@@ -21,8 +21,8 @@ import java.util.Map;
  * @date 2018-03-22 10:10:47
  */
 @RestController
-@RequestMapping("/app/house/srelease")
-@Api("APP登录接口")
+@RequestMapping("/api/house/srelease")
+@Api("挂牌房源详情")
 public class TatSreleaseController {
 
     @Autowired

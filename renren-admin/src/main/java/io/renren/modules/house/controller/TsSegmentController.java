@@ -18,8 +18,8 @@ import java.util.List;
  * @date 2018-03-22 10:10:47
  */
 @RestController
-@RequestMapping("/app/house/tssgment")
-@Api("api登录接口")
+@RequestMapping("/api/house/tssgment")
+@Api("分段信息")
 public class TsSegmentController {
 
     @Autowired
