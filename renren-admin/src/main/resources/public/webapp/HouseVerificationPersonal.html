@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/constant.css">
     <link rel="stylesheet" href="css/HouseVerificationPersonal.css">
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header_new.css">
+    <link rel="stylesheet" href="css/tail_new.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
@@ -34,10 +35,6 @@
         <input type="text" class="form-control" id="fczhId" placeholder="请输入房产证号">
     </div>
 
-    <div class="form-group">
-        <input type="text" class="form-control" id="Idcard" placeholder="请输入身份证号码">
-    </div>
-
     <div class="verification-prompt-info">
         <span></span>
     </div>
@@ -47,27 +44,24 @@
 </div>
 
 <div class="houses">
-    <div class="house-list">
-        <ul>
-
-        </ul>
-    </div>
-    <!--<div id="example">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-
-            </ul>
-        </nav>
-    </div>-->
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Heading</th>
+        <th>Another Heading</th>
+    </tr>
+</table>
 </div>
+
+<div id="tail"></div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/constant.js"></script>
 <!--<script src="js/MyPaging.js"></script>-->
 <script src="js/HouseVerificationPersonal.js"></script>
 <script>
-    $("#header").load("header.html");
+    $("#header").load("header_new.html");
+    $("#tail").load("tail_new.html");
 </script>
-<script src="js/header.js"></script>
+<script src="js/header_new.js"></script>
 </body>
 </html>

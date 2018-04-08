@@ -1,78 +1,79 @@
-html{
+html {
     padding: 5px 0;
 }
 
-body{
+body {
     height: 100%;
     width: 100%;
     background: url("../images/bj.png");
 }
+
 /*
     菜单
  */
-.menu{
-    width: 60%;
-    height: 260px;
+.menu {
+    width: 820px;
+    height: 290px;
     margin: 100px auto;
 }
 
-.menu-left{
+.menu-left {
     float: left;
-    width: 55%;
-    padding-right: 10px;
-    height: 260px;
+    height: 290px;
+    width: 430px;
+    margin-right: 10px;
 }
 
-.menu-right{
+.menu-right {
+    height: 290px;
+    width: 380px;
     float: right;
-    width: 45%;
-    height: 260px;
 }
 
-.menu a{
+.menu a {
     display: block;
 }
 
-#fyhy{
-    width: 100%;
-    padding-bottom: 10px;
+#HouseVerificationPersonal {
+    height: 150px;
+    width: 430px;
+    margin-bottom: 10px;
+}
+
+#htwq {
     height: 130px;
-}
-
-#htwq{
-    width: 55%;
+    width: 235px;
     float: left;
-    padding-right: 10px;
-    height: 120px;
+    margin-right: 10px;
 }
 
-#zjjg{
-    width: 45%;
+#zjjg {
+    height: 130px;
+    width: 185px;
     float: right;
-    height: 120px;
 }
 
-#jjjg{
-    width: 45%;
+#jjjg {
+    height: 290px;
+    width: 155px;
     float: left;
-    height: 250px;
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
-#jgyh{
-    width: 55%;
+#jgyh {
+    height: 150px;
+    width: 215px;
     float: left;
+    margin-bottom: 10px;
+}
+
+#jjr {
     height: 130px;
-    padding-bottom: 10px;
-}
-
-#jjr{
-    width: 55%;
+    width: 215px;
     float: left;
-    height: 120px;
 }
 
-.menu img{
+.menu img {
     width: 100%;
     height: 100%;
 }
@@ -90,7 +91,6 @@ body{
     height: 45px;
 }
 
-
 #verification-context {
     width: 85%;
     height: 45px;
@@ -106,7 +106,7 @@ body{
     padding-left: 8px;
 }
 
-.verification button{
+.verification button {
     width: 100%;
     height: 100%;
     background-color: #63B1F0;
@@ -120,7 +120,7 @@ body{
     border-radius: 5px;
 }
 
-.verification-history{
+.verification-history {
     width: 55.5%;
     height: 100px;
     background-color: white;
@@ -131,7 +131,7 @@ body{
     display: none;
 }
 
-#key-history li{
+#key-history li {
     margin-top: 5px;
     margin-left: 10px;
 }

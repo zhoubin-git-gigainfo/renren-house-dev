@@ -63,11 +63,11 @@ public class HouseRegisterLoginController {
 //        验证手机验证码
         UserEntity user = new UserEntity();
         if (null != userService.queryByMobile(form.getMobile())) {
-            return R.error().put("message", "手机号已注册");
+            return R.error().put("msg", "手机号已注册");
         }
 
         if (null != userService.queryByIdCard(form.getIdCard())) {
-            return R.error().put("message", "身份证已注册");
+            return R.error().put("msg", "身份证已注册");
         }
 //        与户籍接口验证
         Map map = new HashMap();
@@ -91,10 +91,10 @@ public class HouseRegisterLoginController {
             e.printStackTrace();
         }
         if (null == entity.getData() || entity.getData().size() == 0) {
-            return R.error().put("message", "身份证号码不存在"); //身份查询不到用户信息
+            return R.error().put("msg", "身份证号码不存在"); //身份查询不到用户信息
         }
         if (!form.getUsername().equals(entity.getData().get(0).getXm()) || !form.getIdCard().equals(entity.getData().get(0).getSfzh())) {
-            return R.error().put("message", "姓名与身份证号码不匹配"); //用户信息不匹配
+            return R.error().put("msg", "姓名与身份证号码不匹配"); //用户信息不匹配
         }
 
         user.setIdCard(form.getIdCard());

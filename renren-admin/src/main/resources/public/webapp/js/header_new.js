@@ -58,7 +58,7 @@ function loginAjax(mobile, password) {
     };
     $.ajax({
         type: "post",
-        url: getUrl() + "app/house/login",
+        url: getUrl() + "api/house/login",
         async: true,
         timeout: 10000,
         data: data,
@@ -68,7 +68,9 @@ function loginAjax(mobile, password) {
         },
         success: function (result) {
             if (result.code == 0) {
-                $(".top dd").html('<span>' + result.username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+                sessionStorage.setItem("isLogin",true);
+                sessionStorage.setItem("token",result.token);
+                isJumpUrl(result.username);
             }
         }
     });
@@ -78,6 +80,7 @@ function onOutLogin() {
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("password");
     sessionStorage.removeItem("mobile");
+    sessionStorage.removeItem("isLogin");
     localStorage.removeItem("name");
     localStorage.removeItem("password");
     localStorage.removeItem("mobile");
@@ -135,7 +138,7 @@ function onLogin() {
             "mobile": mobile,
             "password": password
         };
-        var url = getUrl() + "app/house/login";
+        var url = getUrl() + "api/house/login";
         $.ajax({
             type: "post",
             url: url,
@@ -155,6 +158,7 @@ function onLogin() {
                     $('.login-prompt-info span').html("该手机号码还没注册");
                     $('.login-prompt-info').css('display', 'block');
                 } else if (result.code == 0) {
+                    sessionStorage.setItem("token",result.token);
                     $('.login-prompt-info span').html("");
                     $('.login-prompt-info').css('display', 'none');
                     $("#loginModal").modal("hide");
@@ -175,8 +179,8 @@ function onLogin() {
                         sessionStorage.setItem("password", password);
                         sessionStorage.setItem("mobile", mobile);
                     }
-                    $(".top dd").html('<span>' + result.username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
-                    alert("登录成功");
+                    sessionStorage.setItem("isLogin",true);
+                    isJumpUrl(result.username);
                 }
             }
         });
@@ -256,7 +260,7 @@ function onRetrievePassword() {
         };
         $.ajax({
             type: "post",
-            url: getUrl() + "app/house/updatePassword",
+            url: getUrl() + "api/house/updatePassword",
             async: true,
             timeout: 10000,
             data: data,
@@ -273,12 +277,13 @@ function onRetrievePassword() {
                 } else if (result.code == 0) {
                     $('.retrieve-prompt-info span').html("");
                     $('.retrieve-prompt-info').css('display', 'none');
+                    sessionStorage.setItem("token",result.token);
                     $("#retrieveModal").modal("hide");
                     sessionStorage.setItem("name", result.username);
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("mobile", mobile);
-                    $(".top dd").html('<span>' + result.username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
-                    alert("修改密码成功");
+                    sessionStorage.setItem("isLogin",true);
+                    isJumpUrl(result.username);
                 }
             }
         });
@@ -343,7 +348,7 @@ function onRegistered() {
         };
         $.ajax({
             type: "post",
-            url: getUrl() + "app/house/register",
+            url: getUrl() + "api/house/register",
             async: true,
             timeout: 10000,
             data: data,
@@ -355,17 +360,18 @@ function onRegistered() {
             success: function (result) {
                 sessionStorage.removeItem("dxyzm");
                 if (result.code == 500) {
-                    $('.registered-prompt-info span').html(result.message);
+                    $('.registered-prompt-info span').html(result.msg);
                     $('.registered-prompt-info').css('display', 'block');
                 } else if (result.code == 0) {
+                    sessionStorage.setItem("token",result.token);
                     $('.registered-prompt-info span').html("");
                     $('.registered-prompt-info').css('display', 'none');
                     $("#registeredModal").modal("hide");
                     sessionStorage.setItem("name", username);
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("mobile", mobile);
-                    $(".top dd").html('<span>' + username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
-                    alert("注册成功");
+                    sessionStorage.setItem("isLogin",true);
+                    isJumpUrl(username);
                 }
             }
         });
@@ -405,7 +411,7 @@ function onInvokeSettime(obj, mobile) {
     };
     $.ajax({
         type: "post",
-        url: getUrl() + "app/house/message",
+        url: getUrl() + "api/house/message",
         async: true,
         timeout: 10000,
         data: data,
@@ -447,4 +453,14 @@ function closeModal(btn) {
     var id = modal.attr('id');
     var url = getUrl() + "webapp/header_new.html #" + id + " .modal-dialog";
     modal.load(url);
+}
+
+function isJumpUrl(username){
+    var jumpUrl=localStorage.getItem("jumpUrl");
+    if(jumpUrl==null||jumpUrl==""){
+        $(".top dd").html('<span>' + username + '</span><span>|</span><a onclick="onOutLogin()">退出登录</a>');
+    }else {
+        localStorage.removeItem("jumpUrl");
+        window.location.href=jumpUrl;
+    }
 }

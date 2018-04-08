@@ -25,6 +25,7 @@ public class HouseVerificationEntity implements Serializable {
     private String hjzt;
     private String hzsfzh;
     private String hyzk;
+    private String zp;
 
     public String getWhcd() {
         return whcd;
@@ -168,5 +169,13 @@ public class HouseVerificationEntity implements Serializable {
 
     public void setHyzk(String hyzk) {
         this.hyzk = hyzk;
+    }
+
+    public String getZp() {
+        return zp;
+    }
+
+    public void setZp(String zp) {
+        this.zp = zp;
     }
 }

@@ -4,7 +4,7 @@
 */
 .generate{
     width: 400px;
-    margin: 0 auto;
+    margin: 100px auto 0 auto;
 }
 
 .generate .form-group {
@@ -24,11 +24,6 @@
     margin: 10px 0 0 0;
 }
 
-#Idcard {
-    width: 100%;
-    margin: 10px 0 0 0;
-}
-
 .verification-prompt-info {
     width: 300px;
     height: 20px;
@@ -41,7 +36,7 @@
 #verification-btn {
     width: 300px;
     margin: 20px 50px;
-    background-color: #42CBC1;
+    background-color: #63B1F0;
     border: none;
 }
 
@@ -50,61 +45,7 @@
 */
 .houses{
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto 100px auto;
 }
 
-.house-list ul li{
-    clear: both;
-    border-bottom: 1px solid #dedede;
-    height: 200px;
-}
-
-.house-pic{
-    width: 23%;
-    height: 130px;
-    float: left;
-    margin: 20px 0;
-}
-
-.house-pic img{
-    width: 100%;
-    height: 100%;
-}
-
-.house-content{
-    float: right;
-    width: 75%;
-    height: 130px;
-    margin: 20px 0;
-}
-
-.house-info{
-    float: left;
-
-}
-
-.house-info a{
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-.house-info a:hover{
-    color: black;
-}
-
-.house-price{
-    float: right;
-    color: #00B86B;
-    font-size: 22px;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-/*#example{
-    text-align: center
-}*/
 
