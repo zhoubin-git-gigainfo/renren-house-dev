@@ -23,6 +23,9 @@ public class HouseEntity implements Serializable {
      */
     private Integer pass_tag;
 
+    private String pass_info;
+    private String bstru;
+    private String bfete;
     /**
      * 关联核验码--界面展示
      */
@@ -98,5 +101,29 @@ public class HouseEntity implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getPass_info() {
+        return pass_info;
+    }
+
+    public void setPass_info(String pass_info) {
+        this.pass_info = pass_info;
+    }
+
+    public String getBstru() {
+        return bstru;
+    }
+
+    public void setBstru(String bstru) {
+        this.bstru = bstru;
+    }
+
+    public String getBfete() {
+        return bfete;
+    }
+
+    public void setBfete(String bfete) {
+        this.bfete = bfete;
     }
 }

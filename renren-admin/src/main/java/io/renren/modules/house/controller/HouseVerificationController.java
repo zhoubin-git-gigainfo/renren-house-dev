@@ -45,7 +45,7 @@ public class HouseVerificationController {
                 return R.error();
             }
             houseCheckEntity.getData().getHouses().stream().forEach(entity -> {
-                //TODO 根据hid查询表是否存在有效状态的客体
+                //TODO 根据hid查询表是否存在有效状态的核验码
                 if (entity.getPass_tag() == 1) {
                     HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByHid(entity.getHid());
                     if (null != codeEntity) {
