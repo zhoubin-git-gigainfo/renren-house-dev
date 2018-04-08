@@ -1,341 +1,4 @@
 
-
-/*
-登录
- */
-#loginModal .modal-content {
-    width: 380px;
-}
-
-#loginModal .modal-dialog {
-    width: 380px;
-    margin: 10% auto;
-}
-
-.login-close {
-    width: 320px;
-    height: 10px;
-    margin: 15px auto 5px auto;
-}
-
-.login {
-    width: 300px;
-    margin: 0px auto 15px auto;
-    height: 50px;
-    line-height: 50px;
-}
-
-.login h3 {
-    height: 50px;
-    margin: 0;
-    line-height: 50px;
-}
-
-#loginModal .form-group {
-    clear: both;
-    width: 300px;
-    margin: 0 auto;
-    height: 44px;
-}
-
-#loginModal .form-control {
-    height: 44px;
-    border-radius: 0px;
-    outline: medium;
-}
-
-#PhoneL {
-    width: 100%;
-    margin: 0;
-}
-
-#PasswordL {
-    width: 100%;
-    margin: -1px 0 0 0;
-}
-
-.login-prompt-info {
-    width: 300px;
-    height: 20px;
-    margin: 10px 40px;
-    color: red;
-    line-height: 20px;
-    display: none;
-}
-
-#loginModal .col-sm-offset-2 {
-    margin: 0;
-    padding: 0;
-    height: 40px;
-}
-
-#loginModal .col-sm-3 {
-    text-align: right;
-}
-
-#loginModal .col-sm-3 a {
-    padding: 12px 0;
-    line-height: 40px;
-    color: black;
-}
-
-#loginModal .col-sm-3 a:hover {
-    color: black;
-}
-
-.login-user-type{
-    width: 300px;
-    margin: 0 auto;
-    height: 40px;
-    clear: both;
-}
-
-.user-type-ordinary{
-    float: left;
-    height: 40px;
-    margin: 0;
-}
-
-.user-type-agent{
-    float: right;
-    height: 40px;
-}
-
-#login-btn {
-    width: 300px;
-    margin: 10px 40px 20px 40px;
-    background-color: #42CBC1;
-    border: none;
-}
-
-/*
- 找回密码
-*/
-#retrieveModal .modal-content {
-    width: 380px;
-}
-
-#retrieveModal .modal-dialog {
-    width: 380px;
-    margin: 10% auto;
-}
-
-.retrieve-close {
-    width: 320px;
-    height: 10px;
-    margin: 15px auto 5px auto;
-}
-
-.retrieve {
-    width: 300px;
-    margin: 0px auto 15px auto;
-    height: 50px;
-    line-height: 50px;
-}
-
-.retrieve h3 {
-    float: left;
-    height: 50px;
-    margin: 0;
-    line-height: 50px;
-}
-
-.retrieve span {
-    float: right;
-}
-
-#retrieveModal .form-group {
-    clear: both;
-    width: 300px;
-    margin: 0 auto;
-    height: 44px;
-}
-
-#retrieveModal .form-control {
-    height: 44px;
-    border-radius: 0px;
-    outline: medium;
-}
-
-#PhoneRW {
-    width: 100%;
-    margin: 0;
-}
-
-#DxyzmRW {
-    width: 201px;
-    float: left;
-    margin: -1px 0 0 0;
-}
-
-#DxyzmRW-btn {
-    width: 100px;
-    height: 44px;
-    float: right;
-    background-color: white;
-    border-radius: 0px;
-    color: black;
-    border-color: #ccc;
-    margin-left: -1px;
-    margin-top: -1px;
-}
-
-#PasswordRW {
-    width: 100%;
-    margin: -2px 0 0 0;
-}
-
-#PasswordTwoRW {
-    width: 100%;
-    margin: -3px 0 0 0;
-}
-
-.retrieve-prompt-info {
-    width: 300px;
-    height: 20px;
-    margin: 10px 40px 0 40px;
-    color: red;
-    line-height: 20px;
-    display: none;
-}
-
-#retrieve-btn {
-    width: 300px;
-    margin: 20px 40px;
-    background-color: #42CBC1;
-    border: none;
-}
-
-.retrieve-a {
-    color: #42CBC1;
-}
-
-.retrieve-a:hover {
-    color: #42CBC1;
-}
-
-/*
- 注册
-*/
-#registeredModal .modal-content {
-    width: 380px;
-}
-
-#registeredModal .modal-dialog {
-    width: 380px;
-    margin: 5% auto;
-}
-
-.registered-close {
-    width: 320px;
-    height: 10px;
-    margin: 15px auto 5px auto;
-}
-
-.registered {
-    width: 300px;
-    margin: 0px auto 15px auto;
-    height: 50px;
-    line-height: 50px;
-}
-
-.registered h3 {
-    float: left;
-    height: 50px;
-    margin: 0;
-    line-height: 50px;
-}
-
-.registered span {
-    float: right;
-}
-
-#registeredModal .form-group {
-    clear: both;
-    width: 300px;
-    margin: 0 auto;
-    height: 44px;
-}
-
-#registeredModal .form-control {
-    height: 44px;
-    border-radius: 0px;
-    outline: medium;
-}
-
-#PhoneR {
-    width: 100%;
-    margin: 0;
-}
-
-#DxyzmR {
-    width: 201px;
-    float: left;
-    margin: -1px 0 0 0;
-}
-
-#DxyzmR-btn {
-    width: 100px;
-    height: 44px;
-    float: right;
-    background-color: white;
-    border-radius: 0px;
-    color: black;
-    border-color: #ccc;
-    margin-left: -1px;
-    margin-top: -1px;
-}
-
-#NameR {
-    width: 100%;
-    margin: -2px 0 0 0;
-}
-
-#IdcardR {
-    width: 100%;
-    margin: -3px 0 0 0;
-}
-
-#PasswordR {
-    width: 100%;
-    margin: -4px 0 0 0;
-}
-
-#PasswordTwoR {
-    width: 100%;
-    margin: -5px 0 0 0;
-}
-
-#registeredModal .col-sm-offset-2 {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.registered-prompt-info {
-    width: 300px;
-    height: 20px;
-    margin: 0 40px;
-    color: red;
-    line-height: 20px;
-    display: none;
-}
-
-#registered-btn {
-    width: 300px;
-    margin: 20px 40px;
-    background-color: #42CBC1;
-    border: none;
-}
-
-.register-a {
-    color: #42CBC1;
-}
-
-.register-a:hover {
-    color: #42CBC1;
-}
-
 /*
     轮播图
  */
@@ -393,6 +56,27 @@
     height: 59px;
 }
 
+
+#verification-context {
+    width: 80%;
+    height: 45px;
+    border-radius: 8px;
+    margin: 7px 0.5% 7px 0;
+    float: left;
+}
+
+.verification-btn {
+    float: left;
+    width: 19.5%;
+    height: 45px;
+    background-color: #FF6D0A;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 7px 0;
+}
+
 .verification-history{
     width: 55.5%;
     height: 100px;
@@ -408,27 +92,6 @@
     margin-top: 5px;
     margin-left: 10px;
 }
-
-.form-control {
-    width: 75%;
-    height: 45px;
-    border-radius: 8px;
-    margin: 7px 0.5% 7px 0;
-    float: left;
-}
-
-.verification-btn {
-    float: left;
-    width: 15%;
-    height: 45px;
-    background-color: #FF6D0A;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 10px;
-    margin: 7px 0;
-}
-
 /*
     有好房
  */

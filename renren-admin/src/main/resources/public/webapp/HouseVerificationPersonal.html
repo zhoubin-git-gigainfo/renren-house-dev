@@ -19,15 +19,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/bootoast.css">
     <link rel="stylesheet" href="css/constant.css">
     <link rel="stylesheet" href="css/HouseVerificationPersonal.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
 <body>
+<div id="header"></div>
 <div class="generate">
     <div class="form-group">
         <input type="text" class="form-control" id="fczhId" placeholder="请输入房产证号">
@@ -48,7 +49,7 @@
 <div class="houses">
     <div class="house-list">
         <ul>
-            <li class="list-unstyled"><div class="house-pic"><img src="images/banner1.jpg" /></div><div class="house-content"><div class="house-info"><a><span>益文路79弄小区</span><span>1室1厅1卫</span><span>54㎡</span></a><p><span>中层 / 共6层</span><span>朝南</span><span>精装</span></p><p><span>青浦 - 香花桥</span><span>新园路508弄</span></p><p><span>1号线</span></p></div><div class="house-price"><span>4200</span>元/月</div></div></li>
+
         </ul>
     </div>
     <!--<div id="example">
@@ -61,9 +62,12 @@
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootoast.js"></script>
 <script src="js/constant.js"></script>
 <!--<script src="js/MyPaging.js"></script>-->
 <script src="js/HouseVerificationPersonal.js"></script>
+<script>
+    $("#header").load("header.html");
+</script>
+<script src="js/header.js"></script>
 </body>
 </html>

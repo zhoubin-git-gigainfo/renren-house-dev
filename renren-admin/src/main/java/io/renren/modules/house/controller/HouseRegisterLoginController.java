@@ -44,7 +44,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("login")
     @ApiOperation("登录")
-    public R login(@RequestBody HouseLoginForm form) {
+    public R login(HouseLoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
 
@@ -57,7 +57,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("register")
     @ApiOperation("注册")
-    public R register(@RequestBody HouseRegisterForm form) {
+    public R register(HouseRegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
 
@@ -92,10 +92,10 @@ public class HouseRegisterLoginController {
             e.printStackTrace();
         }
         if (null == entity.getData() || entity.getData().size() == 0) {
-            return R.error(); //身份查询不到用户信息
+            return R.error().put("message", "身份证号码不存在"); //身份查询不到用户信息
         }
         if (!form.getUsername().equals(entity.getData().get(0).getXm()) || !form.getIdCard().equals(entity.getData().get(0).getSfzh())) {
-            return R.error(); //用户信息不匹配
+            return R.error().put("message", "姓名与身份证号码不匹配"); //用户信息不匹配
         }
 
         user.setIdCard(form.getIdCard());
@@ -110,7 +110,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("updatePassword")
     @ApiOperation("修改密码")
-    public R updatePassword(@RequestBody String mobile,@RequestBody String password) {
+    public R updatePassword(String mobile,String password) {
         UserEntity userEntity = new UserEntity();
         userEntity.setMobile(mobile);
         userEntity.setPassword(DigestUtils.sha256Hex(password));
@@ -121,7 +121,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("message")
     @ApiOperation("验证码")
-    public R message(@RequestBody String mobile) {
+    public R message(String mobile) {
         String code = SendMsgUtil.createRandomVcode();
 //        SendMsgUtil.sendMsg(phone, "【签名】尊敬的用户，您的验证码为" + code + "，请在10分钟内输入。请勿告诉其他人!");
         return R.ok().put("code", code);

@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/bootoast.css">
     <link rel="stylesheet" href="css/constant.css">
-    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/HomePager.css">
+    <link rel="stylesheet" href="css/header.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
@@ -31,203 +31,10 @@
 </head>
 
 <body>
-<div class="header">
-    <div class="top">
-        <dl>
-            <dt>
-                <div class="top-name">
-                    <img src="images/topName.png" />
-                </div>
-                <div class="top-menu">
-                    <ul class="list-inline">
-                        <li>
-                            <a class="pitch-on" href="#">首页</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="RentHouse.html">租赁</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="BuyHouse.html">买卖</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="HouseVerificationPersonal.html">贷款</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="#">真伪核验</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="#">交易担保</a>
-                        </li>
-                        <li>
-                            <a class="unpitch-on" href="#">经纪人</a>
-                        </li>
-                    </ul>
-                </div>
-            </dt>
-            <dd>
-                <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>
-                <span>|</span>
-                <a href="#" data-toggle="modal" data-target="#registeredModal">注册</a>
-            </dd>
-        </dl>
-    </div>
+<div id="header">
+
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="login-close">
-                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
-            </div>
-
-            <div class="login">
-                <h3>账号密码登录</h3>
-            </div>
-
-            <div class="form-group">
-                <input autocomplete="off" type="text" class="form-control" id="PhoneL" placeholder="请输入手机号码">
-            </div>
-
-            <div class="form-group">
-                <input autocomplete="off" type="password" class="form-control" id="PasswordL" placeholder="请输入登录密码">
-            </div>
-
-            <div class="login-prompt-info">
-                <span></span>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-9">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="qtmdl"> 七天免登录
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-offset-2 col-sm-3">
-                    <a href="#" onclick="jumpRW()">忘记密码</a>
-                </div>
-            </div>
-
-            <!--<div class="login-user-type">
-                <div class="radio user-type-ordinary">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                        普通用户
-                    </label>
-                </div>
-                <div class="radio user-type-agent" style="margin: 0px;">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        经纪人
-                    </label>
-                </div>
-            </div>-->
-
-            <button type="button" class="btn btn-primary btn-lg active" id="login-btn" onclick="onLogin()">登录</button>
-
-        </div>
-    </div>
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="retrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="retrieve-close">
-                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
-            </div>
-
-            <div class="retrieve">
-                <h3>找回密码</h3>
-            </div>
-
-            <div class="form-group">
-                <input autocomplete="off" type="text" class="form-control" id="PhoneRW" placeholder="请输入手机号码">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="DxyzmRW" placeholder="请输入短信验证码">
-                <button type="button" class="btn btn-primary active" id="DxyzmRW-btn" onclick="retrievePasswordVerificationCode(this)">获取验证码</button>
-            </div>
-
-            <div class="form-group">
-                <input autocomplete="off" type="password" class="form-control" id="PasswordRW" placeholder="请输入密码(6位到20位，数字加字母)">
-            </div>
-
-            <div class="form-group">
-                <input autocomplete="off" type="password" class="form-control" id="PasswordTwoRW" placeholder="请再次输入密码(6位到20位，数字加字母)">
-            </div>
-
-            <div class="retrieve-prompt-info">
-                <span></span>
-            </div>
-
-            <button type="button" class="btn btn-primary btn-lg active" id="retrieve-btn" onclick="onRetrievePassword()">修改密码</button>
-
-        </div>
-    </div>
-</div>
-
-<div class="modal fade bs-example-modal-sm" id="registeredModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="registered-close">
-                <button type="button" class="close" aria-hidden="true" onclick="closeModal(this)">&times;</button>
-            </div>
-
-            <div class="registered">
-                <h3>手机号码注册</h3>
-                <span>
-                        已有账号？
-                        <a onclick="openLoginModal()" class="register-a">去登录</a>
-                    </span>
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="PhoneR" placeholder="请输入手机号码">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="DxyzmR" placeholder="请输入短信验证码">
-                <button type="button" class="btn btn-primary active" id="DxyzmR-btn" onclick="registeredVerificationCode(this)">获取验证码</button>
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="NameR" placeholder="请输入验姓名">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="IdcardR" placeholder="请输入身份证号码">
-            </div>
-
-            <div class="form-group">
-                <input type="password" class="form-control" id="PasswordR" placeholder="请输入密码(6位到20位，数字加字母)" style="border-bottom:1px solid #ccc;">
-            </div>
-
-            <div class="form-group">
-                <input type="password" class="form-control" id="PasswordTwoR" placeholder="请再次输入密码(6位到20位，数字加字母)" style="border-bottom:1px solid #ccc;">
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="isAgreed"> 我已阅读并同意
-                            <a href="#" class="register-a">《用户使用协议》</a>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="registered-prompt-info">
-                <span></span>
-            </div>
-
-            <button type="button" class="btn btn-primary btn-lg active" id="registered-btn" onclick="onRegistered()">注册</button>
-
-        </div>
-    </div>
-</div>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
     <ol class="carousel-indicators">
@@ -478,4 +285,8 @@
 <script src="js/bootoast.js"></script>
 <script src="js/constant.js"></script>
 <script src="js/HomePager.js"></script>
+<script>
+    $("#header").load("header.html");
+</script>
+<script src="js/header.js"></script>
 </body>

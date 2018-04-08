@@ -1,27 +1,5 @@
 $(document).ready(function () {
-    var data = {
-        "mobile": "18888",
-        "password": "a44s"
-    };
-    $.ajax({
-        type: "post",
-        contentType: "application/json;charset=UTF-8",
-        url: getUrl() + "app/house/login",
-        async: true,
-        timeout: 10000,
-        data: JSON.stringify(data),
-        dataType: "json",
-        error: function () {
 
-        },
-        success: function (result) {
-            var html='';
-            for(var i=0;i<8;i++){
-                html+='<li class="list-unstyled"><div class="house-pic"><img src="images/banner1.jpg" /></div><div class="house-content"><div class="house-info"><a><span>益文路79弄小区</span><span>1室1厅1卫</span><span>54㎡</span></a><p><span>中层 / 共6层</span><span>朝南</span><span>精装</span></p><p><span>青浦 - 香花桥</span><span>新园路508弄</span></p><p><span>1号线</span></p></div><div class="house-price"><span>4200</span>元/月</div></div></li>';
-            }
-            $('.house-list ul').html(html);
-        }
-    });
 });
 
 
