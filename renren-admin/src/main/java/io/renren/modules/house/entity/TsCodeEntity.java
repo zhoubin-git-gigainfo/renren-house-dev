@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 
 /**
- * ${comments}
+ * 基础配置
  *
  * @author chenshun
  * @email sunlightcs@gmail.com

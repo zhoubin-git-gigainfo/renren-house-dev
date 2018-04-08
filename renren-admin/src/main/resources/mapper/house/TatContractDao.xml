@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.house.dao.TatContractDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.house.entity.TatContractEntity" id="tatContractMap">
+        <result property="cId" column="C_ID"/>
+        <result property="contractNo" column="CONTRACT_NO"/>
+        <result property="xydate" column="XYDATE"/>
+        <result property="createdate" column="CREATEDATE"/>
+        <result property="reporid" column="REPORID"/>
+        <result property="state" column="STATE"/>
+        <result property="title" column="TITLE"/>
+        <result property="price" column="PRICE"/>
+        <result property="payment" column="PAYMENT"/>
+        <result property="paymentMessage" column="PAYMENT_MESSAGE"/>
+        <result property="taxationEar" column="TAXATION_EAR"/>
+        <result property="taxationEarMessage" column="TAXATION_EAR_MESSAGE"/>
+        <result property="limitPay" column="LIMIT_PAY"/>
+        <result property="breachInfo" column="BREACH_INFO"/>
+        <result property="disputeResolution" column="DISPUTE_RESOLUTION"/>
+        <result property="otherAssumpsit" column="OTHER_ASSUMPSIT"/>
+        <result property="createDate" column="CREATE_DATE"/>
+    </resultMap>
+
+
+</mapper>

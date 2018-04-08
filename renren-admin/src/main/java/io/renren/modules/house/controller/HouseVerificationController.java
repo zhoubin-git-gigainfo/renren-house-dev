@@ -4,10 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renren.common.utils.HttpRequest;
 import io.renren.common.utils.R;
 import io.renren.common.utils.RequestUrlConfig;
+import io.renren.modules.api.annotation.Login;
 import io.renren.modules.api.annotation.LoginUser;
-import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.entity.HouseVerificationCodeEntity;
 import io.renren.modules.house.entity.UserEntity;
+import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.service.HouseVerificationCodeService;
 import io.renren.modules.house.service.SequenceService;
 import io.swagger.annotations.Api;
@@ -33,6 +34,7 @@ public class HouseVerificationController {
     @Autowired
     private SequenceService sequenceService;
 
+    @Login
     @PostMapping("/list")
     public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
@@ -45,7 +47,7 @@ public class HouseVerificationController {
                 return R.error();
             }
             houseCheckEntity.getData().getHouses().stream().forEach(entity -> {
-                //TODO 根据hid查询表是否存在有效状态的客体
+                //TODO 根据hid查询表是否存在有效状态的核验码
                 if (entity.getPass_tag() == 1) {
                     HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByHid(entity.getHid());
                     if (null != codeEntity) {

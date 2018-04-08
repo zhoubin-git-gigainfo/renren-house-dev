@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.house.dao.TmBodyDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.house.entity.TmBodyEntity" id="tmBodyMap">
+        <result property="mId" column="M_ID"/>
+        <result property="icNo" column="IC_NO"/>
+        <result property="icType" column="IC_TYPE"/>
+        <result property="mdTel" column="MD_TEL"/>
+        <result property="mdAddr" column="MD_ADDR"/>
+        <result property="icOrg" column="IC_ORG"/>
+        <result property="mdType" column="MD_TYPE"/>
+        <result property="mdAname" column="MD_ANAME"/>
+        <result property="maintypeid" column="MAINTYPEID"/>
+        <result property="percant" column="PERCANT"/>
+        <result property="cId" column="C_ID"/>
+    </resultMap>
+
+
+</mapper>
