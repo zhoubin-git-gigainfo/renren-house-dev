@@ -18,7 +18,6 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +34,7 @@ import java.util.Map;
  * @date 2017-03-23 15:31
  */
 @RestController
-@RequestMapping("/app/house")
+@RequestMapping("/api/house")
 @Api(tags = "登录接口")
 public class HouseRegisterLoginController {
 
@@ -44,7 +43,7 @@ public class HouseRegisterLoginController {
 
     @PostMapping("login")
     @ApiOperation("登录")
-    public R login(HouseLoginForm form) {
+    public R login( HouseLoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
 

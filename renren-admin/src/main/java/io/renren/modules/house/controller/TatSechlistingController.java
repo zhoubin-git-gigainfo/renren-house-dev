@@ -19,8 +19,8 @@ import java.util.Map;
  * @date 2018-03-22 10:10:47
  */
 @RestController
-@RequestMapping("/app/house/sechlisting")
-@Api("APP登录接口")
+@RequestMapping("/api/house/sechlisting")
+@Api("挂牌房源")
 public class TatSechlistingController {
 
     @Autowired

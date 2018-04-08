@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 户籍验证接口 实体
  */
-public class HouseEntity implements Serializable {
+public class HouseVerificationEntity implements Serializable {
 
     private String whcd;
     private String rylb;

@@ -20,8 +20,8 @@ import java.util.Map;
  * @date 2018-03-22 10:10:47
  */
 @RestController
-@RequestMapping("/app/house/tscode")
-@Api("APP登录接口")
+@RequestMapping("/api/house/tscode")
+@Api("基础信息")
 public class TsCodeController {
 
     @Autowired

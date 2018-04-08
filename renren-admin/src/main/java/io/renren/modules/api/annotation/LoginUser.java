@@ -14,34 +14,22 @@
  * the License.
  */
 
-package io.renren.common.xss;
+package io.renren.modules.api.annotation;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * XSS过滤
+ * 登录用户信息
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2017-04-01 10:20
+ * @date 2017-03-23 20:39
  */
-public class XssFilter implements Filter {
-
-    @Override
-    public void init(FilterConfig config) throws ServletException {
-    }
-
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-        XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(
-                (HttpServletRequest) request);
-        chain.doFilter(xssRequest, response);
-    }
-
-    @Override
-    public void destroy() {
-    }
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LoginUser {
 
 }

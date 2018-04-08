@@ -19,8 +19,8 @@ import java.util.Map;
  * @date 2018-03-22 10:10:47
  */
 @RestController
-@RequestMapping("/app/house/tmmbodycard")
-@Api("APP登录接口")
+@RequestMapping("/api/house/tmmbodycard")
+@Api("中介公司")
 public class TmMbodycardController {
 
     @Autowired
