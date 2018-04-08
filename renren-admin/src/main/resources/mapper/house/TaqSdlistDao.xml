@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.renren.modules.sys.dao.TaqSdlistDao">
+<mapper namespace="io.renren.modules.house.dao.TaqSdlistDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="io.renren.modules.sys.entity.TaqSdlistEntity" id="taqSdlistMap">
+    <resultMap type="io.renren.modules.house.entity.TaqSdlistEntity" id="taqSdlistMap">
         <result property="id" column="ID"/>
         <result property="hid" column="HID"/>
         <result property="lname" column="LNAME"/>
