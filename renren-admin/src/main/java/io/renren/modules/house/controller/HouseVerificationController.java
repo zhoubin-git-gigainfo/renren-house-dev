@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renren.common.utils.HttpRequest;
 import io.renren.common.utils.R;
 import io.renren.common.utils.RequestUrlConfig;
+import io.renren.modules.api.annotation.Login;
 import io.renren.modules.api.annotation.LoginUser;
 import io.renren.modules.house.entity.HouseVerificationCodeEntity;
 import io.renren.modules.house.entity.UserEntity;
@@ -33,6 +34,7 @@ public class HouseVerificationController {
     @Autowired
     private SequenceService sequenceService;
 
+    @Login
     @PostMapping("/list")
     public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
