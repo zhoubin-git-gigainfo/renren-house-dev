@@ -3,7 +3,7 @@
 
 <mapper namespace="io.renren.modules.house.dao.TmMbodycardDao">
 
-    <select id="queryEntity" resultType="io.renren.modules.house.entity.TmMbodycardEntity">
+    <select id="queryEntity" resultType="io.renren.modules.house.entity.check.TmMbodycardEntity">
         <if test="currPage != null and currPage != ''">
         SELECT * FROM (
             SELECT A.*, ROWNUM RN

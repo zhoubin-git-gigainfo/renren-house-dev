@@ -2,7 +2,7 @@ package io.renren.modules.house.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import io.renren.modules.house.entity.TmMbodycardEntity;
+import io.renren.modules.house.entity.check.TmMbodycardEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;

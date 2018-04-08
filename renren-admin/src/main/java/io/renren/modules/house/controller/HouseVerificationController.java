@@ -1,27 +1,25 @@
 package io.renren.modules.house.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.renren.common.utils.HttpRequest;
 import io.renren.common.utils.R;
 import io.renren.common.utils.RequestUrlConfig;
-import io.renren.modules.house.entity.HouseCheckEntity;
-import io.renren.modules.house.entity.HouseEntity;
+import io.renren.modules.api.annotation.LoginUser;
+import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.entity.HouseVerificationCodeEntity;
+import io.renren.modules.house.entity.UserEntity;
 import io.renren.modules.house.service.HouseVerificationCodeService;
 import io.renren.modules.house.service.SequenceService;
 import io.swagger.annotations.Api;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -36,33 +34,43 @@ public class HouseVerificationController {
     private SequenceService sequenceService;
 
     @PostMapping("/list")
-    public R list(String icno, String cdno) {
+    public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
         try {
             //TODO 接口已修改，需重新解析数据
-            String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "obligee?ic_no" + icno + "&cdno=" + cdno);
+            String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "&cd_no=" + cdno + "&ic_no=" + user.getIdCard());
             ObjectMapper objectMapper = new ObjectMapper();
             houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
-            if (null == houseCheckEntity.getMbodycard() || null == houseCheckEntity.getHouse()) {
+            if (null == houseCheckEntity.getData().getBodys() || null == houseCheckEntity.getData().getHouses()) {
                 return R.error();
             }
-            houseCheckEntity.getHouse().stream().forEach(entity -> {
+            houseCheckEntity.getData().getHouses().stream().forEach(entity -> {
                 //TODO 根据hid查询表是否存在有效状态的客体
-                if (entity.getStates().size() == 0) {
+                if (entity.getPass_tag() == 1) {
                     HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByHid(entity.getHid());
                     if (null != codeEntity) {
                         entity.setCode(codeEntity.getCode());
                     }
                     if (null == codeEntity) {
-                        String code = code();
+
+                        /**
+                         * 生成核验码   180408（年月日）+4位数序列（天为单位）+imei算法
+                         */
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+                        String code = dateFormat.format(new Date());
+                        String seq = sequenceService.queryNextvalSeq("code_validate").toString();
+                        while (seq.toString().length() < 4) {
+                            seq = "0" + seq;
+                        }
+
                         codeEntity = new HouseVerificationCodeEntity();
                         codeEntity.setId(UUID.randomUUID().toString());
                         codeEntity.setHouseId(entity.getHid());
                         codeEntity.setState(1);
                         codeEntity.setCdno(cdno);
-                        codeEntity.setIcno(icno);
+                        codeEntity.setIcno(user.getIdCard());
                         codeEntity.setVDate(new Date());
-                        codeEntity.setCode(code);
+                        codeEntity.setCode(IMEICheck(code + seq));
                         houseVerificationCodeService.insert(codeEntity);
                         entity.setCode(code);
                     }
@@ -75,23 +83,6 @@ public class HouseVerificationController {
             e.printStackTrace();
         }
         return R.ok().put("data", houseCheckEntity);
-    }
-
-    private String code() {
-        String code = "";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
-        code = dateFormat.format(new Date());
-        String seq = sequenceService.queryNextvalSeq("code_validate").toString();
-        while (seq.toString().length() < 4) {
-            seq = "0" + seq;
-        }
-        code = IMEICheck(code);
-        //存在
-        //TODO 查询核验码表--有效状态
-        if (code == "存在") {
-            code();
-        }
-        return code;
     }
 
     /**
