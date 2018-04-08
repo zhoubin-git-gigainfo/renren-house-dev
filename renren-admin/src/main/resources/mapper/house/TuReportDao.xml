@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.sys.dao.TuReportDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.sys.entity.TuReportEntity" id="tuReportMap">
+        <result property="rId" column="R_ID"/>
+        <result property="rName" column="R_NAME"/>
+        <result property="rFile" column="R_FILE"/>
+        <result property="createdate" column="CREATEDATE"/>
+        <result property="cId" column="C_ID"/>
+    </resultMap>
+
+
+</mapper>
