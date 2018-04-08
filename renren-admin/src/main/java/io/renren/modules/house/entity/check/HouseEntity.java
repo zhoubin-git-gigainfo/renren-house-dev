@@ -1,10 +1,6 @@
 package io.renren.modules.house.entity.check;
 
-import io.swagger.models.auth.In;
-
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 客体信息
@@ -15,7 +11,10 @@ public class HouseEntity implements Serializable {
     private String lname;
     private String hdesc;
     private String barea;
-    private String field;
+    /**
+     * 房屋用途
+     */
+    private String huse;
     private String limit_state;
     private String warn_state;
     /**
@@ -24,7 +23,13 @@ public class HouseEntity implements Serializable {
     private Integer pass_tag;
 
     private String pass_info;
+    /**
+     * 建成年代
+     */
     private String bstru;
+    /**
+     * 建成年代
+     */
     private String bfete;
     /**
      * 关联核验码--界面展示
@@ -63,12 +68,12 @@ public class HouseEntity implements Serializable {
         this.barea = barea;
     }
 
-    public String getField() {
-        return field;
+    public String getHuse() {
+        return huse;
     }
 
-    public void setField(String field) {
-        this.field = field;
+    public void setHuse(String huse) {
+        this.huse = huse;
     }
 
     public String getLimit_state() {
