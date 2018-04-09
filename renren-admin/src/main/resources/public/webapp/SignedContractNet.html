@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>发布房源信息</title>
+    <title>合同网签</title>
     <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
     <meta http-equiv="Pragma" content="no-cache">
     <!-- 用来防止别人在框架里调用你的页面 -->
@@ -20,17 +20,26 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/constant.css">
+    <link rel="stylesheet" href="css/SignedContractNet.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/BuyHouse.css">
+    <link rel="stylesheet" href="css/tail.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
 <body>
+<div id="header"></div>
 
-
+<div id="tail"></div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/constant.js"></script>
+<script src="js/SignedContractNet.js"></script>
+<script>
+    $("#header").load("header.html");
+    $("#tail").load("tail.html");
+</script>
+<script src="js/header.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>存量房交易</title>
+    <title>房源核验</title>
     <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
     <meta http-equiv="Pragma" content="no-cache">
     <!-- 用来防止别人在框架里调用你的页面 -->
@@ -19,21 +19,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/bootoast.css">
     <link rel="stylesheet" href="css/constant.css">
+    <link rel="stylesheet" href="css/HouseVerification.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/InventoryTransaction.css">
+    <link rel="stylesheet" href="css/tail.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
 <body>
+<div id="header"></div>
+<div class="generate">
+    <div class="form-group">
+        <input type="text" class="form-control" id="fczhId" placeholder="请输入产权证号">
+    </div>
 
+    <div class="form-group">
+        <input type="text" class="form-control" id="idCard" placeholder="请输入身份证号">
+    </div>
+
+    <div class="verification-prompt-info">
+        <span></span>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg active" id="verification-btn" onclick="generateHouseVerification()">生成</button>
+
+</div>
+
+<div class="houses">
+<table class="table table-bordered table-hover">
+
+</table>
+</div>
+
+<div id="tail"></div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootoast.js"></script>
 <script src="js/constant.js"></script>
-<script src="js/InventoryTransaction.js"></script>
+<!--<script src="js/MyPaging.js"></script>-->
+<script src="js/HouseVerification.js"></script>
+<script>
+    $("#header").load("header.html");
+    $("#tail").load("tail.html");
+</script>
+<script src="js/header.js"></script>
 </body>
 </html>

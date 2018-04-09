@@ -52,3 +52,12 @@ function KillRepeat(val) {
         houseSearchArr.push(val);
     }
 }
+
+function onJump(address){
+    var isLogin = sessionStorage.getItem("isLogin");
+    if(isLogin=="true"){
+        location.href=$(address).attr("id")+".html";
+    }else {
+
+    }
+}

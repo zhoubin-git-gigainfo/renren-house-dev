@@ -1,83 +1,126 @@
+html {
+    padding: 5px 0;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: url("../images/bj.png");
+}
 
 /*
-    轮播图
+    菜单
  */
-#carousel-example-generic {
-    height: 350px;
+.menu {
+    width: 820px;
+    height: 290px;
+    margin: 100px auto;
 }
 
-#carousel-example-generic img {
-    height: 350px;
+.menu-left {
+    float: left;
+    height: 290px;
+    width: 430px;
+    margin-right: 10px;
 }
 
-.carousel-inner img {
+.menu-right {
+    height: 290px;
+    width: 380px;
+    float: right;
+}
+
+.menu a {
+    display: block;
+}
+
+#HouseVerification {
+    height: 150px;
+    width: 430px;
+    margin-bottom: 10px;
+}
+
+#SignedContractNet {
+    height: 130px;
+    width: 235px;
+    float: left;
+    margin-right: 10px;
+}
+
+#zjjg {
+    height: 130px;
+    width: 185px;
+    float: right;
+}
+
+#jjjg {
+    height: 290px;
+    width: 155px;
+    float: left;
+    margin-right: 10px;
+}
+
+#jgyh {
+    height: 150px;
+    width: 215px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#jjr {
+    height: 130px;
+    width: 215px;
+    float: left;
+}
+
+.menu img {
     width: 100%;
     height: 100%;
-}
-
-.carousel-indicators {
-    width: 100%;
-    background-color: #D9D9D9;
-    bottom: 0;
-    left: 0;
-    padding-top: 10px;
-    margin-left: 0;
-    margin-bottom: 0;
-}
-
-.carousel-indicators .active {
-    background-color: #818181;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.carousel-indicators li {
-    border: none;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: white;
 }
 
 /*
 搜索框
  */
-.top-verification {
-    width: 100%;
-    background-color: #D9D9D9;
-}
-
 .house-verification {
-    width: 74%;
-    margin: 0 auto;
+    width: 65%;
+    margin: 0 auto 100px auto;
 }
 
 .input-verification {
     width: 100%;
-    height: 59px;
+    height: 45px;
 }
-
 
 #verification-context {
-    width: 80%;
+    width: 85%;
     height: 45px;
     border-radius: 8px;
-    margin: 7px 0.5% 7px 0;
+    border: 1px solid #63B1F0;
     float: left;
 }
 
-.verification-btn {
+.verification {
     float: left;
-    width: 19.5%;
+    width: 15%;
     height: 45px;
-    background-color: #FF6D0A;
+    padding-left: 8px;
+}
+
+.verification button {
+    width: 100%;
+    height: 100%;
+    background-color: #63B1F0;
     color: white;
     font-size: 20px;
     font-weight: bold;
-    border-radius: 10px;
-    margin: 7px 0;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom-width: 5px;
+    border-radius: 5px;
 }
 
-.verification-history{
+.verification-history {
     width: 55.5%;
     height: 100px;
     background-color: white;
@@ -88,256 +131,7 @@
     display: none;
 }
 
-#key-history li{
+#key-history li {
     margin-top: 5px;
     margin-left: 10px;
-}
-/*
-    有好房
- */
-.room {
-    width: 100%;
-}
-
-.good-room {
-    width: 90%;
-    margin: 0 4% 0 6%;
-}
-
-.room-title {
-    width: 125px;
-    margin: 0 auto;
-}
-
-.room-title p {
-    margin-top: 45px;
-    width: 5px;
-    height: 30px;
-    background-color: #41CBBE;
-    float: left;
-}
-
-.room-title h1 {
-    padding-top: 20px;
-    float: right;
-}
-
-.room-text {
-    clear: both;
-    text-align: center;
-    color: #5E5E5E;
-    margin: 20px auto;
-}
-
-.good-room .row {
-    height: 280px;
-}
-
-.good-room .col-md-3 {
-    height: 100%;
-    width: 22%;
-    margin-right: 3%;
-    padding-left: 0;
-    padding-right: 0;
-    background-color: #F3F3F3;
-    border: 1px solid #DDDDDD;
-}
-
-.room-img {
-    height: 200px;
-    width: 100%;
-}
-
-.room-img img {
-    height: 100%;
-    width: 100%;
-}
-
-.room-content {
-    width: 80%;
-    margin: 0 auto;
-    color: black;
-}
-
-.room-introduce {
-    margin-top: 15px;
-    width: 100%;
-    font-size: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.room-info {
-    width: 100%;
-    font-size: 12px;
-    color: #999;
-    margin-top: 15px;
-}
-
-.room-price {
-    color: white;
-    font-size: 18px;
-    position: absolute;
-    background-color: black;
-    top: 150px;
-    left: 0;
-}
-
-/*
-绝对强推
- */
-.community {
-    width: 100%;
-}
-
-.community-recommended {
-    width: 90%;
-    margin: 20px 4% 20px 6%;
-}
-
-.community-title {
-    width: 160px;
-    margin: 0 auto;
-}
-
-.community-title p {
-    margin-top: 45px;
-    width: 5px;
-    height: 30px;
-    background-color: #41CBBE;
-    float: left;
-}
-
-.community-title h1 {
-    padding-top: 20px;
-    float: right;
-}
-
-.community-text {
-    clear: both;
-    text-align: center;
-    color: #5E5E5E;
-    margin: 20px auto;
-}
-
-.community-recommended .row {
-    height: 280px;
-}
-
-.community-recommended .col-md-4 {
-    height: 100%;
-    background-color: #EEEEF1;
-    width: 30.333%;
-    margin-right: 3%;
-    padding: 0;
-    border: 1px solid #DDDDDD;
-}
-
-.community-recommended .col-md-4 img {
-    height: 200px;
-    width: 100%;
-}
-
-.community-content {
-    width: 90%;
-    margin: 10px auto 10px auto;
-    color: black;
-}
-
-.community-name {
-    font-size: 20px;
-}
-
-.community-size {
-    float: left;
-}
-
-.community-date {
-    float: right;
-    color: grey;
-}
-
-/*
-核验担保
- */
-.guarantee {
-    width: 100%;
-    background-color: #F3F3F3;
-    padding-bottom: 20px;
-}
-
-.check-guarantee {
-    width: 90%;
-    margin: 0 4% 0 6%;
-}
-
-.guarantee-title {
-    width: 160px;
-    margin: 0 auto;
-}
-
-.guarantee-title p {
-    margin-top: 45px;
-    width: 5px;
-    height: 30px;
-    background-color: #41CBBE;
-    float: left;
-}
-
-.guarantee-title h1 {
-    padding-top: 20px;
-    float: right;
-}
-
-.guarantee-text {
-    clear: both;
-    text-align: center;
-    margin: 20px auto;
-    color: #5E5E5E;
-}
-
-.check-guarantee .row {
-    height: 150px;
-}
-
-.check-guarantee .col-md-6 {
-    height: 100%;
-    width: 47%;
-    margin-right: 3%;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.guarantee-img {
-    height: 100%;
-    width: 49%;
-    float: left;
-}
-
-.guarantee-img img {
-    height: 100%;
-    width: 100%;
-}
-
-.guarantee-content {
-    width: 49%;
-    margin-left: 2%;
-    color: black;
-    float: right;
-}
-
-.guarantee-question {
-    width: 100%;
-    font-size: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.guarantee-answer {
-    width: 50%;
-    max-height: 80%;
-    font-size: 12px;
-    color: #999;
-    position: absolute;
-    bottom: 0;
 }

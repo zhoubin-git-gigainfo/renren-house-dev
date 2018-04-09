@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/constant.css">
     <link rel="stylesheet" href="css/HomePager.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/tail.css">
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
@@ -35,251 +36,45 @@
 
 </div>
 
-
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="images/banner1.jpg" alt="...">
-            <div class="carousel-caption">
-
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/housing.jpg" alt="...">
-            <div class="carousel-caption">
-
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/banner1.jpg" alt="...">
-            <div class="carousel-caption">
-
-            </div>
-        </div>
+<div class="menu">
+    <div class="menu-left">
+        <a id="HouseVerification" onclick="onJump(this)">
+            <img src="images/menu_1txt.png"/>
+        </a>
+        <a id="SignedContractNet" onclick="onJump(this)">
+            <img src="images/menu_2txt.png"/>
+        </a>
+        <a id="zjjg">
+            <img src="images/menu_3txt.png"/>
+        </a>
     </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-<div class="top-verification">
-    <div class="house-verification">
-        <div class="input-verification">
-            <input type="text" class="form-control" placeholder="请輸入房源核验码" data-search="true" id="verification-context">
-            <button type="button" class="verification-btn" onclick="onHouseVerification()">核验</button>
-        </div>
-        <div class="verification-history">
-            <ul class="list-unstyled" id="key-history"></ul>
-        </div>
+    <div class="menu-right">
+        <a id="jjjg">
+            <img src="images/menu_4txt.png"/>
+        </a>
+        <a id="jgyh">
+            <img src="images/menu_5txt.png"/>
+        </a>
+        <a id="jjr">
+            <img src="images/menu_6txt.png"/>
+        </a>
     </div>
 </div>
 
-<div class="room">
-    <div class="good-room">
-        <div class="room-title">
-            <p></p>
-            <h1>有好房</h1>
+
+<div class="house-verification">
+    <div class="input-verification">
+        <input type="text" class="form-control" placeholder="请輸入需要核验的房源编码" data-search="true" id="verification-context">
+        <div class="verification">
+            <button type="button" onclick="onHouseVerification()">核验</button>
         </div>
-        <p class="room-text">好房那么多，总有一套适合你</p>
-        <div class="container-fluid">
-            <div class="row">
-                <a href="#">
-                    <div class="col-md-3">
-                        <div class="room-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="room-content">
-                            <div class="room-introduce">
-                                保利花园三期精装三居 满五
-                            </div>
-                            <div class="room-info">
-                                <ul class="list-inline">
-                                    <li>保利花园三期</li>
-                                    <li>3室2厅</li>
-                                    <li>84.5平方米</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="room-price">5000元/月</div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-3">
-                        <div class="room-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="room-content">
-                            <div class="room-introduce">
-                                保利花园三期精装三居 满五
-                            </div>
-                            <div class="room-info">
-                                <ul class="list-inline">
-                                    <li>保利花园三期</li>
-                                    <li>3室2厅</li>
-                                    <li>84.5平方米</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="room-price">5000元/月</div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-3">
-                        <div class="room-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="room-content">
-                            <div class="room-introduce">
-                                保利花园三期精装三居 满五
-                            </div>
-                            <div class="room-info">
-                                <ul class="list-inline">
-                                    <li>保利花园三期</li>
-                                    <li>3室2厅</li>
-                                    <li>84.5平方米</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="room-price">5000元/月</div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-3">
-                        <div class="room-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="room-content">
-                            <div class="room-introduce">
-                                保利花园三期精装三居 满五
-                            </div>
-                            <div class="room-info">
-                                <ul class="list-inline">
-                                    <li>保利花园三期</li>
-                                    <li>3室2厅</li>
-                                    <li>84.5平方米</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="room-price">5000元/月</div>
-                    </div>
-                </a>
-            </div>
-        </div>
+    </div>
+    <div class="verification-history">
+        <ul class="list-unstyled" id="key-history"></ul>
     </div>
 </div>
 
-<div class="community">
-    <div class="community-recommended">
-        <div class="community-title">
-            <p></p>
-            <h1>绝对强推</h1>
-        </div>
-        <p class="community-text">我们已经跑断了路，只为展示最真实的小区状况</p>
-        <div class="container-fluid">
-            <div class="row">
-                <a href="#">
-                    <div class="col-md-4">
-                        <img src="images/housing.jpg" />
-                        <div class="community-content">
-                            <div class="community-name">
-                                融科三万英尺
-                            </div>
-                            <div>
-                                <span class="community-size">11025元/平</span>
-                                <span class="community-date">2006年建</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-4">
-                        <img src="images/housing.jpg" />
-                        <div class="community-content">
-                            <div class="community-name">
-                                融科三万英尺
-                            </div>
-                            <div>
-                                <span class="community-size">11025元/平</span>
-                                <span class="community-date">2006年建</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-4">
-                        <img src="images/housing.jpg" />
-                        <div class="community-content">
-                            <div class="community-name">
-                                融科三万英尺
-                            </div>
-                            <div>
-                                <span class="community-size">11025元/平</span>
-                                <span class="community-date">2006年建</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="guarantee">
-    <div class="check-guarantee">
-        <div class="guarantee-title">
-            <p></p>
-            <h1>核验担保</h1>
-        </div>
-        <p class="guarantee-text">万事有我，买房不再是难题</p>
-        <div class="container-fluid">
-            <div class="row">
-                <a href="#">
-                    <div class="col-md-6">
-                        <div class="guarantee-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="guarantee-content">
-                            <div class="guarantee-question">
-                                什么是房源核验？
-                            </div>
-                            <p class="guarantee-answer">
-                                什么是房源核验？请看的人来补充。什么是房源核验？请看的人来补充。什么是房源核验？请看的人来补充。
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-md-6">
-                        <div class="guarantee-img">
-                            <img src="images/housing.jpg" />
-                        </div>
-                        <div class="guarantee-content">
-                            <div class="guarantee-question">
-                                什么是房源核验？
-                            </div>
-                            <div class="guarantee-answer">
-                                什么是房源核验？请看的人来补充。什么是房源核验？请看的人来补充。什么是房源核验？请看的人来补充。
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<div style="height:200px;"></div>
+<div id="tail"></div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootoast.js"></script>
@@ -287,6 +82,7 @@
 <script src="js/HomePager.js"></script>
 <script>
     $("#header").load("header.html");
+    $("#tail").load("tail.html");
 </script>
 <script src="js/header.js"></script>
 </body>
