@@ -2,6 +2,7 @@ package io.renren.modules.house.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
@@ -19,7 +20,7 @@ public class TmBodyEntity implements Serializable {
 	/**
 	 * 主键
 	 */
-	@TableId
+	@TableId(type = IdType.INPUT)
 	private String mId;
 	/**
 	 * 证件号
