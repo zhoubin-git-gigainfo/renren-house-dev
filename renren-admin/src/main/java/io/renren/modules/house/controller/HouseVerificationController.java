@@ -34,13 +34,19 @@ public class HouseVerificationController {
     @Autowired
     private SequenceService sequenceService;
 
+    @PostMapping("/info")
+    public R info(String hid) {
+        String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid?b_type=2&hid=" + hid);
+        return R.ok().put("data", json);
+    }
+
     @Login
     @PostMapping("/list")
     public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
         try {
             //TODO 接口已修改，需重新解析数据
-            String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "&cd_no=" + cdno + "&ic_no=" + user.getIdCard());
+            String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "bycdnoandicno?b_type=2&cd_no=" + cdno + "&ic_no=" + user.getIdCard());
             ObjectMapper objectMapper = new ObjectMapper();
             houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
             if (null == houseCheckEntity.getData().getBodys() || null == houseCheckEntity.getData().getHouses()) {
@@ -50,20 +56,17 @@ public class HouseVerificationController {
                 //TODO 根据hid查询表是否存在有效状态的核验码
                 if (entity.getPass_tag() == 1) {
                     HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByHid(entity.getHid());
-                    if (null != codeEntity) {
-                        entity.setCode(codeEntity.getCode());
-                    }
                     if (null == codeEntity) {
 
                         /**
                          * 生成核验码   180408（年月日）+4位数序列（天为单位）+imei算法
                          */
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
-                        String code = dateFormat.format(new Date());
                         String seq = sequenceService.queryNextvalSeq("code_validate").toString();
                         while (seq.toString().length() < 4) {
                             seq = "0" + seq;
                         }
+                        String code = IMEICheck(dateFormat.format(new Date()) + seq);
 
                         codeEntity = new HouseVerificationCodeEntity();
                         codeEntity.setId(UUID.randomUUID().toString());
@@ -72,9 +75,11 @@ public class HouseVerificationController {
                         codeEntity.setCdno(cdno);
                         codeEntity.setIcno(user.getIdCard());
                         codeEntity.setVDate(new Date());
-                        codeEntity.setCode(IMEICheck(code + seq));
+                        codeEntity.setCode(code);
                         houseVerificationCodeService.insert(codeEntity);
                         entity.setCode(code);
+                    } else {
+                        entity.setCode(codeEntity.getCode());
                     }
                 }
             });
