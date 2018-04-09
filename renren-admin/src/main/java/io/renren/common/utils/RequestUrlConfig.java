@@ -9,7 +9,7 @@ public interface RequestUrlConfig {
     /**
      * 房源核验接口地址
      */
-    public static final String HOUSE_VERIFICATION_URL = "http://172.24.24.120:8765/FyhyWeb/rest/fyhy/bycdnoandicno?b_type=";
+    public static final String HOUSE_VERIFICATION_URL = "http://172.24.24.120:8765/FyhyWeb/rest/fyhy/";
 
 
 }

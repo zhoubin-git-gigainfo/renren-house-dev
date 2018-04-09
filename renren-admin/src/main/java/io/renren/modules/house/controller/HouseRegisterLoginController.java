@@ -114,7 +114,7 @@ public class HouseRegisterLoginController {
         userEntity.setMobile(mobile);
         userEntity.setPassword(DigestUtils.sha256Hex(password));
         userService.update(userEntity, new EntityWrapper<UserEntity>().eq("mobile", mobile));
-        return R.ok().put("code", 0).put("username", userService.queryByMobile(mobile).getUsername());
+        return R.ok().put("code", 0).put("user", userService.queryByMobile(mobile));
     }
 
 

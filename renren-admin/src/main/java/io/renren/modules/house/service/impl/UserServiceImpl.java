@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 
             map.put("token", tokenEntity.getToken());
             map.put("expire", tokenEntity.getExpireTime().getTime() - System.currentTimeMillis());
-            map.put("username",user.getUsername());
+            map.put("user",user);
 
             return map;
         }
