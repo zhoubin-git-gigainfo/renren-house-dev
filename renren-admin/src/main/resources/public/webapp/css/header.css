@@ -151,7 +151,7 @@
 #login-btn {
     width: 300px;
     margin: 10px 40px 20px 40px;
-    background-color: #42CBC1;
+    background-color: #207ac4;
     border: none;
 }
 
@@ -249,16 +249,16 @@
 #retrieve-btn {
     width: 300px;
     margin: 20px 40px;
-    background-color: #42CBC1;
+    background-color: #207ac4;
     border: none;
 }
 
 .retrieve-a {
-    color: #42CBC1;
+    color: #207ac4;
 }
 
 .retrieve-a:hover {
-    color: #42CBC1;
+    color: #207ac4;
 }
 
 /*
@@ -371,14 +371,14 @@
 #registered-btn {
     width: 300px;
     margin: 20px 40px;
-    background-color: #42CBC1;
+    background-color: #207ac4;
     border: none;
 }
 
 .register-a {
-    color: #42CBC1;
+    color: #207ac4;
 }
 
 .register-a:hover {
-    color: #42CBC1;
+    color: #207ac4;
 }
