@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("api/tatcontract")
-public class ApiHouseContractTroller {
+public class ApiHouseContractController {
 
     @Autowired
     private TatContractService tatContractService;
