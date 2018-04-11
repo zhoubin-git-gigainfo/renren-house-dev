@@ -16,5 +16,7 @@ import java.util.Map;
 public interface TuReportService extends IService<TuReportEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void insertFile(TuReportEntity tuReportEntity);
 }
 

@@ -11,5 +11,7 @@ import io.renren.modules.house.entity.TuReportEntity;
  * @date 2018-04-08 14:56:01
  */
 public interface TuReportDao extends BaseMapper<TuReportEntity> {
-	
+
+    void insertFile(TuReportEntity tuReportEntity);
+
 }

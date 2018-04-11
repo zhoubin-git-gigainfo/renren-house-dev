@@ -8,6 +8,7 @@ import io.renren.common.utils.Query;
 import io.renren.modules.house.dao.TuReportDao;
 import io.renren.modules.house.entity.TuReportEntity;
 import io.renren.modules.house.service.TuReportService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -15,6 +16,9 @@ import java.util.Map;
 
 @Service("tuReportService")
 public class TuReportServiceImpl extends ServiceImpl<TuReportDao, TuReportEntity> implements TuReportService {
+
+    @Autowired
+    private TuReportDao tuReportDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -24,6 +28,11 @@ public class TuReportServiceImpl extends ServiceImpl<TuReportDao, TuReportEntity
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void insertFile(TuReportEntity tuReportEntity) {
+        tuReportDao.insertFile(tuReportEntity);
     }
 
 }
