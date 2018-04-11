@@ -1,4 +1,4 @@
-package io.renren.modules.house.entity;
+package io.renren.modules.house.entity.check;
 
 import java.io.Serializable;
 

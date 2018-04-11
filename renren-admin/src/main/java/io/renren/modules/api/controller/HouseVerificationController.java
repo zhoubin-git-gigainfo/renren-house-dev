@@ -1,4 +1,4 @@
-package io.renren.modules.house.controller;
+package io.renren.modules.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renren.common.utils.HttpRequest;

@@ -20,7 +20,7 @@ public class TmBodyEntity implements Serializable {
     /**
      * 主键
      */
-    @TableId(type = IdType.INPUT)
+    @TableId
     private String mId;
     /**
      * 证件号
@@ -43,7 +43,7 @@ public class TmBodyEntity implements Serializable {
      */
     private String icOrg;
     /**
-     * 类型
+     * 状态1买方、2卖方3、买代理4、卖代理
      */
     private String mdType;
     /**
@@ -62,10 +62,6 @@ public class TmBodyEntity implements Serializable {
      * 业务主体id
      */
     private String cId;
-    /**
-     * 状态1买方、2卖方3、买代理4、卖代理
-     */
-    private String type;
     /**
      * 是否确认人1是0否
      */
@@ -173,14 +169,6 @@ public class TmBodyEntity implements Serializable {
 
     public void setcId(String cId) {
         this.cId = cId;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getIsConfirm() {

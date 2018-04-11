@@ -11,8 +11,8 @@ import io.renren.modules.house.entity.*;
 import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.entity.check.HouseEntity;
 import io.renren.modules.house.entity.check.HouseMiddleware;
+import io.renren.modules.house.entity.check.HouseholdRegisterEntity;
 import io.renren.modules.house.service.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 前端合同controller
@@ -94,7 +91,7 @@ public class ApiHouseContractController {
                 tmBodyEntity.setMdAddr(tmMbodycardEntity.getMd_addr());
                 tmBodyEntity.setMdAname(tmMbodycardEntity.getMd_name());
                 tmBodyEntity.setMdTel(tmMbodycardEntity.getMd_tel());
-                tmBodyEntity.setType("2");
+                tmBodyEntity.setMdType("2");
 //                tmBodyEntity.setIsConfirm();
 //                tmBodyEntity.setIcOrg();
 //                tmBodyEntity.setMaintypeid();
@@ -261,5 +258,11 @@ public class ApiHouseContractController {
             return R.error().put("msg", "姓名与身份证号码不匹配"); //用户信息不匹配
         }
         return R.ok().put("lname", entity.getData().get(0).getXzzxz());
+    }
+
+    @RequestMapping("/insertBody")
+    public R insertBody(List<TmBodyEntity> tmBodyEntities){
+        tmBodyService.insertBatch(tmBodyEntities);
+        return R.ok();
     }
 }
