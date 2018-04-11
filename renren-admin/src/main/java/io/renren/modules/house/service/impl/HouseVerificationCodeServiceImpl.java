@@ -34,4 +34,12 @@ public class HouseVerificationCodeServiceImpl extends ServiceImpl<HouseVerificat
         return baseMapper.selectOne(entity);
     }
 
+    @Override
+    public HouseVerificationCodeEntity queryByCode(String code) {
+        HouseVerificationCodeEntity entity = new HouseVerificationCodeEntity();
+        entity.setCode(code);
+        entity.setState(1);
+        return baseMapper.selectOne(entity);
+    }
+
 }

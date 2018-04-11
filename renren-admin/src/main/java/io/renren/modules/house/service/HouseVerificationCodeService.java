@@ -18,5 +18,7 @@ public interface HouseVerificationCodeService extends IService<HouseVerification
     PageUtils queryPage(Map<String, Object> params);
 
     HouseVerificationCodeEntity queryByHid(String hid);
+
+    HouseVerificationCodeEntity queryByCode(String code);
 }
 
