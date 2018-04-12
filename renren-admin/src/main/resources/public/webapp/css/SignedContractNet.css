@@ -1,0 +1,359 @@
+.table{
+    font-size: 14px;
+}
+
+button{
+    color: white;
+    background-color: #63B1F0;
+}
+
+.htwq{
+    width: 90%;
+    margin: 20px auto;
+}
+
+/*
+房源核验
+ */
+.fyhy-query{
+    width: 360px;
+    margin: 40px auto 20px auto;
+}
+
+.fyhy-query .input-custom{
+    clear: both;
+    height: 34px;
+    margin-top: 10px;
+}
+
+.fyhy-query .input-custom span{
+    display: block;
+    width: 90px;
+    height: 100%;
+    line-height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+    text-align: right;
+    float: left;
+}
+
+.fyhy-query .input-custom input{
+    width: 270px;
+    float: left;
+}
+
+.query-prompt-info {
+    width: 360px;
+    height: 20px;
+    margin: 10px 0 0 0;
+    color: red;
+    line-height: 20px;
+    display: none;
+}
+
+#query-btn {
+    width: 300px;
+    margin: 20px 30px;
+    background-color: #63B1F0;
+    border: none;
+}
+
+#fyhy .table{
+    width: 1000px;
+    margin: 0 100px;
+}
+/*
+房屋列表
+ */
+
+/*
+买卖双方信息
+ */
+/*
+卖方信息
+ */
+.seller-users{
+    width: 1002px;
+    margin: 20px 100px 10px 100px;
+    border: 1px solid black;
+}
+
+.seller-users h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.seller-user-list{
+    width: 200px;
+    float: left;
+}
+
+.seller-user{
+    width: 800px;
+    padding-left: 80px;
+    float: right;
+}
+
+.seller-user-left{
+    width: 360px;
+    float: left;
+}
+
+.seller-user-right{
+    width: 360px;
+    float: right;
+}
+
+.seller-user-center{
+    width: 720px;
+    clear: both;
+}
+
+.seller-user .input-custom{
+    clear: both;
+    height: 34px;
+    margin-bottom: 10px;
+}
+
+.seller-user .input-custom span{
+    display: block;
+    width: 90px;
+    height: 100%;
+    line-height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+    text-align: right;
+    float: left;
+}
+
+.seller-user .input-custom input{
+    width: 270px;
+    float: left;
+}
+
+.seller-user-center .input-custom input{
+    width: 470px;
+    float: left;
+}
+
+/*
+买方信息
+ */
+
+.buy-users{
+    width: 1002px;
+    margin: 10px 100px;
+    border: 1px solid black;
+}
+
+.buy-users h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.buy-user-list{
+    width: 240px;
+    float: left;
+}
+
+.buy-user{
+    width: 760px;
+    padding-left: 40px;
+    float: right;
+}
+
+.buy-user .input-custom{
+    width: 360px;
+    float: left;
+    height: 34px;
+    margin-bottom: 10px;
+}
+
+.buy-user .input-custom span{
+    display: block;
+    width: 90px;
+    height: 100%;
+    line-height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+    text-align: right;
+    float: left;
+}
+
+.buy-user .input-custom input{
+    width: 270px;
+    float: left;
+}
+
+.buy-user .input-custom select{
+    width: 270px;
+    height: 34px;
+    float: left;
+    font-size: 14px;
+}
+
+.buy-user .input-custom button{
+    height: 100%;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.buy-user .wc{
+    width: 720px;
+    text-align: center;
+}
+
+
+
+/*
+代理人信息
+ */
+.agent-users{
+    width: 1002px;
+    margin: 10px 100px;
+    border: 1px solid black;
+}
+
+.agent-users h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.agent-user-list{
+    width: 200px;
+    float: left;
+}
+
+.agent-user{
+    width: 800px;
+    padding-left: 80px;
+    float: right;
+}
+
+.agent-user .input-custom{
+    width: 360px;
+    float: left;
+    height: 34px;
+    margin-bottom: 10px;
+}
+
+.agent-user .input-custom span{
+    display: block;
+    width: 90px;
+    height: 100%;
+    line-height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+    text-align: right;
+    float: left;
+}
+
+.agent-user .input-custom input{
+    width: 270px;
+    float: left;
+}
+
+.agent-user .input-custom select{
+    width: 270px;
+    height: 34px;
+    float: left;
+    font-size: 14px;
+}
+
+.agent-user .input-custom button{
+    height: 100%;
+    width: 100px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.agent-user .wc{
+    width: 720px;
+    text-align: center;
+}
+
+/*
+合同信息
+ */
+.htxx-content{
+    width: 900px;
+    margin: 20px auto;
+}
+
+.htxx-content input{
+    border: none;
+    border-bottom: 1px solid black;
+    max-width: 300px;
+}
+
+.htxx-content textarea{
+    border: none;
+    border-bottom: 1px solid black;
+    overflow-y:hidden;
+    resize: none;
+    width: 850px;
+}
+
+/*
+合同确认
+ */
+.htqr-query{
+    width: 360px;
+    margin: 40px auto 20px auto;
+}
+
+.htqr-query .input-custom{
+    clear: both;
+    height: 34px;
+    margin-top: 10px;
+}
+
+.htqr-query .input-custom span{
+    display: block;
+    width: 90px;
+    height: 100%;
+    line-height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+    text-align: right;
+    float: left;
+}
+
+.htqr-query .input-custom input{
+    width: 270px;
+    float: left;
+}
+
+.dxyzm-prompt-info {
+    width: 360px;
+    height: 20px;
+    margin: 10px 0 0 0;
+    color: red;
+    line-height: 20px;
+    display: none;
+}
+
+#dxyzm-btn {
+    width: 300px;
+    margin: 20px 30px;
+    background-color: #63B1F0;
+    border: none;
+}
+
+
+/*
+合同完成
+ */
+
+.qzsc{
+    width: 400px;
+    margin: 20px auto;
+}
+
+#complete-btn {
+    width: 300px;
+    margin: 20px 450px;
+    background-color: #63B1F0;
+    border: none;
+}

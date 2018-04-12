@@ -3,8 +3,10 @@ $(document).ready(function () {
     if(isLogin!="true"){
         localStorage.setItem("jumpUrl",location.href);
         alert("请先登录");
-        window.location.href="NewHomePager.html";
+        window.location.href="HomePager.html";
     }
+    var idCard=sessionStorage.getItem("idCard");
+    $('#idCard').val(idCard);
 });
 
 

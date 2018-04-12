@@ -13,7 +13,7 @@ function onHouseVerification() {
 //然后再把搜索内容显示出来
         MapSearchArr();
         $('#search-context').val("");
-        window.location.href = "RentHouse.html";
+        //window.location.href = "RentHouse.html";
     }
 }
 

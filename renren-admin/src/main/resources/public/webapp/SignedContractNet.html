@@ -17,8 +17,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- 页面按原比例显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='css/normalize.css'>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel='stylesheet' href='css/prettify.css'>
+    <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/constant.css">
     <link rel="stylesheet" href="css/SignedContractNet.css">
     <link rel="stylesheet" href="css/header.css">
@@ -30,15 +36,539 @@
 </head>
 <body>
 <div id="header"></div>
+<div class="htwq">
+    <form id="commentForm" method="get" action="" class="form-horizontal">
+        <div id="rootwizard">
+            <ul>
+                <li><a href="#fyhy" data-toggle="tab"><span class="label">1</span> 房源核验</a></li>
+                <li><a href="#mmsfxxqr" data-toggle="tab"><span class="label">2</span> 买卖双方信息确认</a></li>
+                <li><a href="#htxx" data-toggle="tab"><span class="label">3</span> 合同信息</a></li>
+                <li><a href="#htqr" data-toggle="tab"><span class="label">4</span> 合同确认</a></li>
+                <li><a href="#tab5" data-toggle="tab"><span class="label">5</span> 合同完成</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="fyhy">
+                    <div class="fyhy-query">
+                        <div class="input-custom">
+                            <span>房产证号</span>
+                            <input type="text" class="form-control" id="fczhId" placeholder="请输入房产证号">
+                        </div>
 
+                        <div class="input-custom">
+                            <span>身份证号码</span>
+                            <input type="text" class="form-control" id="idCard" placeholder="请输入身份证号码"
+                                   readonly="readonly">
+                        </div>
+
+                        <div class="query-prompt-info">
+                            <span></span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-lg active" id="query-btn"
+                                onclick="queryHouse()">
+                            查询
+                        </button>
+
+                    </div>
+
+                    <table class="table table-bordered table-hover">
+
+                    </table>
+
+                </div>
+                <div class="tab-pane" id="mmsfxxqr">
+                    <div class="seller-users">
+                        <h2>卖方用户信息</h2>
+                        <div>
+                            <div class="seller-user-list">
+                                <table class="table table-bordered table-hover">
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>证件类型</th>
+                                        <th>是否主体</th>
+                                    </tr>
+                                    <tr>
+                                        <td>张三</td>
+                                        <td>身份证</td>
+                                        <td>是</td>
+                                    </tr>
+                                    <tr>
+                                        <td>李思</td>
+                                        <td>营业执照</td>
+                                        <td>否</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="seller-user">
+                                <div class="seller-user-left">
+                                    <div class="input-custom">
+                                        <span>名称</span>
+                                        <input type="text" class="form-control" id="name-tab2" placeholder="请输入名称">
+                                    </div>
+
+                                    <div class="input-custom">
+                                        <span>手机号码</span>
+                                        <input type="text" class="form-control" id="phone-tab2" placeholder="请输入手机号码">
+                                    </div>
+
+                                    <div class="input-custom">
+                                        <span>所属区域</span>
+                                        <input type="text" class="form-control" id="ssqy-tab2" placeholder="请输入所属区域">
+                                    </div>
+                                </div>
+
+                                <div class="seller-user-right">
+
+                                    <div class="input-custom">
+                                        <span>证件类型</span>
+                                        <input type="text" class="form-control" id="idCardType-tab2"
+                                               placeholder="请输入证件类型">
+                                    </div>
+
+                                    <div class="input-custom">
+                                        <span>证件号码</span>
+                                        <input type="text" class="form-control" id="idCard-tab2" placeholder="请输入证件号码">
+                                    </div>
+
+                                    <div class="input-custom">
+                                        <span>类型</span>
+                                        <input type="text" class="form-control" id="type-tab2" placeholder="请输入类型">
+                                    </div>
+
+                                </div>
+
+                                <div class="seller-user-center">
+                                    <div class="input-custom">
+                                        <span>联系地址</span>
+                                        <input type="text" class="form-control" id="addr-tab2" placeholder="请输入联系地址">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                    <div class="buy-users">
+                        <h2>买方用户信息</h2>
+                        <div>
+                            <div class="buy-user-list">
+
+                                <div id="toolbar" class="btn-group">
+                                    <button id="btn_add" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                                    </button>
+                                    <button id="btn_delete" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                    </button>
+                                </div>
+                                <table id="buy-table"></table>
+
+                            </div>
+                            <div class="buy-user">
+                                <div class="input-custom">
+                                    <span>名称</span>
+                                    <input type="text" class="form-control" id="name-buy" placeholder="请输入名称">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>证件类型</span>
+                                    <input type="text" class="form-control" id="idCardType-buy"
+                                           placeholder="请输入证件类型">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>证件号码</span>
+                                    <input type="text" class="form-control" id="idCard-buy" placeholder="请输入证件号码">
+                                </div>
+
+                                <div class="input-custom jc">
+                                    <button>检测</button>
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>手机号码</span>
+                                    <input type="text" class="form-control" id="phone-buy" placeholder="请输入手机号码">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>所属区域</span>
+                                    <input type="text" class="form-control" id="ssqy-buy" placeholder="请输入所属区域">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>类型</span>
+                                    <select id="type-buy" class="selectpicker">
+                                        <option value="1">个人</option>
+                                        <option value="2">法人</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>确认方</span>
+                                    <select id="qrf" class="selectpicker">
+                                        <option value="1">是</option>
+                                        <option value="2">否</option>
+                                    </select>
+                                </div>
+                                <div class="input-custom">
+                                    <span>联系地址</span>
+                                    <input type="text" class="form-control" id="addr-buy" placeholder="请输入联系地址">
+                                </div>
+
+                                <div class="input-custom wc">
+                                    <button id="wc-buy">完成</button>
+                                </div>
+
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                    <div class="agent-users">
+                        <h2>代理人用户信息</h2>
+                        <div>
+                            <div class="agent-user-list">
+
+                                <div id="agent-toolbar" class="btn-group">
+
+                                    <button id="agent-add" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                                    </button>
+
+                                    <button id="agent-delete" type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                                    </button>
+
+                                </div>
+
+                                <table id="agent-table"></table>
+
+                            </div>
+                            <div class="agent-user">
+                                <div class="input-custom">
+                                    <span>名称</span>
+                                    <input type="text" class="form-control" id="name-agent" placeholder="请输入名称">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>证件类型</span>
+                                    <input type="text" class="form-control" id="idCardType-agent"
+                                           placeholder="请输入证件类型">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>证件号码</span>
+                                    <input type="text" class="form-control" id="idCard-agent" placeholder="请输入证件号码">
+                                </div>
+
+                                <div class="input-custom jc">
+                                    <button>检测</button>
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>手机号码</span>
+                                    <input type="text" class="form-control" id="phone-agent" placeholder="请输入手机号码">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>所属区域</span>
+                                    <input type="text" class="form-control" id="ssqy-agent" placeholder="请输入所属区域">
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>类型</span>
+                                    <select id="type-agent" class="selectpicker">
+                                        <option value="1">个人</option>
+                                        <option value="2">法人</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>哪方</span>
+                                    <select id="nf" class="selectpicker">
+                                        <option value="1">买方</option>
+                                        <option value="2">卖方</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-custom">
+                                    <span>联系地址</span>
+                                    <input type="text" class="form-control" id="addr-agent" placeholder="请输入联系地址">
+                                </div>
+
+                                <div class="input-custom wc">
+
+                                    <button id="wc-agent">完成</button>
+                                </div>
+
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="htxx">
+                    <div class="htxx-content">
+                        <h1>合同信息</h1>
+                        <p>甲乙双方就房屋买卖事宜，经协商一致，达成如下协议。</p>
+                        <h3>一、买卖房屋</h3>
+                        <p>
+                            <span>甲方自愿将坐落于</span>
+                            <input type="text" class="ht-input" id="ht-zl" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>20?this.value.length:20);" size="20" readonly="readonly"/>
+                            <span>栋</span>
+                            <input type="text" class="ht-input" id="ht-fh" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                            <span>室的房屋以买卖的方式转让给乙方，不动产权证号（房屋所有权证号、土地使用权证号）</span>
+                            <input type="text" class="ht-input" id="ht-cqzh" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>16?this.value.length:16);" size="16" readonly="readonly"/>
+                            <span>。房屋建筑面积</span>
+                            <input type="text" class="ht-input" id="ht-jzmj" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                            <span>平方米，房屋用途为</span>
+                            <input type="text" class="ht-input" id="ht-fwyt" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                            <span>。</span>
+                        </p>
+                        <h3>二、成交价格</h3>
+                        <p>
+                            <span>上述房屋的成交价格为：人民币￥</span>
+                            <input type="text" class="ht-input" id="ht-cjjg" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"/>
+                            <span>元整。</span>
+                        </p>
+                        <h3>三、付款方式</h3>
+                        <p>
+                            <span>房屋成交价款按下列第</span>
+                            <input type="text" class="ht-input" id="ht-fkfs" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"/>
+                            <span>种方式付款：</span>
+                        </p>
+                        <p>1.通过存量房交易资金监管方式支付。</p>
+                        <p>2.自行约定方式支付。具体为：</p>
+                        <p>
+                            <textarea id="ht-zdyfk" rows="1" onkeyup="ResizeTextarea(this)"></textarea>
+                        </p>
+                        <h3>四、税费等承担原则</h3>
+                        <p>
+                            <span>房屋买卖所应缴纳的税费按以下第</span>
+                            <input type="text" class="ht-input" id="ht-sffkfs" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"/>
+                            <span>种方式承担：</span>
+                        </p>
+                        <p>1．由甲方承担；</p>
+                        <p>2．由乙方承担；</p>
+                        <p>3．按法定承担原则，各自承担；</p>
+                        <p>4.其他方式：
+                        </p>
+                        <P>
+                            <textarea id="ht-qtfs" rows="1" onkeyup="ResizeTextarea(this)"></textarea>
+                        </P>
+
+                        <h3>五、交付</h3>
+                        <p>
+                            <span>甲方应配合乙方办理不动产转移登记的相关手续，并于不动产转移登记完成之日起</span>
+                            <input type="text" class="ht-input" id="ht-jfrq" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"/>
+                            <span>日内将房屋交付给乙方。</span>
+                        </p>
+                        <h3>六、违约责任</h3>
+                        <p>
+                            <textarea id="ht-wyzr" rows="1" onkeyup="ResizeTextarea(this)"></textarea>
+                        </p>
+                        <h3>七、争议的解决方式</h3>
+                        <p>
+                            <span>买卖双方因履行本合同发生纠纷，应协商解决。协商不成的，通过以下第</span>
+                            <input type="text" class="ht-input" id="ht-jjfs" onkeydown="this.onkeyup();"
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"/>
+                            <span>种方式解决：</span>
+                        </p>
+                        <p>1.向房屋所在地人民法院提起诉讼；</p>
+                        <p>2.向株洲仲裁委员会申请仲裁。</p>
+                        <h3>八、其他约定事项</h3>
+                        <p>
+                            <textarea id="ht-ydsx" rows="1" onkeyup="ResizeTextarea(this)"></textarea>
+                        </p>
+                    </div>
+                </div>
+                <div class="tab-pane" id="htqr">
+                    <div class="htqr-query">
+
+                        <div class="input-custom">
+                            <span>短信验证码</span>
+                            <input type="text" class="form-control" id="dxyzm" placeholder="请输入短信验证码">
+                        </div>
+
+                        <div class="dxyzm-prompt-info">
+                            <span></span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-lg active" id="dxyzm-btn"
+                                onclick="confirmDxyzm()">
+                            确认
+                        </button>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab5">
+                    <div class="qzsc">
+                        <input type="file" name="uploadfile" id="uploadfile" multiple class="file-loading" />
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg active" id="complete-btn"
+                            onclick="completeHT()">
+                        完成
+                    </button>
+
+                </div>
+                <ul class="pager wizard">
+                    <li class="previous"><a href="#">上一步</a></li>
+                    <li class="next"><a href="#">下一步</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
 <div id="tail"></div>
 <script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.bootstrap.wizard.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script src="js/zh.js"></script>
 <script src="js/constant.js"></script>
-<script src="js/SignedContractNet.js"></script>
+<!--<script src="js/SignedContractNet.js"></script>-->
 <script>
-    $("#header").load("header.html");
-    $("#tail").load("tail.html");
+    $(document).ready(function () {
+        $("#header").load("header.html");
+        $("#tail").load("tail.html");
+
+        $('#rootwizard').bootstrapWizard({
+            'tabClass': 'bwizard-steps',
+            'onNext': function (tab, navigation, index) {
+                //alert("tab:" + tab + ";navigation" + navigation + ";index:" + index);
+                if (index == 1) {
+
+                }
+            },
+            'onSHow': function () {
+
+            }
+        });
+        $('#buy-table').bootstrapTable({
+            data: [],
+            clickToSelect: true,
+            columns: [{
+                field: 'name',
+                title: '姓名'
+            }, {
+                field: 'certificateType',
+                title: '证件类型'
+            }, {
+                field: 'level',
+                title: '是否主体'
+            }],
+            onClickRow: function (row) {
+                alert(row);
+            }
+        });
+
+        $('#agent-table').bootstrapTable({
+            data: [],
+            clickToSelect: true,
+            columns: [{
+                field: 'name',
+                title: '姓名'
+            }, {
+                field: 'certificateType',
+                title: '证件类型'
+            }, {
+                field: 'type',
+                title: '类型'
+            }],
+            onClickRow: function (row) {
+                alert(row);
+            }
+        });
+    });
+</script>
+<script>
+    // 最小高度
+    var minRows = 1;
+    // 最大高度，超过则出现滚动条
+    var maxRows = 60;
+    function ResizeTextarea(textarea) {
+        var t = textarea;
+        if (t.scrollTop == 0) t.scrollTop = 1;
+        while (t.scrollTop == 0) {
+            if (t.rows > minRows)
+                t.rows--;
+            else
+                break;
+            t.scrollTop = 1;
+            if (t.rows < maxRows)
+                t.style.overflowY = "hidden";
+            if (t.scrollTop > 0) {
+                t.rows++;
+                break;
+            }
+        }
+        while (t.scrollTop > 0) {
+            if (t.rows < maxRows) {
+                t.rows++;
+                if (t.scrollTop == 0) t.scrollTop = 1;
+            } else {
+                t.style.overflowY = "auto";
+                break;
+            }
+        }
+    }
+</script>
+<script>
+    $("#uploadfile").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: "./list.json", //上传的地址(访问接口地址)
+        allowedFileExtensions: ['jpg', 'gif', 'png','pdf'],//接收的文件后缀
+        uploadAsync: true, //默认异步上传
+        showUpload: true, //是否显示上传按钮
+        showRemove : false, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        dropZoneEnabled: false,//是否显示拖拽区域
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        enctype: 'multipart/form-data',
+        validateInitialCount:true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+    });
+    //异步上传返回错误结果处理
+    $('#uploadfile').on('fileerror', function(event, data, msg) {
+        console.log(data.id);
+        console.log(data.index);
+        console.log(data.file);
+        console.log(data.reader);
+        console.log(data.files);
+        // get message
+        alert(msg);
+    });
+    //异步上传返回结果处理
+    $("#uploadfile").on("fileuploaded", function (event, data, previewId, index) {
+        console.log(data.id);
+        console.log(data.index);
+        console.log(data.file);
+        console.log(data.reader);
+        console.log(data.files);
+        var obj = data.response;
+        alert(JSON.stringify(data.success));
+
+    });
+    //上传前
+    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+        console.log('File pre upload triggered');
+    });
 </script>
 <script src="js/header.js"></script>
 </body>

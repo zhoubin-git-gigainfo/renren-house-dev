@@ -68,9 +68,11 @@ function loginAjax(mobile, password) {
         },
         success: function (result) {
             if (result.code == 0) {
+                sessionStorage.setItem("name",result.user.username);
                 sessionStorage.setItem("isLogin",true);
                 sessionStorage.setItem("token",result.token);
-                isJumpUrl(result.username);
+                sessionStorage.setItem("idCard",result.user.idCard);
+                isJumpUrl(result.user.username);
             }
         }
     });
@@ -81,6 +83,8 @@ function onOutLogin() {
     sessionStorage.removeItem("password");
     sessionStorage.removeItem("mobile");
     sessionStorage.removeItem("isLogin");
+    sessionStorage.removeItem("idCard");
+    sessionStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("password");
     localStorage.removeItem("mobile");
@@ -159,28 +163,26 @@ function onLogin() {
                     $('.login-prompt-info').css('display', 'block');
                 } else if (result.code == 0) {
                     sessionStorage.setItem("token",result.token);
+                    sessionStorage.setItem("idCard",result.user.idCard);
                     $('.login-prompt-info span').html("");
                     $('.login-prompt-info').css('display', 'none');
                     $("#loginModal").modal("hide");
                     if (qtmdl) {
-                        localStorage.setItem("name", result.username);
+                        localStorage.setItem("name", result.user.username);
                         localStorage.setItem("password", password);
                         localStorage.setItem("mobile", mobile);
                         localStorage.setItem("startTime", getNowFormatDate());
-                        sessionStorage.removeItem("name");
-                        sessionStorage.removeItem("password");
-                        sessionStorage.removeItem("mobile");
                     } else {
                         localStorage.removeItem("name");
                         localStorage.removeItem("password");
                         localStorage.removeItem("mobile");
                         localStorage.removeItem("startTime");
-                        sessionStorage.setItem("name", result.username);
-                        sessionStorage.setItem("password", password);
-                        sessionStorage.setItem("mobile", mobile);
                     }
+                    sessionStorage.setItem("name", result.user.username);
+                    sessionStorage.setItem("password", password);
+                    sessionStorage.setItem("mobile", mobile);
                     sessionStorage.setItem("isLogin",true);
-                    isJumpUrl(result.username);
+                    isJumpUrl(result.user.username);
                 }
             }
         });
@@ -279,11 +281,12 @@ function onRetrievePassword() {
                     $('.retrieve-prompt-info').css('display', 'none');
                     sessionStorage.setItem("token",result.token);
                     $("#retrieveModal").modal("hide");
-                    sessionStorage.setItem("name", result.username);
+                    sessionStorage.setItem("name", result.user.username);
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("mobile", mobile);
                     sessionStorage.setItem("isLogin",true);
-                    isJumpUrl(result.username);
+                    sessionStorage.setItem("idCard",result.user.idCard);
+                    isJumpUrl(result.user.username);
                 }
             }
         });
