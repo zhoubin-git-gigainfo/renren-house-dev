@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.pdf.PdfReader;
 import io.renren.common.utils.*;
+import io.renren.modules.api.annotation.Login;
+import io.renren.modules.api.annotation.LoginUser;
 import io.renren.modules.house.entity.*;
 import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.entity.check.HouseEntity;
@@ -17,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.*;
 
 /**
@@ -68,8 +73,9 @@ public class ApiHouseContractController {
      * 3、客体
      * 4、写入状态表
      */
+    @Login
     @RequestMapping("/save")
-    public R save(String code) {
+    public R save(@ApiIgnore @LoginUser UserEntity user, String code) {
         TatContractEntity tatContractEntity = new TatContractEntity();
         try {
             HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByCode(code);
@@ -81,18 +87,21 @@ public class ApiHouseContractController {
             //生成合同
             tatContractEntity.setCId(UUID.randomUUID().toString());
             tatContractEntity.setCreatedate(new Date());
-            String seq = sequenceService.queryNextvalSeq("code_validate").toString();
+            String seq = sequenceService.queryNextvalSeq("business_no").toString();
             while (seq.length() < 9) {
                 seq = "0" + seq;
             }
             tatContractEntity.setBusinessNo("B" + seq);
+            tatContractEntity.setCode(code);
+            tatContractEntity.setCreateNsername(user.getUsername());
+            tatContractEntity.setCreateIdCard(user.getIdCard());
             tatContractService.insert(tatContractEntity);
 
             //主体
             houseCheckEntity.getData().getBodys().stream().forEach(tmMbodycardEntity -> {
                 TmBodyEntity tmBodyEntity = new TmBodyEntity();
                 tmBodyEntity.setMId(UUID.randomUUID().toString());
-                tmBodyEntity.setCId(tatContractEntity.getCId());
+                tmBodyEntity.setcId(tatContractEntity.getCId());
                 tmBodyEntity.setIcNo(tmMbodycardEntity.getIc_no());
                 tmBodyEntity.setIcType(tmMbodycardEntity.getIc_type());
                 tmBodyEntity.setMdAddr(tmMbodycardEntity.getMd_addr());
@@ -122,7 +131,7 @@ public class ApiHouseContractController {
 
 
             //写入状态表
-            toStateService.insert(ContractStateEmun.CONTRACT_ON_LINE.generateOrder(tatContractEntity.getCId(), tatContractEntity.getBusinessNo(), null));
+            toStateService.insert(ContractStateEnum.CONTRACT_ON_LINE.generateOrder(tatContractEntity.getCId(), tatContractEntity.getBusinessNo(), null));
             return R.ok().put("contractId", tatContractEntity.getCId());
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,6 +152,13 @@ public class ApiHouseContractController {
     }
 
 
+    /**
+     * 验证主体
+     *
+     * @param idCard
+     * @param username
+     * @return
+     */
     @RequestMapping("/checkBody")
     public R checkBody(String idCard, String username) {
         Map map = new HashMap();
@@ -178,68 +194,122 @@ public class ApiHouseContractController {
 
     /**
      * 合同确定
-     * 1、判断是否双方都确认过
+     * 1、验证房源
+     * 2、判断是否双方都确认过
      * 是：生成合同号、生成pdf、写入、修改（两个）状态表
      * 否：写入状态表
      */
     @RequestMapping("/contractDetermine")
-    public R contractDetermine(String cid) {
-        //TODO 双方
-        //写入状态表
+    public R contractDetermine(String cid, String idCard) {
         try {
-            TatContractEntity tatContractEntity = tatContractService.selectById(cid);
-            String seq = sequenceService.queryNextvalSeq("code_validate").toString();
-            while (seq.length() < 9) {
-                seq = "0" + seq;
+            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            if (null == houseCheckEntity) {
+                return R.error();
             }
-            TatContractEntity entity = new TatContractEntity();
-            entity.setCId(tatContractEntity.getCId());
-            entity.setContractNo("C" + seq);
-            tatContractService.updateById(entity);
 
-            /**
-             * 生成合同
-             */
-            ObjectMapper objectMapper = new ObjectMapper();
-            //表单数据
-            Map formMap = objectMapper.readValue(tatContractEntity.getContent(), HashMap.class);
-            //主体
-            List<TmBodyEntity> tmBodyEntities = tmBodyService.selectListByCid(cid);
-            tmBodyEntities.stream().forEach(tmBodyEntity -> {
-                switch (tmBodyEntity.getMdType()) {
-                    case 1:
-                        formMap.put("buyerName", tmBodyEntity.getName());
-                        formMap.put("buyerIc", tmBodyEntity.getIcNo());
-                        break;
-                    case 2:
-                        formMap.put("sellerName", tmBodyEntity.getName());
-                        formMap.put("sellerIc", tmBodyEntity.getIcNo());
-                        break;
-                    case 3:
-                        formMap.put("buyerAgentName", tmBodyEntity.getName());
-                        formMap.put("buyerAgentIc", tmBodyEntity.getIcNo());
-                        break;
-                    case 4:
-                        formMap.put("sellerAgentName", tmBodyEntity.getName());
-                        formMap.put("sellerAgentIc", tmBodyEntity.getIcNo());
-                        break;
-                }
-            });
-            //客体
-            TaqSdlistEntity taqSdlistEntity = taqSdlistService.selectOneByCid(cid);
-            formMap.put("lname", taqSdlistEntity.getLname());
-            formMap.put("hdesc", taqSdlistEntity.getHdesc());
-            formMap.put("barea", taqSdlistEntity.getBarea());
-            formMap.put("huse", taqSdlistEntity.getHuse());
+            TatContractEntity tatContractEntity = tatContractService.selectById(cid);
+            //判断是否存在有效状态的确认
+            ToStateEntity toStateEntity = new ToStateEntity();
+            toStateEntity.setBid(tatContractEntity.getBusinessNo());
+            toStateEntity.setSid(cid);
+            toStateEntity.setModality(1);
+            toStateEntity.setDroits(idCard);
+            toStateEntity.setStype(ContractStateEnum.CONTRACT_CONFIRM.getCode() + "");
+            toStateEntity = toStateService.selectByEntity(toStateEntity);
+            //没有有效的确认状态
+            if (null == toStateEntity) {
+                ToStateEntity entity = new ToStateEntity();
+                entity.setFDate(new Date());
+                entity.setModality(0);
+                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_GENERATE.getCode()));
 
-            //产权证号
-            HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByCode(tatContractEntity.getCode());
-            formMap.put("cdno", codeEntity.getCdno());
+                toStateService.insert(ContractStateEnum.CONTRACT_CONFIRM.generateOrder(cid, tatContractEntity.getBusinessNo(), idCard));
+            }
 
-            Map barCodeMap = new HashMap();
-            //条形码数据
-            barCodeMap.put("businessNo", tatContractEntity.getBusinessNo());
-            barCodeMap.put("contractNo", tatContractEntity.getContractNo());
+
+            List<ToStateEntity> toStateEntities = toStateService.selectList(new EntityWrapper<ToStateEntity>()
+                    .eq("sid", cid)
+                    .eq("bid", tatContractEntity.getBusinessNo())
+                    .eq("stype", ContractStateEnum.CONTRACT_CONFIRM.getCode())
+                    .eq("modality", 1));
+
+            if (toStateEntities.size() == 2) {
+                ToStateEntity entity = new ToStateEntity();
+                entity.setFDate(new Date());
+                entity.setModality(0);
+                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_CONFIRM.getCode()));
+
+                toStateService.insert(ContractStateEnum.CONTRACT_PRINT.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
+
+                generateContractPdf(cid);
+            }
+            return R.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error();
+        }
+    }
+
+    /**
+     * 生成合同号、生成pdf
+     *
+     * @param cid 合同id
+     * @throws Exception
+     */
+    private void generateContractPdf(String cid) throws Exception {
+        TatContractEntity tatContractEntity = tatContractService.selectById(cid);
+        String seq = sequenceService.queryNextvalSeq("code_validate").toString();
+        while (seq.length() < 9) {
+            seq = "0" + seq;
+        }
+        TatContractEntity entity = new TatContractEntity();
+        entity.setCId(tatContractEntity.getCId());
+        entity.setContractNo("C" + seq);
+        tatContractService.updateById(entity);
+
+        /**
+         * 生成合同
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        //表单数据
+        Map formMap = objectMapper.readValue(tatContractEntity.getContent(), HashMap.class);
+        //主体
+        List<TmBodyEntity> tmBodyEntities = tmBodyService.selectListByCid(cid);
+        tmBodyEntities.stream().forEach(tmBodyEntity -> {
+            switch (tmBodyEntity.getMdType()) {
+                case 1:
+                    formMap.put("buyerName", tmBodyEntity.getName());
+                    formMap.put("buyerIc", tmBodyEntity.getIcNo());
+                    break;
+                case 2:
+                    formMap.put("sellerName", tmBodyEntity.getName());
+                    formMap.put("sellerIc", tmBodyEntity.getIcNo());
+                    break;
+                case 3:
+                    formMap.put("buyerAgentName", tmBodyEntity.getName());
+                    formMap.put("buyerAgentIc", tmBodyEntity.getIcNo());
+                    break;
+                case 4:
+                    formMap.put("sellerAgentName", tmBodyEntity.getName());
+                    formMap.put("sellerAgentIc", tmBodyEntity.getIcNo());
+                    break;
+            }
+        });
+        //客体
+        TaqSdlistEntity taqSdlistEntity = taqSdlistService.selectOneByCid(cid);
+        formMap.put("lname", taqSdlistEntity.getLname());
+        formMap.put("hdesc", taqSdlistEntity.getHdesc());
+        formMap.put("barea", taqSdlistEntity.getBarea());
+        formMap.put("huse", taqSdlistEntity.getHuse());
+
+        //产权证号
+        HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByCode(tatContractEntity.getCode());
+        formMap.put("cdno", codeEntity.getCdno());
+
+        Map barCodeMap = new HashMap();
+        //条形码数据
+        barCodeMap.put("businessNo", tatContractEntity.getBusinessNo());
+        barCodeMap.put("contractNo", tatContractEntity.getContractNo());
 //        map.put("sellerName", "甲方姓名");
 //        map.put("sellerIc", "甲方身份证");
 //        map.put("sellerAgentName", "甲方代理人");
@@ -263,13 +333,7 @@ public class ApiHouseContractController {
 //        map.put("responsibility", "违约责任");
 //        map.put("dispute", "争议解决方式");
 //        map.put("matter", "其他约定");
-            convertTransData(formMap, barCodeMap, tatContractEntity);
-            System.out.println("执行完毕");
-            return R.ok();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return R.error();
-        }
+        convertTransData(formMap, barCodeMap, tatContractEntity);
     }
 
     /**
@@ -285,7 +349,7 @@ public class ApiHouseContractController {
         if (form == null || form.isEmpty())
             return null;
         try {
-            //TODO  更改查询方式
+            //TODO  模板合同更改查询方式
             TsReportEntity t = tsReportService.selectById("45708f9f-0a10-4d4d-8123-4f12ce37976f");
             InputStream in = new ByteArrayInputStream(t.getFile());
 
@@ -317,8 +381,17 @@ public class ApiHouseContractController {
      */
     @RequestMapping("/insertBody")
     public R insertBody(List<TmBodyEntity> tmBodyEntities) {
-        tmBodyService.insertBatch(tmBodyEntities);
-        return R.ok();
+        try {
+            HouseCheckEntity houseCheckEntity = houseCheck(tmBodyEntities.get(0).getcId());
+            if (null == houseCheckEntity) {
+                return R.error();
+            }
+            tmBodyService.insertBatch(tmBodyEntities);
+            return R.ok();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return R.error();
+        }
     }
 
     /**
@@ -329,20 +402,23 @@ public class ApiHouseContractController {
      */
     @RequestMapping("/insertContract")
     public R insertContract(Map map) {
-        //TODO 大写金额
         try {
+            String cid = map.get("cid") + "";
             String state = map.get("state") + "";
+            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            if (null == houseCheckEntity) {
+                return R.error();
+            }
+
             ObjectMapper objectMapper = new ObjectMapper();
-            String contractId = map.get("cid") + "";
             map.remove("state");
             map.remove("cid");
-            String price = map.get("price") + "";
 
             BigDecimal numberOfMoney = new BigDecimal(map.get("price") + "");
             map.put("priceC", NumberToCNUtils.number2CNMontrayUnit(numberOfMoney));
 
             TatContractEntity tatContractEntity = new TatContractEntity();
-            tatContractEntity.setCId(contractId);
+            tatContractEntity.setCId(cid);
             tatContractEntity.setContent(objectMapper.writeValueAsString(map));
             tatContractService.updateById(tatContractEntity);
 
@@ -350,19 +426,22 @@ public class ApiHouseContractController {
              * 合同信息录入完成
              *  修改状态表-写入新状态
              */
-            tatContractEntity = tatContractService.selectById(contractId);
+            tatContractEntity = tatContractService.selectById(cid);
             if ("1".equals(state)) {
                 ToStateEntity toStateEntity = new ToStateEntity();
                 toStateEntity.setFDate(new Date());
                 toStateEntity.setModality(0);
-                toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", contractId).eq("stype", ContractStateEmun.CONTRACT_ON_LINE.getCode()));
+                toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_ON_LINE.getCode()));
 
-                toStateService.insert(ContractStateEmun.CONTRACT_GENERATE.generateOrder(contractId, tatContractEntity.getBusinessNo(), null));
+                toStateService.insert(ContractStateEnum.CONTRACT_GENERATE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
             }
             return R.ok();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return R.error();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return R.error();//房源验证不通过
         }
     }
 
@@ -377,6 +456,10 @@ public class ApiHouseContractController {
      */
     @RequestMapping(value = "/download")
     public Object offRechargeExportRecords(String cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HouseCheckEntity houseCheckEntity = houseCheck(cid);
+        if (null == houseCheckEntity) {
+            return R.error();
+        }
         TuReportEntity tuReportEntity = new TuReportEntity();
         tuReportEntity.setcId(cid);
 
@@ -406,6 +489,10 @@ public class ApiHouseContractController {
     @RequestMapping("/uploadFile")
     public Map<String, Object> uploadFile(HttpServletRequest request, String cid) throws IOException {
         try {
+            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            if (null == houseCheckEntity) {
+                return R.error();
+            }
             //转换成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
             //取得request中的所有文件名
@@ -463,8 +550,12 @@ public class ApiHouseContractController {
      * @return
      */
     @RequestMapping("/contractFinish")
-    public R contractFinish(String cid) {
+    public R contractFinish(String cid, String date) {
         try {
+            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            if (null == houseCheckEntity) {
+                return R.error();
+            }
             /**
              * 失效核验码
              */
@@ -474,21 +565,53 @@ public class ApiHouseContractController {
             houseVerificationCodeService.update(codeEntity, new EntityWrapper<HouseVerificationCodeEntity>().eq("code", tatContractEntity.getCode()));
 
             /**
+             * 合同添加签约日期
+             */
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            tatContractEntity.setXydate(sf.parse(date));
+            tatContractService.update(tatContractEntity, new EntityWrapper<TatContractEntity>().eq("cId", cid));
+            /**
              * 修改状态表
              */
             ToStateEntity toStateEntity = new ToStateEntity();
             toStateEntity.setFDate(new Date());
             toStateEntity.setModality(0);
-            toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_PRINT.getCode()));
+            toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_PRINT.getCode()));
             /**
              * 写入状态表
              */
-            toStateService.insert(ContractStateEmun.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
+            toStateService.insert(ContractStateEnum.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
             return R.ok();
         } catch (Exception e) {
             e.printStackTrace();
             return R.error();
         }
     }
+
+    /**
+     * 查询合同
+     *
+     * @param user
+     * @return
+     */
+    @Login
+    @RequestMapping("/queryContract")
+    public R queryContract(@ApiIgnore @LoginUser UserEntity user) {
+        //查询主体
+        try {
+            TmBodyEntity tmBodyEntity = tmBodyService.selectOne(new EntityWrapper<TmBodyEntity>().eq("icNo", user.getIdCard()));
+
+            if (null == tmBodyEntity) {
+                return R.error();
+            }
+            TatContractEntity contractEntity = tatContractService.selectById(tmBodyEntity.getcId());
+            List<ToStateEntity> toStateEntities = toStateService.selectList(new EntityWrapper<ToStateEntity>().eq("sid", contractEntity.getCId()).eq("modality", 1));
+            return R.ok().put("contract", contractEntity).put("state", toStateEntities);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error();
+        }
+    }
+
 
 }

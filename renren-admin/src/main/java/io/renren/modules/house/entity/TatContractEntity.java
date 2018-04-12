@@ -44,10 +44,6 @@ public class TatContractEntity implements Serializable {
 	 */
 	private String code;
 	/**
-	 * 业务状态
-	 */
-	private Integer state;
-	/**
 	 * 业务号
 	 */
 	private String businessNo;
@@ -56,8 +52,16 @@ public class TatContractEntity implements Serializable {
 	 */
 	private String title;
 
+	/**
+	 * 合同信息
+	 */
 	private String content;
 
+	/**
+	 * 创建人
+	 */
+	private String createNsername;
+	private String createIdCard;
 
 	public void setCId(String cId) {
 		this.cId = cId;
@@ -99,14 +103,6 @@ public class TatContractEntity implements Serializable {
 		return reporid;
 	}
 
-	public void setState(Integer state) {
-		this.state = state;
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -137,5 +133,21 @@ public class TatContractEntity implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getCreateNsername() {
+		return createNsername;
+	}
+
+	public void setCreateNsername(String createNsername) {
+		this.createNsername = createNsername;
+	}
+
+	public String getCreateIdCard() {
+		return createIdCard;
+	}
+
+	public void setCreateIdCard(String createIdCard) {
+		this.createIdCard = createIdCard;
 	}
 }

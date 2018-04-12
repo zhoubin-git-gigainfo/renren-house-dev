@@ -3,7 +3,7 @@ package io.renren.modules.house.entity;
 import java.util.Date;
 import java.util.UUID;
 
-public enum ContractStateEmun {
+public enum ContractStateEnum {
 
     CONTRACT_ON_LINE("合同再签", 1),
     CONTRACT_GENERATE("已生成合同", 2),
@@ -15,7 +15,7 @@ public enum ContractStateEmun {
     private String name;
     private Integer code;
 
-    ContractStateEmun(String name, Integer code) {
+    ContractStateEnum(String name, Integer code) {
         this.name = name;
         this.code = code;
     }

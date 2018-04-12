@@ -158,15 +158,6 @@ public class TmBodyEntity implements Serializable {
     public String getPercant() {
         return percant;
     }
-
-    public void setCId(String cId) {
-        this.cId = cId;
-    }
-
-    public String getCId() {
-        return cId;
-    }
-
     public String getmId() {
         return mId;
     }
@@ -175,19 +166,19 @@ public class TmBodyEntity implements Serializable {
         this.mId = mId;
     }
 
-    public String getcId() {
-        return cId;
-    }
-
-    public void setcId(String cId) {
-        this.cId = cId;
-    }
-
     public String getIsConfirm() {
         return isConfirm;
     }
 
     public void setIsConfirm(String isConfirm) {
         this.isConfirm = isConfirm;
+    }
+
+    public String getcId() {
+        return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId;
     }
 }
