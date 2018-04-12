@@ -1,3 +1,19 @@
+
+create function nextval (v_seq_name VARCHAR(50))
+    returns integer
+begin
+    update sequence set current_val = current_val + increment_val  where seq_name = v_seq_name;
+    return currval(v_seq_name);
+end;
+create function currval(v_seq_name VARCHAR(50))
+returns integer
+begin
+    declare value integer;
+    set value = 0;
+    select current_val into value  from sequence where seq_name = v_seq_name;
+   return value;
+end;
+
 -- 菜单
 CREATE TABLE `sys_menu` (
   `menu_id` bigint NOT NULL AUTO_INCREMENT,

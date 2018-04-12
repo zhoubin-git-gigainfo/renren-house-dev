@@ -1,17 +1,22 @@
 package io.renren.modules.api.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renren.common.utils.HttpRequest;
+import io.renren.common.utils.IPUtils;
 import io.renren.common.utils.R;
 import io.renren.common.utils.RequestUrlConfig;
 import io.renren.modules.api.annotation.Login;
 import io.renren.modules.api.annotation.LoginUser;
 import io.renren.modules.house.entity.HouseVerificationCodeEntity;
+import io.renren.modules.house.entity.ToLogEntity;
 import io.renren.modules.house.entity.UserEntity;
 import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.service.HouseVerificationCodeService;
 import io.renren.modules.house.service.SequenceService;
+import io.renren.modules.house.service.ToLogService;
 import io.swagger.annotations.Api;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,8 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -34,18 +41,40 @@ public class HouseVerificationController {
     @Autowired
     private SequenceService sequenceService;
 
+    @Autowired
+    private ToLogService toLogService;
+
+    @Login
     @PostMapping("/info")
-    public R info(String hid) {
-        String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid?b_type=2&hid=" + hid);
-        return R.ok().put("data", json);
+    public R info(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, String hid) {
+        try {
+            String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid?b_type=2&hid=" + hid);
+            Map map = new HashMap();
+            map.put("b_type", 2);
+            map.put("hid", hid);
+            ToLogEntity toLogEntity = ApiHouseContractController.insertToLog(json, map, user, IPUtils.getIpAddr(request), RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid", "房屋id查询");
+            toLogService.insert(toLogEntity);
+            return R.ok().put("data", json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error();
+        }
     }
 
     @Login
     @PostMapping("/list")
-    public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
+    public R list(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
         try {
             String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "bycdnoandicno?b_type=2&cd_no=" + cdno + "&ic_no=" + user.getIdCard());
+
+            Map map = new HashMap();
+            map.put("b_type", 2);
+            map.put("cd_no", cdno);
+            map.put("ic_no", user.getIdCard());
+            ToLogEntity toLogEntity = ApiHouseContractController.insertToLog(json, map, user, IPUtils.getIpAddr(request), RequestUrlConfig.HOUSE_VERIFICATION_URL + "bycdnoandicno", "产权证号查询");
+            toLogService.insert(toLogEntity);
+
             ObjectMapper objectMapper = new ObjectMapper();
             houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
             if (null == houseCheckEntity.getData().getBodys() || null == houseCheckEntity.getData().getHouses()) {

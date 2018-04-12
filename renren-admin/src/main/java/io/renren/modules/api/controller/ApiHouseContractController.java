@@ -65,6 +65,8 @@ public class ApiHouseContractController {
     @Autowired
     private ToStateService toStateService;
 
+    @Autowired
+    private ToLogService toLogService;
 
     /**
      * 保存
@@ -75,11 +77,11 @@ public class ApiHouseContractController {
      */
     @Login
     @RequestMapping("/save")
-    public R save(@ApiIgnore @LoginUser UserEntity user, String code) {
+    public R save(@ApiIgnore @LoginUser UserEntity user, String code, HttpServletRequest request) {
         TatContractEntity tatContractEntity = new TatContractEntity();
         try {
             HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByCode(code);
-            HouseCheckEntity houseCheckEntity = houseCheck(codeEntity.getHouseId());
+            HouseCheckEntity houseCheckEntity = houseCheck(codeEntity.getHouseId(), user, IPUtils.getIpAddr(request));
 
             if (null == houseCheckEntity) {
                 return R.error();
@@ -139,8 +141,13 @@ public class ApiHouseContractController {
         }
     }
 
-    private HouseCheckEntity houseCheck(String hid) throws IOException {
+    private HouseCheckEntity houseCheck(String hid, UserEntity user, String ip) throws IOException {
         String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid?b_type=2&hid=" + hid);
+        Map map = new HashMap();
+        map.put("b_type", 2);
+        map.put("hid", hid);
+        ToLogEntity toLogEntity = insertToLog(json, map, user, ip, RequestUrlConfig.HOUSE_VERIFICATION_URL + "byhid", "房屋id查询");
+        toLogService.insert(toLogEntity);
         ObjectMapper objectMapper = new ObjectMapper();
         HouseCheckEntity houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
         HouseMiddleware date = houseCheckEntity.getData();
@@ -149,6 +156,31 @@ public class ApiHouseContractController {
             return houseCheckEntity;
         }
         return null;
+    }
+
+    /**
+     * 生成日志
+     *
+     * @param json      返回结果
+     * @param map       请求参数
+     * @param user      当前用户
+     * @param ip        ip地址
+     * @param method    请求地址
+     * @param operation 用户操作
+     * @throws JsonProcessingException
+     */
+    public static ToLogEntity insertToLog(String json, Map map, UserEntity user, String ip, String method, String operation) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ToLogEntity toLogEntity = new ToLogEntity();
+        toLogEntity.setId(UUID.randomUUID().toString());
+        toLogEntity.setCreateDate(new Date());
+        toLogEntity.setIp(ip);
+        toLogEntity.setMethod(method);
+        toLogEntity.setOperation(operation);
+        toLogEntity.setUsername(user.getIdCard());
+        toLogEntity.setParams(objectMapper.writeValueAsString(map));
+        toLogEntity.setReturnResult(json);
+        return toLogEntity;
     }
 
 
@@ -199,10 +231,11 @@ public class ApiHouseContractController {
      * 是：生成合同号、生成pdf、写入、修改（两个）状态表
      * 否：写入状态表
      */
+    @Login
     @RequestMapping("/contractDetermine")
-    public R contractDetermine(String cid, String idCard) {
+    public R contractDetermine(@ApiIgnore @LoginUser UserEntity user, String cid, String idCard, HttpServletRequest request) {
         try {
-            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            HouseCheckEntity houseCheckEntity = houseCheck(cid, user, IPUtils.getIpAddr(request));
             if (null == houseCheckEntity) {
                 return R.error();
             }
@@ -379,10 +412,11 @@ public class ApiHouseContractController {
      * @param tmBodyEntities
      * @return
      */
+    @Login
     @RequestMapping("/insertBody")
-    public R insertBody(List<TmBodyEntity> tmBodyEntities) {
+    public R insertBody(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, List<TmBodyEntity> tmBodyEntities) {
         try {
-            HouseCheckEntity houseCheckEntity = houseCheck(tmBodyEntities.get(0).getcId());
+            HouseCheckEntity houseCheckEntity = houseCheck(tmBodyEntities.get(0).getcId(), user, IPUtils.getIpAddr(request));
             if (null == houseCheckEntity) {
                 return R.error();
             }
@@ -400,12 +434,13 @@ public class ApiHouseContractController {
      * @param map
      * @return
      */
+    @Login
     @RequestMapping("/insertContract")
-    public R insertContract(Map map) {
+    public R insertContract(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, Map map) {
         try {
             String cid = map.get("cid") + "";
             String state = map.get("state") + "";
-            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            HouseCheckEntity houseCheckEntity = houseCheck(cid, user, IPUtils.getIpAddr(request));
             if (null == houseCheckEntity) {
                 return R.error();
             }
@@ -454,9 +489,10 @@ public class ApiHouseContractController {
      * @return
      * @throws IOException
      */
+    @Login
     @RequestMapping(value = "/download")
-    public Object offRechargeExportRecords(String cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HouseCheckEntity houseCheckEntity = houseCheck(cid);
+    public Object offRechargeExportRecords(@ApiIgnore @LoginUser UserEntity user, String cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HouseCheckEntity houseCheckEntity = houseCheck(cid, user, IPUtils.getIpAddr(request));
         if (null == houseCheckEntity) {
             return R.error();
         }
@@ -486,10 +522,11 @@ public class ApiHouseContractController {
      * @return
      * @throws IOException
      */
+    @Login
     @RequestMapping("/uploadFile")
-    public Map<String, Object> uploadFile(HttpServletRequest request, String cid) throws IOException {
+    public Map<String, Object> uploadFile(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, String cid) throws IOException {
         try {
-            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            HouseCheckEntity houseCheckEntity = houseCheck(cid, user, IPUtils.getIpAddr(request));
             if (null == houseCheckEntity) {
                 return R.error();
             }
@@ -549,10 +586,11 @@ public class ApiHouseContractController {
      * @param cid
      * @return
      */
+    @Login
     @RequestMapping("/contractFinish")
-    public R contractFinish(String cid, String date) {
+    public R contractFinish(@ApiIgnore @LoginUser UserEntity user, HttpServletRequest request, String cid, String date) {
         try {
-            HouseCheckEntity houseCheckEntity = houseCheck(cid);
+            HouseCheckEntity houseCheckEntity = houseCheck(cid, user, IPUtils.getIpAddr(request));
             if (null == houseCheckEntity) {
                 return R.error();
             }
