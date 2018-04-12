@@ -7,14 +7,29 @@ import java.io.Serializable;
  */
 public class HouseEntity implements Serializable {
 
+    /**
+     * 房屋id
+     */
     private String hid;
+    /**
+     * 坐落
+     */
     private String lname;
+    /**
+     * 房号
+     */
     private String hdesc;
+    /**
+     * 面积
+     */
     private String barea;
     /**
      * 房屋用途
      */
     private String huse;
+    /**
+     *
+     */
     private String limit_state;
     private String warn_state;
     /**
@@ -22,6 +37,9 @@ public class HouseEntity implements Serializable {
      */
     private Integer pass_tag;
 
+    /**
+     * 未通过信息
+     */
     private String pass_info;
     /**
      * 建成年代
@@ -31,6 +49,7 @@ public class HouseEntity implements Serializable {
      * 建成年代
      */
     private String bfete;
+
     /**
      * 关联核验码--界面展示
      */
