@@ -145,7 +145,7 @@ public class ApiHouseContractController {
         HouseCheckEntity houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
         HouseMiddleware date = houseCheckEntity.getData();
         if (null != date.getBodys() && null != date.getHouses()
-                && date.getHouses().size() != 1 && date.getHouses().get(0).getPass_tag() == 1) {
+                && date.getHouses().size() == 1 && date.getHouses().get(0).getPass_tag() == 1) {
             return houseCheckEntity;
         }
         return null;

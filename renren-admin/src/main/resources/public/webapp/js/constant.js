@@ -1,4 +1,4 @@
-var url = "http://192.168.168.164:8080/renren-admin/";
+var url = "http://"+location.host+"/renren-admin/";
 function getUrl(){
     return url;
 }

@@ -58,10 +58,23 @@ button{
     border: none;
 }
 
-#fyhy .table{
+#generate-table{
     width: 1000px;
-    margin: 0 100px;
 }
+
+.bootstrap-table{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#generate-btn {
+    width: 300px;
+    margin: 20px 400px;
+    background-color: #63B1F0;
+    border: none;
+    display: none;
+}
+
 /*
 房屋列表
  */

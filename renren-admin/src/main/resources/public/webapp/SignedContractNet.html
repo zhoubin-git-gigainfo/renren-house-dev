@@ -71,9 +71,12 @@
 
                     </div>
 
-                    <table class="table table-bordered table-hover">
+                    <table id="generate-table"></table>
 
-                    </table>
+                    <button type="button" class="btn btn-primary btn-lg active" id="generate-btn"
+                            onclick="generateHouse()">
+                        生成
+                    </button>
 
                 </div>
                 <div class="tab-pane" id="mmsfxxqr">
@@ -313,19 +316,24 @@
                         <p>
                             <span>甲方自愿将坐落于</span>
                             <input type="text" class="ht-input" id="ht-zl" onkeydown="this.onkeyup();"
-                                   onkeyup="this.size=(this.value.length>20?this.value.length:20);" size="20" readonly="readonly"/>
+                                   onkeyup="this.size=(this.value.length>20?this.value.length:20);" size="20"
+                                   readonly="readonly"/>
                             <span>栋</span>
                             <input type="text" class="ht-input" id="ht-fh" onkeydown="this.onkeyup();"
-                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"
+                                   readonly="readonly"/>
                             <span>室的房屋以买卖的方式转让给乙方，不动产权证号（房屋所有权证号、土地使用权证号）</span>
                             <input type="text" class="ht-input" id="ht-cqzh" onkeydown="this.onkeyup();"
-                                   onkeyup="this.size=(this.value.length>16?this.value.length:16);" size="16" readonly="readonly"/>
+                                   onkeyup="this.size=(this.value.length>16?this.value.length:16);" size="16"
+                                   readonly="readonly"/>
                             <span>。房屋建筑面积</span>
                             <input type="text" class="ht-input" id="ht-jzmj" onkeydown="this.onkeyup();"
-                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"
+                                   readonly="readonly"/>
                             <span>平方米，房屋用途为</span>
                             <input type="text" class="ht-input" id="ht-fwyt" onkeydown="this.onkeyup();"
-                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" readonly="readonly"/>
+                                   onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4"
+                                   readonly="readonly"/>
                             <span>。</span>
                         </p>
                         <h3>二、成交价格</h3>
@@ -409,7 +417,7 @@
                 </div>
                 <div class="tab-pane" id="tab5">
                     <div class="qzsc">
-                        <input type="file" name="uploadfile" id="uploadfile" multiple class="file-loading" />
+                        <input type="file" name="uploadfile" id="uploadfile" multiple class="file-loading"/>
 
                     </div>
 
@@ -437,7 +445,7 @@
 <script src="js/fileinput.min.js"></script>
 <script src="js/zh.js"></script>
 <script src="js/constant.js"></script>
-<!--<script src="js/SignedContractNet.js"></script>-->
+<script src="js/SignedContractNet.js"></script>
 <script>
     $(document).ready(function () {
         $("#header").load("header.html");
@@ -497,6 +505,7 @@
     var minRows = 1;
     // 最大高度，超过则出现滚动条
     var maxRows = 60;
+
     function ResizeTextarea(textarea) {
         var t = textarea;
         if (t.scrollTop == 0) t.scrollTop = 1;
@@ -528,22 +537,22 @@
     $("#uploadfile").fileinput({
         language: 'zh', //设置语言
         uploadUrl: "./list.json", //上传的地址(访问接口地址)
-        allowedFileExtensions: ['jpg', 'gif', 'png','pdf'],//接收的文件后缀
+        allowedFileExtensions: ['jpg', 'gif', 'png', 'pdf'],//接收的文件后缀
         uploadAsync: true, //默认异步上传
         showUpload: true, //是否显示上传按钮
-        showRemove : false, //显示移除按钮
-        showPreview : true, //是否显示预览
+        showRemove: false, //显示移除按钮
+        showPreview: true, //是否显示预览
         showCaption: false,//是否显示标题
         browseClass: "btn btn-primary", //按钮样式
         dropZoneEnabled: false,//是否显示拖拽区域
         maxFileCount: 1, //表示允许同时上传的最大文件个数
         enctype: 'multipart/form-data',
-        validateInitialCount:true,
+        validateInitialCount: true,
         previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
         msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
     });
     //异步上传返回错误结果处理
-    $('#uploadfile').on('fileerror', function(event, data, msg) {
+    $('#uploadfile').on('fileerror', function (event, data, msg) {
         console.log(data.id);
         console.log(data.index);
         console.log(data.file);
@@ -564,7 +573,7 @@
 
     });
     //上传前
-    $('#uploadfile').on('filepreupload', function(event, data, previewId, index) {
+    $('#uploadfile').on('filepreupload', function (event, data, previewId, index) {
         var form = data.form, files = data.files, extra = data.extra,
             response = data.response, reader = data.reader;
         console.log('File pre upload triggered');

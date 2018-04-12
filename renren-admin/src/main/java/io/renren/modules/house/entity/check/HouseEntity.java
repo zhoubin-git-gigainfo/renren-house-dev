@@ -42,7 +42,7 @@ public class HouseEntity implements Serializable {
      */
     private String pass_info;
     /**
-     * 建成年代
+     * 结构
      */
     private String bstru;
     /**

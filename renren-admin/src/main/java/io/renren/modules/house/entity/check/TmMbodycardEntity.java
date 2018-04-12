@@ -26,6 +26,8 @@ public class TmMbodycardEntity implements Serializable {
     private String md_name;
     private String md_tel;
     private String md_addr;
+    private String md_type;
+    private String maintypeid;
 
     public String getMd_id() {
         return md_id;
@@ -81,5 +83,21 @@ public class TmMbodycardEntity implements Serializable {
 
     public void setMd_addr(String md_addr) {
         this.md_addr = md_addr;
+    }
+
+    public String getMd_type() {
+        return md_type;
+    }
+
+    public void setMd_type(String md_type) {
+        this.md_type = md_type;
+    }
+
+    public String getMaintypeid() {
+        return maintypeid;
+    }
+
+    public void setMaintypeid(String maintypeid) {
+        this.maintypeid = maintypeid;
     }
 }
