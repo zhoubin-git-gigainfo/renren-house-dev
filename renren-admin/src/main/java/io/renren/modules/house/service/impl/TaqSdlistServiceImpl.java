@@ -27,4 +27,11 @@ public class TaqSdlistServiceImpl extends ServiceImpl<TaqSdlistDao, TaqSdlistEnt
         return new PageUtils(page);
     }
 
+    @Override
+    public TaqSdlistEntity selectOneByCid(String rId) {
+        TaqSdlistEntity taqSdlistEntity = new TaqSdlistEntity();
+        taqSdlistEntity.setCId(rId);
+        return baseMapper.selectOne(taqSdlistEntity);
+    }
+
 }

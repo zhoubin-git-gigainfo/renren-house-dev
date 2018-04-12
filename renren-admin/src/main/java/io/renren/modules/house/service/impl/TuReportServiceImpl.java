@@ -35,4 +35,9 @@ public class TuReportServiceImpl extends ServiceImpl<TuReportDao, TuReportEntity
         tuReportDao.insertFile(tuReportEntity);
     }
 
+    @Override
+    public TuReportEntity selectByEntity(TuReportEntity tuReportEntity ) {
+        return baseMapper.selectOne(tuReportEntity);
+    }
+
 }

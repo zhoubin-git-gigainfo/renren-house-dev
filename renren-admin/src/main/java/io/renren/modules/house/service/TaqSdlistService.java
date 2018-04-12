@@ -16,5 +16,7 @@ import java.util.Map;
 public interface TaqSdlistService extends IService<TaqSdlistEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    TaqSdlistEntity selectOneByCid(String rId);
 }
 

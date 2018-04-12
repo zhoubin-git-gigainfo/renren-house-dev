@@ -18,5 +18,7 @@ public interface TuReportService extends IService<TuReportEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void insertFile(TuReportEntity tuReportEntity);
+
+    TuReportEntity selectByEntity(TuReportEntity tuReportEntity);
 }
 
