@@ -40,6 +40,10 @@ public class TatContractEntity implements Serializable {
 	 */
 	private String reporid;
 	/**
+	 * 核验码
+	 */
+	private String code;
+	/**
 	 * 业务状态
 	 */
 	private Integer state;
@@ -125,5 +129,13 @@ public class TatContractEntity implements Serializable {
 
 	public void setBusinessNo(String businessNo) {
 		this.businessNo = businessNo;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

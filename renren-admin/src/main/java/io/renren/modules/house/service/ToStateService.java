@@ -2,21 +2,19 @@ package io.renren.modules.house.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
-import io.renren.modules.house.entity.TaqSdlistEntity;
+import io.renren.modules.house.entity.ToStateEntity;
 
 import java.util.Map;
 
 /**
- * 业务客体-合同
+ * 状态表
  *
  * @author zhoubin
  * @email zhoubin@gigainfo.com.cn
- * @date 2018-04-08 14:56:01
+ * @date 2018-04-11 16:06:28
  */
-public interface TaqSdlistService extends IService<TaqSdlistEntity> {
+public interface ToStateService extends IService<ToStateEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
-
-    TaqSdlistEntity selectOneByCid(String rId);
 }
 

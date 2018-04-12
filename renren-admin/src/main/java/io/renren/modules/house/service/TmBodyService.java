@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.house.entity.TmBodyEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,12 @@ import java.util.Map;
 public interface TmBodyService extends IService<TmBodyEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 查询主体信息（已封装）
+     * @param rId
+     * @return
+     */
+    List<TmBodyEntity> selectListByCid(String rId);
 }
 

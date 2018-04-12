@@ -18,5 +18,18 @@
         <result property="cId" column="C_ID"/>
     </resultMap>
 
+    <select id="selectListByCid" parameterType="java.lang.String" resultType="io.renren.modules.house.entity.TmBodyEntity">
+        SELECT
+            GROUP_CONCAT(t1.value, t.IC_NO) AS ic_no,
+            GROUP_CONCAT(t.NAME) AS name,
+            t.MD_TYPE
+        FROM
+            tm_body t
+        LEFT JOIN sys_dict t1 ON t1.type = 'ic_type' AND t1.code = t.IC_TYPE
+        WHERE
+            t.C_ID = #{value}
+        GROUP BY
+            t.MD_TYPE
+    </select>
 
 </mapper>

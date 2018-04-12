@@ -72,6 +72,9 @@ public class HouseRegisterLoginController {
 //        与户籍接口验证
         Map map = new HashMap();
         Map mapIDCard = new HashMap();
+        if (!form.getIdCard().startsWith("43")) {
+            mapIDCard.put("username", "031507");
+        }
         mapIDCard.put("sfzh", form.getIdCard());
         map.put("business", "querySsSyrkInfoBySfzh");
         map.put("sjly", "1");

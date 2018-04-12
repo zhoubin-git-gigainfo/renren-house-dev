@@ -23,6 +23,10 @@ public class TmBodyEntity implements Serializable {
     @TableId
     private String mId;
     /**
+     * 姓名
+     */
+    private String name;
+    /**
      * 证件号
      */
     private String icNo;
@@ -45,7 +49,7 @@ public class TmBodyEntity implements Serializable {
     /**
      * 状态1买方、2卖方3、买代理4、卖代理
      */
-    private String mdType;
+    private Integer mdType;
     /**
      * 所属区域
      */
@@ -73,6 +77,14 @@ public class TmBodyEntity implements Serializable {
 
     public String getMId() {
         return mId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setIcNo(String icNo) {
@@ -115,11 +127,11 @@ public class TmBodyEntity implements Serializable {
         return icOrg;
     }
 
-    public void setMdType(String mdType) {
+    public void setMdType(Integer mdType) {
         this.mdType = mdType;
     }
 
-    public String getMdType() {
+    public Integer getMdType() {
         return mdType;
     }
 
