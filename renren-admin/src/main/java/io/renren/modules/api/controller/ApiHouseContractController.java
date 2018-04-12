@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.pdf.PdfReader;
-import io.renren.common.utils.HttpRequest;
-import io.renren.common.utils.ITextUtil;
-import io.renren.common.utils.R;
-import io.renren.common.utils.RequestUrlConfig;
+import io.renren.common.utils.*;
 import io.renren.modules.house.entity.*;
 import io.renren.modules.house.entity.check.HouseCheckEntity;
 import io.renren.modules.house.entity.check.HouseEntity;
@@ -24,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -125,10 +123,11 @@ public class ApiHouseContractController {
 
             //写入状态表
             toStateService.insert(ContractStateEmun.CONTRACT_ON_LINE.generateOrder(tatContractEntity.getCId(), tatContractEntity.getBusinessNo(), null));
+            return R.ok().put("contractId", tatContractEntity.getCId());
         } catch (IOException e) {
             e.printStackTrace();
+            return R.error();
         }
-        return R.ok().put("contractId", tatContractEntity.getCId());
     }
 
     private HouseCheckEntity houseCheck(String hid) throws IOException {
@@ -169,10 +168,10 @@ public class ApiHouseContractController {
             e.printStackTrace();
         }
         if (null == entity.getData() || entity.getData().size() == 0) {
-            return R.error().put("msg", "身份证号码不存在"); //身份查询不到用户信息
+            return R.error(); //身份查询不到用户信息
         }
         if (!username.equals(entity.getData().get(0).getXm()) || !idCard.equals(entity.getData().get(0).getSfzh())) {
-            return R.error().put("msg", "姓名与身份证号码不匹配"); //用户信息不匹配
+            return R.error(); //用户信息不匹配
         }
         return R.ok().put("lname", entity.getData().get(0).getXzzxz());
     }
@@ -266,10 +265,11 @@ public class ApiHouseContractController {
 //        map.put("matter", "其他约定");
             convertTransData(formMap, barCodeMap, tatContractEntity);
             System.out.println("执行完毕");
+            return R.ok();
         } catch (Exception e) {
             e.printStackTrace();
+            return R.error();
         }
-        return R.ok();
     }
 
     /**
@@ -336,6 +336,11 @@ public class ApiHouseContractController {
             String contractId = map.get("cid") + "";
             map.remove("state");
             map.remove("cid");
+            String price = map.get("price") + "";
+
+            BigDecimal numberOfMoney = new BigDecimal(map.get("price") + "");
+            map.put("priceC", NumberToCNUtils.number2CNMontrayUnit(numberOfMoney));
+
             TatContractEntity tatContractEntity = new TatContractEntity();
             tatContractEntity.setCId(contractId);
             tatContractEntity.setContent(objectMapper.writeValueAsString(map));
@@ -354,10 +359,11 @@ public class ApiHouseContractController {
 
                 toStateService.insert(ContractStateEmun.CONTRACT_GENERATE.generateOrder(contractId, tatContractEntity.getBusinessNo(), null));
             }
+            return R.ok();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            return R.error();
         }
-        return R.ok();
     }
 
     /**
@@ -399,30 +405,35 @@ public class ApiHouseContractController {
      */
     @RequestMapping("/uploadFile")
     public Map<String, Object> uploadFile(HttpServletRequest request, String cid) throws IOException {
-        //转换成多部分request
-        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-        //取得request中的所有文件名
-        Iterator<String> iter = multiRequest.getFileNames();
-        while (iter.hasNext()) {
-            //取得上传文件
-            MultipartFile file = multiRequest.getFile(iter.next());
-            if (file != null) {
-                //取得当前上传文件的文件名称
-                String myFileName = file.getOriginalFilename();
-                /**获取文件的后缀**/
-                String suffix = file.getOriginalFilename().substring
-                        (file.getOriginalFilename().lastIndexOf("."));
-                //如果名称不为"",说明该文件存在，否则说明该文件不存在
-                if (!StringUtils.isEmpty(myFileName.trim())) {
-                    // 上传文件流
-                    InputStream inputStream = file.getInputStream();
-                    TuReportEntity tuReportEntity = new TuReportEntity();
-                    tuReportEntity.setPic(toByteArray(inputStream));
-                    tuReportService.update(tuReportEntity, new EntityWrapper<TuReportEntity>().eq("cId", cid));
+        try {
+            //转换成多部分request
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            //取得request中的所有文件名
+            Iterator<String> iter = multiRequest.getFileNames();
+            while (iter.hasNext()) {
+                //取得上传文件
+                MultipartFile file = multiRequest.getFile(iter.next());
+                if (file != null) {
+                    //取得当前上传文件的文件名称
+                    String myFileName = file.getOriginalFilename();
+                    /**获取文件的后缀**/
+                    String suffix = file.getOriginalFilename().substring
+                            (file.getOriginalFilename().lastIndexOf("."));
+                    //如果名称不为"",说明该文件存在，否则说明该文件不存在
+                    if (!StringUtils.isEmpty(myFileName.trim())) {
+                        // 上传文件流
+                        InputStream inputStream = file.getInputStream();
+                        TuReportEntity tuReportEntity = new TuReportEntity();
+                        tuReportEntity.setPic(toByteArray(inputStream));
+                        tuReportService.update(tuReportEntity, new EntityWrapper<TuReportEntity>().eq("cId", cid));
+                    }
                 }
             }
+            return R.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error();
         }
-        return R.ok();
     }
 
     /**
@@ -453,26 +464,31 @@ public class ApiHouseContractController {
      */
     @RequestMapping("/contractFinish")
     public R contractFinish(String cid) {
-        /**
-         * 失效核验码
-         */
-        TatContractEntity tatContractEntity = tatContractService.selectById(cid);
-        HouseVerificationCodeEntity codeEntity = new HouseVerificationCodeEntity();
-        codeEntity.setState(0);
-        houseVerificationCodeService.update(codeEntity, new EntityWrapper<HouseVerificationCodeEntity>().eq("code", tatContractEntity.getCode()));
+        try {
+            /**
+             * 失效核验码
+             */
+            TatContractEntity tatContractEntity = tatContractService.selectById(cid);
+            HouseVerificationCodeEntity codeEntity = new HouseVerificationCodeEntity();
+            codeEntity.setState(0);
+            houseVerificationCodeService.update(codeEntity, new EntityWrapper<HouseVerificationCodeEntity>().eq("code", tatContractEntity.getCode()));
 
-        /**
-         * 修改状态表
-         */
-        ToStateEntity toStateEntity = new ToStateEntity();
-        toStateEntity.setFDate(new Date());
-        toStateEntity.setModality(0);
-        toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_PRINT.getCode()));
-        /**
-         * 写入状态表
-         */
-        toStateService.insert(ContractStateEmun.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
-        return R.ok();
+            /**
+             * 修改状态表
+             */
+            ToStateEntity toStateEntity = new ToStateEntity();
+            toStateEntity.setFDate(new Date());
+            toStateEntity.setModality(0);
+            toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_PRINT.getCode()));
+            /**
+             * 写入状态表
+             */
+            toStateService.insert(ContractStateEmun.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
+            return R.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error();
+        }
     }
 
 }
