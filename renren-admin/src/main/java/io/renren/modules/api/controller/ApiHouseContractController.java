@@ -122,7 +122,7 @@ public class ApiHouseContractController {
 
 
             //写入状态表
-            toStateService.insert(ContractStateEmun.CONTRACT_ON_LINE.generateOrder(tatContractEntity.getCId(), tatContractEntity.getBusinessNo(), null));
+            toStateService.insert(ContractStateEnum.CONTRACT_ON_LINE.generateOrder(tatContractEntity.getCId(), tatContractEntity.getBusinessNo(), null));
             return R.ok().put("contractId", tatContractEntity.getCId());
         } catch (IOException e) {
             e.printStackTrace();
@@ -192,32 +192,32 @@ public class ApiHouseContractController {
             toStateEntity.setSid(cid);
             toStateEntity.setModality(1);
             toStateEntity.setDroits(idCard);
-            toStateEntity.setStype(ContractStateEmun.CONTRACT_CONFIRM.getCode() + "");
+            toStateEntity.setStype(ContractStateEnum.CONTRACT_CONFIRM.getCode() + "");
             toStateEntity = toStateService.selectByEntity(toStateEntity);
             //没有有效的确认状态
             if (null == toStateEntity) {
                 ToStateEntity entity = new ToStateEntity();
                 entity.setFDate(new Date());
                 entity.setModality(0);
-                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_GENERATE.getCode()));
+                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_GENERATE.getCode()));
 
-                toStateService.insert(ContractStateEmun.CONTRACT_CONFIRM.generateOrder(cid, tatContractEntity.getBusinessNo(), idCard));
+                toStateService.insert(ContractStateEnum.CONTRACT_CONFIRM.generateOrder(cid, tatContractEntity.getBusinessNo(), idCard));
             }
 
 
             List<ToStateEntity> toStateEntities = toStateService.selectList(new EntityWrapper<ToStateEntity>()
                     .eq("sid", cid)
                     .eq("bid", tatContractEntity.getBusinessNo())
-                    .eq("stype", ContractStateEmun.CONTRACT_CONFIRM.getCode())
+                    .eq("stype", ContractStateEnum.CONTRACT_CONFIRM.getCode())
                     .eq("modality", 1));
 
             if (toStateEntities.size() == 2) {
                 ToStateEntity entity = new ToStateEntity();
                 entity.setFDate(new Date());
                 entity.setModality(0);
-                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_CONFIRM.getCode()));
+                toStateService.update(entity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_CONFIRM.getCode()));
 
-                toStateService.insert(ContractStateEmun.CONTRACT_PRINT.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
+                toStateService.insert(ContractStateEnum.CONTRACT_PRINT.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
 
                 generateContractPdf(cid);
             }
@@ -396,9 +396,9 @@ public class ApiHouseContractController {
                 ToStateEntity toStateEntity = new ToStateEntity();
                 toStateEntity.setFDate(new Date());
                 toStateEntity.setModality(0);
-                toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", contractId).eq("stype", ContractStateEmun.CONTRACT_ON_LINE.getCode()));
+                toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", contractId).eq("stype", ContractStateEnum.CONTRACT_ON_LINE.getCode()));
 
-                toStateService.insert(ContractStateEmun.CONTRACT_GENERATE.generateOrder(contractId, tatContractEntity.getBusinessNo(), null));
+                toStateService.insert(ContractStateEnum.CONTRACT_GENERATE.generateOrder(contractId, tatContractEntity.getBusinessNo(), null));
             }
             return R.ok();
         } catch (JsonProcessingException e) {
@@ -520,11 +520,11 @@ public class ApiHouseContractController {
             ToStateEntity toStateEntity = new ToStateEntity();
             toStateEntity.setFDate(new Date());
             toStateEntity.setModality(0);
-            toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEmun.CONTRACT_PRINT.getCode()));
+            toStateService.update(toStateEntity, new EntityWrapper<ToStateEntity>().eq("sid", cid).eq("stype", ContractStateEnum.CONTRACT_PRINT.getCode()));
             /**
              * 写入状态表
              */
-            toStateService.insert(ContractStateEmun.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
+            toStateService.insert(ContractStateEnum.CONTRACT_COMPLETE.generateOrder(cid, tatContractEntity.getBusinessNo(), null));
             return R.ok();
         } catch (Exception e) {
             e.printStackTrace();
