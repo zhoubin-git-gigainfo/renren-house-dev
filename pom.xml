@@ -50,11 +50,6 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.6</version>
         </dependency>
-        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itextasian</artifactId>
-            <version>1.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.itextpdf/itext-asian -->
         <dependency>
             <groupId>com.itextpdf</groupId>

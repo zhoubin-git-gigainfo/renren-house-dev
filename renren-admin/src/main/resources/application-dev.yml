@@ -4,14 +4,14 @@ spring:
         druid:
             first:  #数据源1
                 driverClassName: com.mysql.jdbc.Driver
-                url: jdbc:mysql://192.168.168.107:3306/houst-dev?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                url: jdbc:mysql://172.24.24.120:3318/houst-dev?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
                 username: root
-                password: root
+                password: harmony321
             second:  #数据源2
-                driverClassName: oracle.jdbc.driver.OracleDriver
-                url: jdbc:oracle:thin:@172.24.24.96:1521:zztest
-                username: zfadmin
-                password: password
+                driverClassName: com.mysql.jdbc.Driver
+                url: jdbc:mysql://172.24.24.120:3318/houst-dev?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                username: root
+                password: harmony321
             initial-size: 10
             max-active: 100
             min-idle: 10
