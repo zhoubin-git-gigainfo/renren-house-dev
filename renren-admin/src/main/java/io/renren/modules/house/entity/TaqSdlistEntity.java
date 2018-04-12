@@ -37,7 +37,7 @@ public class TaqSdlistEntity implements Serializable {
 	/**
 	 * 面积
 	 */
-	private Integer barea;
+	private String barea;
 	/**
 	 * 房屋用途
 	 */
@@ -88,11 +88,11 @@ public class TaqSdlistEntity implements Serializable {
 		return hdesc;
 	}
 
-	public void setBarea(Integer barea) {
+	public void setBarea(String barea) {
 		this.barea = barea;
 	}
 
-	public Integer getBarea() {
+	public String getBarea() {
 		return barea;
 	}
 

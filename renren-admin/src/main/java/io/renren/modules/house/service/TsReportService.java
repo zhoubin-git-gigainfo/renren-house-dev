@@ -2,21 +2,22 @@ package io.renren.modules.house.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
-import io.renren.modules.house.entity.TuReportEntity;
+import io.renren.modules.house.entity.TsReportEntity;
 
 import java.util.Map;
 
 /**
- * 合同文本
+ * 文本字典
  *
  * @author zhoubin
  * @email zhoubin@gigainfo.com.cn
- * @date 2018-04-08 14:56:01
+ * @date 2018-04-09 11:00:21
  */
-public interface TuReportService extends IService<TuReportEntity> {
+public interface TsReportService extends IService<TsReportEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    void insertFile(TuReportEntity tuReportEntity);
+    void insertFile(TsReportEntity tsReportEntity);
+
 }
 

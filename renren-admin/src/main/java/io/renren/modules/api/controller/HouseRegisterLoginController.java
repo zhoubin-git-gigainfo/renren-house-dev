@@ -1,4 +1,4 @@
-package io.renren.modules.house.controller;
+package io.renren.modules.api.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,7 +8,7 @@ import io.renren.common.utils.R;
 import io.renren.common.utils.RequestUrlConfig;
 import io.renren.common.utils.SendMsgUtil;
 import io.renren.common.validator.ValidatorUtils;
-import io.renren.modules.house.entity.HouseholdRegisterEntity;
+import io.renren.modules.house.entity.check.HouseholdRegisterEntity;
 import io.renren.modules.house.entity.UserEntity;
 import io.renren.modules.house.form.HouseLoginForm;
 import io.renren.modules.house.form.HouseRegisterForm;

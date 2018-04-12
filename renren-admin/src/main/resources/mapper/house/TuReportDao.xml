@@ -12,5 +12,21 @@
         <result property="cId" column="C_ID"/>
     </resultMap>
 
+    <insert id="insertFile" parameterType="io.renren.modules.house.entity.TuReportEntity">
+        insert into TU_REPORT (
+        R_ID,
+        R_NAME,
+        R_FILE,
+        CREATEDATE,
+        C_ID
+        ) values(
+        #{rId},
+        #{rName},
+        #{rFile,jdbcType=BLOB},
+        #{createdate},
+        #{cId}
+        )
+    </insert>
+
 
 </mapper>

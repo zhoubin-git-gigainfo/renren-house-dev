@@ -31,54 +31,65 @@ public class TuReportEntity implements Serializable {
     /**
      * 合同文件
      */
-    private Blob rFile;
+    private byte[] rFile;
     /**
      * 创建时间
      */
     private Date createdate;
     /**
+     * 图片
+     */
+    private byte[] pic;
+    /**
      * 合同id
      */
     private String cId;
 
-
-    public void setRId(String rId) {
-        this.rId = rId;
-    }
-
-    public String getRId() {
+    public String getrId() {
         return rId;
     }
 
-    public void setRName(String rName) {
-        this.rName = rName;
+    public void setrId(String rId) {
+        this.rId = rId;
     }
 
-    public String getRName() {
+    public String getrName() {
         return rName;
     }
 
-    public void setRFile(Blob rFile) {
-        this.rFile = rFile;
+    public void setrName(String rName) {
+        this.rName = rName;
     }
 
-    public Blob getRFile() {
+    public byte[] getrFile() {
         return rFile;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setrFile(byte[] rFile) {
+        this.rFile = rFile;
     }
 
     public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCId(String cId) {
-        this.cId = cId;
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 
-    public String getCId() {
+    public byte[] getPic() {
+        return pic;
+    }
+
+    public void setPic(byte[] pic) {
+        this.pic = pic;
+    }
+
+    public String getcId() {
         return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId;
     }
 }

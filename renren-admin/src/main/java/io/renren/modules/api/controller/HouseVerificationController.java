@@ -1,4 +1,4 @@
-package io.renren.modules.house.controller;
+package io.renren.modules.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.renren.common.utils.HttpRequest;
@@ -45,7 +45,6 @@ public class HouseVerificationController {
     public R list(@ApiIgnore @LoginUser UserEntity user, String cdno) {
         HouseCheckEntity houseCheckEntity = new HouseCheckEntity();
         try {
-            //TODO 接口已修改，需重新解析数据
             String json = HttpRequest.get(RequestUrlConfig.HOUSE_VERIFICATION_URL + "bycdnoandicno?b_type=2&cd_no=" + cdno + "&ic_no=" + user.getIdCard());
             ObjectMapper objectMapper = new ObjectMapper();
             houseCheckEntity = objectMapper.readValue(json, HouseCheckEntity.class);
@@ -53,7 +52,7 @@ public class HouseVerificationController {
                 return R.error();
             }
             houseCheckEntity.getData().getHouses().stream().forEach(entity -> {
-                //TODO 根据hid查询表是否存在有效状态的核验码
+                // 根据hid查询表是否存在有效状态的核验码
                 if (entity.getPass_tag() == 1) {
                     HouseVerificationCodeEntity codeEntity = houseVerificationCodeService.queryByHid(entity.getHid());
                     if (null == codeEntity) {

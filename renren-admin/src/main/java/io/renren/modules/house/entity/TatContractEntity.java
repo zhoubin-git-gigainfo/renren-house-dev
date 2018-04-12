@@ -44,49 +44,15 @@ public class TatContractEntity implements Serializable {
 	 */
 	private Integer state;
 	/**
+	 * 业务号
+	 */
+	private String businessNo;
+	/**
 	 * 标题
 	 */
 	private String title;
-	/**
-	 * 价格
-	 */
-	private Integer price;
-	/**
-	 * 付款方式
-	 */
-	private Integer payment;
-	/**
-	 * 付款方式信息
-	 */
-	private String paymentMessage;
-	/**
-	 * 税费等承担原则
-	 */
-	private Integer taxationEar;
-	/**
-	 * 税费等承担原则信息
-	 */
-	private String taxationEarMessage;
-	/**
-	 * 交付期限
-	 */
-	private Integer limitPay;
-	/**
-	 * 违约责任
-	 */
-	private String breachInfo;
-	/**
-	 * 争议解决方式
-	 */
-	private Integer disputeResolution;
-	/**
-	 * 其他约定事项
-	 */
-	private String otherAssumpsit;
-	/**
-	 * 创建时间
-	 */
-	private Date createDate;
+
+	private String content;
 
 
 	public void setCId(String cId) {
@@ -145,83 +111,19 @@ public class TatContractEntity implements Serializable {
 		return title;
 	}
 
-	public void setPrice(Integer price) {
-		this.price = price;
+	public String getContent() {
+		return content;
 	}
 
-	public Integer getPrice() {
-		return price;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public void setPayment(Integer payment) {
-		this.payment = payment;
+	public String getBusinessNo() {
+		return businessNo;
 	}
 
-	public Integer getPayment() {
-		return payment;
-	}
-
-	public void setPaymentMessage(String paymentMessage) {
-		this.paymentMessage = paymentMessage;
-	}
-
-	public String getPaymentMessage() {
-		return paymentMessage;
-	}
-
-	public void setTaxationEar(Integer taxationEar) {
-		this.taxationEar = taxationEar;
-	}
-
-	public Integer getTaxationEar() {
-		return taxationEar;
-	}
-
-	public void setTaxationEarMessage(String taxationEarMessage) {
-		this.taxationEarMessage = taxationEarMessage;
-	}
-
-	public String getTaxationEarMessage() {
-		return taxationEarMessage;
-	}
-
-	public void setLimitPay(Integer limitPay) {
-		this.limitPay = limitPay;
-	}
-
-	public Integer getLimitPay() {
-		return limitPay;
-	}
-
-	public void setBreachInfo(String breachInfo) {
-		this.breachInfo = breachInfo;
-	}
-
-	public String getBreachInfo() {
-		return breachInfo;
-	}
-
-	public void setDisputeResolution(Integer disputeResolution) {
-		this.disputeResolution = disputeResolution;
-	}
-
-	public Integer getDisputeResolution() {
-		return disputeResolution;
-	}
-
-	public void setOtherAssumpsit(String otherAssumpsit) {
-		this.otherAssumpsit = otherAssumpsit;
-	}
-
-	public String getOtherAssumpsit() {
-		return otherAssumpsit;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
+	public void setBusinessNo(String businessNo) {
+		this.businessNo = businessNo;
 	}
 }
