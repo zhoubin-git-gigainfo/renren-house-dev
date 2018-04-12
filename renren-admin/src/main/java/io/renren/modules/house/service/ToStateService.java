@@ -16,5 +16,7 @@ import java.util.Map;
 public interface ToStateService extends IService<ToStateEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    ToStateEntity selectByEntity(ToStateEntity toStateEntity);
 }
 

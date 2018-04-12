@@ -26,4 +26,9 @@ public class ToStateServiceImpl extends ServiceImpl<ToStateDao, ToStateEntity> i
         return new PageUtils(page);
     }
 
+    @Override
+    public ToStateEntity selectByEntity(ToStateEntity toStateEntity) {
+        return baseMapper.selectOne(toStateEntity);
+    }
+
 }
