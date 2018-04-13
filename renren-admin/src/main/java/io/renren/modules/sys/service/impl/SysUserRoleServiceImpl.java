@@ -1,4 +1,5 @@
 /**
+/**
  * Copyright 2018 人人开源 http://www.renren.io
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -42,7 +43,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleDao, SysUserR
 		//先删除用户与角色关系
 		this.deleteByMap(new MapUtils().put("user_id", userId));
 
-		if(roleIdList.size() == 0){
+		if(roleIdList == null || roleIdList.size() == 0){
 			return ;
 		}
 		

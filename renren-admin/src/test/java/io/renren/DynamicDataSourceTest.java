@@ -9,6 +9,7 @@ import io.renren.modules.house.entity.TmBodyEntity;
 import io.renren.modules.house.entity.TsReportEntity;
 import io.renren.modules.house.entity.TuReportEntity;
 import io.renren.modules.house.service.TmBodyService;
+import io.renren.modules.house.service.ToStateService;
 import io.renren.modules.house.service.TsReportService;
 import io.renren.modules.house.service.TuReportService;
 import io.renren.modules.sys.entity.SysUserEntity;
@@ -54,39 +55,6 @@ public class DynamicDataSourceTest {
         BigDecimal numberOfMoney = new BigDecimal(money);
         String s = NumberToCNUtils.number2CNMontrayUnit(numberOfMoney);
         System.out.println("你输入的金额为：【" + money + "】   #--# [" + s.toString() + "]");
-    }
-
-    @Test
-    public void test() {
-        Map formMap = new HashMap();
-        List<TmBodyEntity> tmBodyEntities = tmBodyService.selectListByCid("1");
-        tmBodyEntities.stream().forEach(tmBodyEntity -> {
-
-            switch (tmBodyEntity.getMdType()) {
-                case 1:
-                    formMap.put("buyerName", tmBodyEntity.getName());
-                    formMap.put("buyerIc", tmBodyEntity.getIcNo());
-                    break;
-                case 2:
-                    formMap.put("sellerName", tmBodyEntity.getName());
-                    formMap.put("sellerIc", tmBodyEntity.getIcNo());
-                    break;
-                case 3:
-                    formMap.put("buyerAgentName", tmBodyEntity.getName());
-                    formMap.put("buyerAgentIc", tmBodyEntity.getIcNo());
-                    break;
-                case 4:
-                    formMap.put("sellerAgentName", tmBodyEntity.getName());
-                    formMap.put("sellerAgentIc", tmBodyEntity.getIcNo());
-                    break;
-            }
-        });
-
-        for (Iterator it = formMap.keySet().iterator(); it.hasNext(); ) {
-            String key = it.next() + "";
-            String value = formMap.get(key) + "";
-            System.out.println(key + "=" + value);
-        }
     }
 
     @Test
