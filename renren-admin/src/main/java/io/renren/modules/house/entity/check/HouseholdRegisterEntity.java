@@ -1,7 +1,5 @@
 package io.renren.modules.house.entity.check;
 
-import io.renren.modules.house.entity.check.HouseVerificationEntity;
-
 import java.io.Serializable;
 import java.util.List;
 

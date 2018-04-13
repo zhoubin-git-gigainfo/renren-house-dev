@@ -1,7 +1,7 @@
 package io.renren.modules.house.dao;
 
-import io.renren.modules.house.entity.ToStateEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import io.renren.modules.house.entity.ToStateEntity;
 
 /**
  * 状态表

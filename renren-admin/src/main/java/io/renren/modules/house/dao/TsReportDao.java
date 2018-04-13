@@ -1,7 +1,7 @@
 package io.renren.modules.house.dao;
 
-import io.renren.modules.house.entity.TsReportEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import io.renren.modules.house.entity.TsReportEntity;
 
 /**
  * 文本字典

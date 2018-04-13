@@ -1,7 +1,7 @@
 package io.renren.modules.house.dao;
 
-import io.renren.modules.house.entity.ToLogEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import io.renren.modules.house.entity.ToLogEntity;
 
 /**
  * 接口日志表
